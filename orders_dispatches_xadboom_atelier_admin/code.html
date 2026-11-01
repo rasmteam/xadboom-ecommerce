@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Orders &amp; Dispatches — Xadboom Atelier Admin</title>
+<!-- Google Fonts: Space Grotesk, DM Sans, Newsreader -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brandBg: "#F7E9E3",
+            cardBg: "#FBF0EC",
+            cardBorder: "#E2D8D3",
+            railBg: "#12100E",
+            primaryDark: "#1E1A18",
+            accentGold: "#9E7852"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            body: ["DM Sans", "sans-serif"],
+            serif: ["Newsreader", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      background-color: #F7E9E3;
+      font-family: 'DM Sans', sans-serif;
+      color: #231A16;
+      margin: 0;
+      padding: 0;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#F7E9E3] text-[#231A16] flex flex-row antialiased selection:bg-[#1E1A18] selection:text-white">
+<!-- Persistent Left Sidebar (Icon Rail - #12100e) -->
+<aside class="w-[74px] shrink-0 min-h-screen bg-[#12100E] border-r border-[#2A2420] flex flex-col items-center py-5 fixed left-0 top-0 bottom-0 z-50 justify-between select-none">
+<!-- Top Branding & Navigation -->
+<div class="flex flex-col items-center w-full gap-6">
+<!-- Monogram Atelier Logo -->
+<a class="w-10 h-10 bg-[#FAF4F0] flex items-center justify-center rounded-none shadow-md group transition-transform active:scale-95" href="#">
+<span class="font-headline font-bold text-xs tracking-widest text-[#12100E]">XB</span>
+</a>
+<!-- Icon Nav Items -->
+<nav class="flex flex-col items-center gap-1.5 w-full px-2">
+<!-- Overview -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Overview &amp; Telemetry">
+<span class="material-symbols-outlined text-[21px]">grid_view</span>
+</a>
+<!-- Pieces Catalog -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Pieces Catalog">
+<span class="material-symbols-outlined text-[21px]">chair</span>
+</a>
+<!-- Categories & Typologies -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Categories &amp; Typologies">
+<span class="material-symbols-outlined text-[21px]">category</span>
+</a>
+<!-- Designers & Collaborators -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Designers &amp; Collaborators">
+<span class="material-symbols-outlined text-[21px]">architecture</span>
+</a>
+<!-- Orders & Dispatches (Active with Badge 12) -->
+<a class="relative w-11 h-11 flex items-center justify-center rounded bg-[#FAF4F0] text-[#12100E] shadow-sm transition-colors" href="#" title="Orders &amp; Dispatches">
+<span class="material-symbols-outlined fill-icon text-[21px]">receipt_long</span>
+<span class="absolute -top-1 -right-1 bg-[#9E7852] text-white text-[9px] font-headline font-bold px-1.5 py-0.2 rounded-full border-2 border-[#12100E]">12</span>
+</a>
+<!-- Users & Accounts -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Users &amp; Accounts">
+<span class="material-symbols-outlined text-[21px]">group</span>
+</a>
+<!-- Inquiries & Forms -->
+<a class="w-11 h-11 flex items-center justify-center rounded text-[#8E837D] hover:bg-[#201C19] hover:text-[#F7E9E3] transition-colors" href="#" title="Inquiries &amp; Patron Requests">
+<span class="material-symbols-outlined text-[21px]">mail</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Curator Profile & System State -->
+<div class="flex flex-col items-center gap-3 pt-4 border-t border-[#25201C] w-full px-2">
+<!-- Status Beacon -->
+<div class="flex items-center justify-center gap-1.5 py-1 px-2 rounded-full bg-[#1C1815] border border-[#2B2420]" title="Vault Ledger Online">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-headline text-[9px] tracking-wider text-[#A89F9A] uppercase">SYNC</span>
+</div>
+<!-- Curator Profile: Helena Vane -->
+<button class="w-10 h-10 rounded-full bg-[#241F1C] border border-[#3E352F] flex items-center justify-center text-[#E0D5CE] hover:ring-2 hover:ring-[#9E7852] transition-all" title="Helena Vane — Chief Curator" type="button">
+<span class="font-headline font-medium text-xs tracking-wider">HV</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Layout (Offset for 74px sidebar) -->
+<div class="flex-1 ml-[74px] flex flex-col min-h-screen">
+<!-- Top Header Bar -->
+<header class="sticky top-0 z-40 bg-[#F7E9E3]/95 backdrop-blur-md border-b border-[#E2D8D3] px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+<!-- Left: Breadcrumb Navigation -->
+<div class="flex items-center gap-2 font-headline text-[11px] uppercase tracking-wider text-[#635D5C]">
+<span class="hover:text-[#12100E] cursor-pointer transition-colors">Curatorial Atelier</span>
+<span class="text-[#B6ACA7]">/</span>
+<span class="hover:text-[#12100E] cursor-pointer transition-colors">Operations</span>
+<span class="text-[#B6ACA7]">/</span>
+<span class="text-[#12100E] font-semibold">Orders &amp; Master Dispatches</span>
+</div>
+<!-- Right: Search & Action Buttons -->
+<div class="flex items-center gap-3">
+<!-- Live Registry Search -->
+<div class="relative w-48 sm:w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[#7E746F] text-[18px]">search</span>
+<input class="w-full bg-[#FBF0EC] border border-[#E2D8D3] text-xs font-body text-[#1E1A18] placeholder-[#968C86] pl-8 pr-3 py-1.5 rounded-lg focus:outline-none focus:border-[#1E1A18] transition-colors" placeholder="Search Order ID, Patron, Crate..." type="text"/>
+</div>
+<!-- Manifest Export (CSV / PDF) -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FBF0EC] hover:bg-[#F2E5DF] text-[#1E1A18] border border-[#E2D8D3] text-xs font-headline font-medium rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[16px] text-[#635D5C]">ios_share</span>
+<span>Manifest (CSV/PDF)</span>
+</button>
+<!-- New Dispatch Order Action -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#12100E] hover:bg-[#2A2420] text-white text-xs font-headline font-semibold rounded-lg shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[17px]">add</span>
+<span>+ New Dispatch Order</span>
+</button>
+</div>
+</header>
+<!-- Page Body Container -->
+<main class="p-6 lg:p-8 space-y-7 max-w-[1780px] w-full mx-auto flex-1">
+<!-- Editorial Title & Status Banner -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#E2D8D3]/80 pb-5">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="w-2 h-2 rounded-full bg-[#9E7852]"></span>
+<span class="font-headline text-[10px] tracking-widest uppercase text-[#7A716C] font-semibold">Global White-Glove Dispatch Registry</span>
+</div>
+<h1 class="font-headline text-2xl lg:text-3xl font-medium tracking-tight text-[#12100E]">
+            Orders, Custom Crating &amp; International Dispatches
+          </h1>
+<p class="font-serif italic text-[#635D5C] text-sm lg:text-base mt-1">
+            Real-time itinerary telemetry, museum crate staging, sealed provenance releases, and bonded patron deliveries.
+          </p>
+</div>
+<!-- Telemetry Pill -->
+<div class="inline-flex items-center gap-2.5 px-3.5 py-2 bg-[#FBF0EC] border border-[#E2D8D3] rounded-lg text-xs font-headline text-[#4A423D] shrink-0 self-start md:self-auto">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+</span>
+<span>Telemetry Active: <strong class="text-[#12100E]">Cargo Carrier Sync (99.8%)</strong></span>
+</div>
+</div>
+<!-- Top KPI Summary Cards (4 Cards) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-[#FBF0EC] p-5 rounded-xl border border-[#E2D8D3] flex flex-col justify-between hover:border-[#BFB2AA] transition-colors shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline text-[10px] uppercase tracking-wider text-[#736A64] font-semibold">Total Fulfilled Orders</span>
+<div class="w-8 h-8 rounded-lg bg-[#F2E5DF] flex items-center justify-center text-[#1E1A18]">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-3xl font-semibold text-[#12100E]">28</span>
+<span class="font-headline text-xs text-[#736A64]">Orders Cleared</span>
+</div>
+<div class="mt-1 flex items-center justify-between text-xs text-[#635D5C] font-headline">
+<span class="font-medium text-[#1E1A18]">$142,500 Vol</span>
+<span class="text-emerald-800 font-semibold">+18.4% Q2</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-[#FBF0EC] p-5 rounded-xl border border-[#E2D8D3] flex flex-col justify-between hover:border-[#BFB2AA] transition-colors shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline text-[10px] uppercase tracking-wider text-[#736A64] font-semibold">Active Dispatches</span>
+<div class="w-8 h-8 rounded-lg bg-[#F2E5DF] flex items-center justify-center text-[#1E1A18]">
+<span class="material-symbols-outlined text-[18px]">flight_takeoff</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-3xl font-semibold text-[#12100E]">06</span>
+<span class="font-headline text-xs text-blue-900 font-medium">In Transit</span>
+</div>
+<div class="mt-1 text-xs text-[#635D5C] font-headline">
+<span>In Flight / Ocean (Zurich, Milan, Tehran)</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-[#FBF0EC] p-5 rounded-xl border border-[#E2D8D3] flex flex-col justify-between hover:border-[#BFB2AA] transition-colors shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline text-[10px] uppercase tracking-wider text-[#736A64] font-semibold">Crate Staging &amp; Prep</span>
+<div class="w-8 h-8 rounded-lg bg-[#F2E5DF] flex items-center justify-center text-[#1E1A18]">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-3xl font-semibold text-[#12100E]">04</span>
+<span class="font-headline text-xs text-amber-900 font-medium">Timber Staging</span>
+</div>
+<div class="mt-1 text-xs text-[#635D5C] font-headline">
+<span>04 Crates Custom Fitting &amp; Sensor Mounting</span>
+</div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-[#FBF0EC] p-5 rounded-xl border border-[#E2D8D3] flex flex-col justify-between hover:border-[#BFB2AA] transition-colors shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline text-[10px] uppercase tracking-wider text-[#736A64] font-semibold">Pending Release</span>
+<div class="w-8 h-8 rounded-lg bg-[#F2E5DF] flex items-center justify-center text-[#1E1A18]">
+<span class="material-symbols-outlined text-[18px]">lock_clock</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-3xl font-semibold text-[#12100E]">02</span>
+<span class="font-headline text-xs text-[#9E7852] font-medium">Awaiting Clear</span>
+</div>
+<div class="mt-1 text-xs text-[#635D5C] font-headline">
+<span>02 Wire Clearances &amp; Escrow Verification</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Orders & Dispatches Data Table Section -->
+<section class="bg-[#FBF0EC] rounded-xl border border-[#E2D8D3] overflow-hidden shadow-sm">
+<!-- Filter Tabs & Table Tools Bar -->
+<div class="p-4 border-b border-[#E2D8D3] flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+<!-- Filter Tabs -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none font-headline text-xs uppercase tracking-wider">
+<button class="px-3.5 py-1.5 bg-[#12100E] text-white rounded-lg font-medium shrink-0 shadow-sm">
+              All Orders (18)
+            </button>
+<button class="px-3.5 py-1.5 bg-[#F2E5DF] hover:bg-[#EBDDD6] text-[#4A423D] rounded-lg shrink-0 transition-colors">
+              In Transit (6)
+            </button>
+<button class="px-3.5 py-1.5 bg-[#F2E5DF] hover:bg-[#EBDDD6] text-[#4A423D] rounded-lg shrink-0 transition-colors">
+              Custom Crating (4)
+            </button>
+<button class="px-3.5 py-1.5 bg-[#F2E5DF] hover:bg-[#EBDDD6] text-[#4A423D] rounded-lg shrink-0 transition-colors">
+              Clearance Hold (2)
+            </button>
+<button class="px-3.5 py-1.5 bg-[#F2E5DF] hover:bg-[#EBDDD6] text-[#4A423D] rounded-lg shrink-0 transition-colors">
+              Delivered (6)
+            </button>
+</div>
+<!-- Secondary Filter Selectors -->
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 bg-[#F7E9E3] border border-[#E2D8D3] px-2.5 py-1.5 rounded-lg text-xs font-headline">
+<span class="text-[#736A64]">Tier:</span>
+<select class="bg-transparent text-[#12100E] font-medium focus:outline-none cursor-pointer">
+<option>All Logistics Tiers</option>
+<option>White-Glove Air Freight</option>
+<option>Timber Crate Foam Padded</option>
+<option>Diplomatic Air Cargo</option>
+<option>Climate Courier</option>
+</select>
+</div>
+<button class="p-1.5 bg-[#F7E9E3] hover:bg-[#F2E5DF] border border-[#E2D8D3] rounded-lg text-[#635D5C] transition-colors" title="Reset Filters">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Table View -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F2E5DF]/70 text-[#736A64] font-headline text-[10.5px] uppercase tracking-wider border-b border-[#E2D8D3]">
+<th class="py-3 px-4 font-semibold">Order ID &amp; Date</th>
+<th class="py-3 px-4 font-semibold">Curated Piece &amp; Edition</th>
+<th class="py-3 px-4 font-semibold">Patron / Collector</th>
+<th class="py-3 px-4 font-semibold">Destination &amp; Tier</th>
+<th class="py-3 px-4 font-semibold">Crating &amp; Logistics Status</th>
+<th class="py-3 px-4 font-semibold">Value (USD)</th>
+<th class="py-3 px-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2D8D3] font-body text-xs">
+<!-- Row 1: #XB-8924 -->
+<tr class="hover:bg-[#F7E9E3]/70 transition-colors">
+<td class="py-3.5 px-4 align-top">
+<div class="font-headline font-semibold text-[#12100E] tracking-wider text-[13px]">#XB-8924</div>
+<div class="text-[11px] text-[#736A64] font-headline mt-0.5">Oct 21, 2024</div>
+<div class="text-[9px] text-[#9E7852] font-headline tracking-widest uppercase mt-0.5">WAYBILL-ZRH-892</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-3">
+<img alt="Lumen Void Lounge Chair" class="w-12 h-12 object-cover rounded-md border border-[#E2D8D3] shrink-0 bg-[#F2E5DF]" src="https://lh3.googleusercontent.com/aida/AEtjO1XSF7yIx522bUbLEdYvh_AFE25LNwVD6lQdydYfjUHSgpKWr3ts5ddGJOdcYLPwhcttf0FgKSHruX2--eNHzXvfcM8FcEfW5gAs8Z9CsyfKFufxjIyowMnn-q8tpXLQmHbb8-2yxDNk7B9hy9z0lXIVFM8JTZs8HPKz4TacUtfFS1JjVkb7YiFE2_xDXKlXlXr7BdqYD4MxB8t5x5h2A8RjY6hJTnTdICa8VtKyxKj4czmDmn3st-I8oA5q"/>
+<div>
+<div class="font-headline font-medium text-[#12100E] text-[13px]">Lumen Void Lounge Chair</div>
+<div class="text-[11px] text-[#635D5C] font-headline">Alireza Taghaboni</div>
+<span class="inline-block mt-0.5 px-1.5 py-0.5 bg-[#F2E5DF] text-[#4A423D] rounded text-[10px] font-headline font-semibold border border-[#E2D8D3]">
+                        Ed. 03/12 · Oiled Walnut
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="font-medium text-[#12100E]">Studio ZT</div>
+<div class="text-[11px] text-[#736A64]">Architectural Retainer</div>
+<div class="text-[10px] text-[#9E7852] font-headline tracking-wider uppercase mt-0.5">VIP Patron</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-1 font-headline font-medium text-[#12100E]">
+<span class="material-symbols-outlined text-[13px] text-[#9E7852]">location_on</span>
+<span>Zurich, Switzerland</span>
+</div>
+<div class="text-[11px] text-[#635D5C] mt-0.5">White-Glove Air Freight</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-950/10 text-blue-900 border border-blue-900/20 font-headline text-[10px] font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-700 animate-pulse"></span>
+                    In Transit
+                  </span>
+<div class="text-[11px] text-[#736A64] mt-1 font-headline">Flight LX1822 · En Route ZRH</div>
+</td>
+<td class="py-3.5 px-4 align-top font-headline font-medium text-[#12100E] text-[13px]">
+                  $2,450
+                </td>
+<td class="py-3.5 px-4 align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 bg-[#12100E] text-white hover:bg-[#2A2420] rounded font-headline text-[10px] uppercase tracking-wider transition-colors" title="Inspect Telemetry Dossier">
+                      Inspect
+                    </button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Manifest PDF">
+<span class="material-symbols-outlined text-[17px]">description</span>
+</button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Update Dispatch">
+<span class="material-symbols-outlined text-[17px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: #XB-8921 -->
+<tr class="hover:bg-[#F7E9E3]/70 transition-colors">
+<td class="py-3.5 px-4 align-top">
+<div class="font-headline font-semibold text-[#12100E] tracking-wider text-[13px]">#XB-8921</div>
+<div class="text-[11px] text-[#736A64] font-headline mt-0.5">Oct 19, 2024</div>
+<div class="text-[9px] text-[#9E7852] font-headline tracking-widest uppercase mt-0.5">WAYBILL-TEH-104</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-3">
+<img alt="Tectonic Monolith Console" class="w-12 h-12 object-cover rounded-md border border-[#E2D8D3] shrink-0 bg-[#F2E5DF]" src="https://lh3.googleusercontent.com/aida/AEtjO1VJBdryU3vUX4MrUpXkFInoPLQy4bDX_WOIYukOdOTduA49ZHNlhnOxgQCS8TdfJET-zHwNXbiGy5qGydqHFJ3EnsunaTiO126Jn35rVVU4OymZG2SZaRr80dyTruSs_4j3JuL6lasudrHnAHrZTR0cyphiboHBmVAT_wNCrpdGaA2O_RhyZur_l-Z5IdDBr6FcXawJu_UumFOmwF90rWjZVtMft0L0D_PaUOd84SKNPTijCJIT2bTTlxwy"/>
+<div>
+<div class="font-headline font-medium text-[#12100E] text-[13px]">Tectonic Monolith Console</div>
+<div class="text-[11px] text-[#635D5C] font-headline">Alireza Taghaboni</div>
+<span class="inline-block mt-0.5 px-1.5 py-0.5 bg-[#F2E5DF] text-[#4A423D] rounded text-[10px] font-headline font-semibold border border-[#E2D8D3]">
+                        Ed. 02/06 · Travertine &amp; Bronze
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="font-medium text-[#12100E]">Darius Mehregan</div>
+<div class="text-[11px] text-[#736A64]">Private Collection</div>
+<div class="text-[10px] text-[#736A64] font-headline tracking-wider uppercase mt-0.5">Verified Patron</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-1 font-headline font-medium text-[#12100E]">
+<span class="material-symbols-outlined text-[13px] text-[#9E7852]">location_on</span>
+<span>Tehran, Iran</span>
+</div>
+<div class="text-[11px] text-[#635D5C] mt-0.5">Timber Crate Foam Padded</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-950/10 text-amber-900 border border-amber-900/20 font-headline text-[10px] font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-700"></span>
+                    Staging &amp; Inspection
+                  </span>
+<div class="text-[11px] text-[#736A64] mt-1 font-headline">Timber Crate Assembly Bay 2</div>
+</td>
+<td class="py-3.5 px-4 align-top font-headline font-medium text-[#12100E] text-[13px]">
+                  $3,800
+                </td>
+<td class="py-3.5 px-4 align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 bg-[#F2E5DF] hover:bg-[#12100E] hover:text-white border border-[#E2D8D3] text-[#12100E] rounded font-headline text-[10px] uppercase tracking-wider transition-colors" title="Stage Crate Release">
+                      Stage Crate
+                    </button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Manifest PDF">
+<span class="material-symbols-outlined text-[17px]">description</span>
+</button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Update Dispatch">
+<span class="material-symbols-outlined text-[17px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: #XB-8919 -->
+<tr class="hover:bg-[#F7E9E3]/70 transition-colors">
+<td class="py-3.5 px-4 align-top">
+<div class="font-headline font-semibold text-[#12100E] tracking-wider text-[13px]">#XB-8919</div>
+<div class="text-[11px] text-[#736A64] font-headline mt-0.5">Oct 16, 2024</div>
+<div class="text-[9px] text-[#9E7852] font-headline tracking-widest uppercase mt-0.5">WAYBILL-MIL-442</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-3">
+<img alt="Cantilever Cane Daybed" class="w-12 h-12 object-cover rounded-md border border-[#E2D8D3] shrink-0 bg-[#F2E5DF]" src="https://lh3.googleusercontent.com/aida/AEtjO1XKimhH2fUP389xHe7E9orJ8dQl2XRJ5_VWguOQ-AE4_6XCKUKITKoenO8LF7IQUlR-nK1BDN4itKGqPeYhCAEmELnEZgmEb2SXLBKpbdNknpe2qYVX9ohi5epxQMsGdPzCONE6pVOv4Vudxy07qiWmm9Mbpf5ATKopBiukx1qmZNZ2KBopIdkp0IiRq7jNDvYJNdIDNCW6UKj-ybpMwfxh5WQ2jJ0d08iT51koJAOPp2q4BL7vYOoyWm2Q"/>
+<div>
+<div class="font-headline font-medium text-[#12100E] text-[13px]">Cantilever Cane Daybed</div>
+<div class="text-[11px] text-[#635D5C] font-headline">Mehrdad Zavareh</div>
+<span class="inline-block mt-0.5 px-1.5 py-0.5 bg-[#F2E5DF] text-[#4A423D] rounded text-[10px] font-headline font-semibold border border-[#E2D8D3]">
+                        Ed. 01/05 · Cast Bronze &amp; Cane
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="font-medium text-[#12100E]">Lissoni Living</div>
+<div class="text-[11px] text-[#736A64]">Design Studio Install</div>
+<div class="text-[10px] text-[#9E7852] font-headline tracking-wider uppercase mt-0.5">VIP Patron</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-1 font-headline font-medium text-[#12100E]">
+<span class="material-symbols-outlined text-[13px] text-[#9E7852]">location_on</span>
+<span>Milan, Italy</span>
+</div>
+<div class="text-[11px] text-[#635D5C] mt-0.5">Diplomatic Air Cargo</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-950/10 text-rose-900 border border-rose-900/20 font-headline text-[10px] font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-700"></span>
+                    Customs Clearance
+                  </span>
+<div class="text-[11px] text-[#736A64] mt-1 font-headline">Malpensa Bonded Terminal</div>
+</td>
+<td class="py-3.5 px-4 align-top font-headline font-medium text-[#12100E] text-[13px]">
+                  $4,200
+                </td>
+<td class="py-3.5 px-4 align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 bg-[#12100E] text-white hover:bg-[#2A2420] rounded font-headline text-[10px] uppercase tracking-wider transition-colors" title="Clearance Dossier">
+                      Clearance
+                    </button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Manifest PDF">
+<span class="material-symbols-outlined text-[17px]">description</span>
+</button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Update Dispatch">
+<span class="material-symbols-outlined text-[17px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: #XB-8915 -->
+<tr class="hover:bg-[#F7E9E3]/70 transition-colors">
+<td class="py-3.5 px-4 align-top">
+<div class="font-headline font-semibold text-[#12100E] tracking-wider text-[13px]">#XB-8915</div>
+<div class="text-[11px] text-[#736A64] font-headline mt-0.5">Oct 12, 2024</div>
+<div class="text-[9px] text-[#9E7852] font-headline tracking-widest uppercase mt-0.5">WAYBILL-MIL-319</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-md bg-[#F2E5DF] border border-[#E2D8D3] flex items-center justify-center text-[#736A64] shrink-0">
+<span class="material-symbols-outlined text-[22px]">light</span>
+</div>
+<div>
+<div class="font-headline font-medium text-[#12100E] text-[13px]">Luma Wood Arc Lamp</div>
+<div class="text-[11px] text-[#635D5C] font-headline">Atelier Arpa</div>
+<span class="inline-block mt-0.5 px-1.5 py-0.5 bg-[#F2E5DF] text-[#4A423D] rounded text-[10px] font-headline font-semibold border border-[#E2D8D3]">
+                        Ed. 08/20 · Smoked Oak
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="font-medium text-[#12100E]">Camilla Bertoni</div>
+<div class="text-[11px] text-[#736A64]">Private Residence</div>
+<div class="text-[10px] text-[#736A64] font-headline tracking-wider uppercase mt-0.5">Collector</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-1 font-headline font-medium text-[#12100E]">
+<span class="material-symbols-outlined text-[13px] text-[#9E7852]">location_on</span>
+<span>Milan, Italy</span>
+</div>
+<div class="text-[11px] text-[#635D5C] mt-0.5">Specialized Glass Crate</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-950/10 text-blue-900 border border-blue-900/20 font-headline text-[10px] font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-700 animate-pulse"></span>
+                    In Transit
+                  </span>
+<div class="text-[11px] text-[#736A64] mt-1 font-headline">Alps Transit Express Truck</div>
+</td>
+<td class="py-3.5 px-4 align-top font-headline font-medium text-[#12100E] text-[13px]">
+                  $1,850
+                </td>
+<td class="py-3.5 px-4 align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 bg-[#12100E] text-white hover:bg-[#2A2420] rounded font-headline text-[10px] uppercase tracking-wider transition-colors" title="Inspect Telemetry Dossier">
+                      Inspect
+                    </button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Manifest PDF">
+<span class="material-symbols-outlined text-[17px]">description</span>
+</button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Update Dispatch">
+<span class="material-symbols-outlined text-[17px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: #XB-8910 -->
+<tr class="hover:bg-[#F7E9E3]/70 transition-colors">
+<td class="py-3.5 px-4 align-top">
+<div class="font-headline font-semibold text-[#12100E] tracking-wider text-[13px]">#XB-8910</div>
+<div class="text-[11px] text-[#736A64] font-headline mt-0.5">Oct 08, 2024</div>
+<div class="text-[9px] text-[#9E7852] font-headline tracking-widest uppercase mt-0.5">WAYBILL-GVA-201</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-md bg-[#F2E5DF] border border-[#E2D8D3] flex items-center justify-center text-[#736A64] shrink-0">
+<span class="material-symbols-outlined text-[22px]">chair_alt</span>
+</div>
+<div>
+<div class="font-headline font-medium text-[#12100E] text-[13px]">Radial Carved Ash Dining Chair</div>
+<div class="text-[11px] text-[#635D5C] font-headline">Studio Khazeni</div>
+<span class="inline-block mt-0.5 px-1.5 py-0.5 bg-[#F2E5DF] text-[#4A423D] rounded text-[10px] font-headline font-semibold border border-[#E2D8D3]">
+                        Ed. 05/16 · Bleached Ash
+                      </span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="font-medium text-[#12100E]">Elena Rostova</div>
+<div class="text-[11px] text-[#736A64]">Private Foundation</div>
+<div class="text-[10px] text-[#9E7852] font-headline tracking-wider uppercase mt-0.5">VIP Patron</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<div class="flex items-center gap-1 font-headline font-medium text-[#12100E]">
+<span class="material-symbols-outlined text-[13px] text-[#9E7852]">location_on</span>
+<span>Geneva, Switzerland</span>
+</div>
+<div class="text-[11px] text-[#635D5C] mt-0.5">Climate-Controlled Courier</div>
+</td>
+<td class="py-3.5 px-4 align-top">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/10 text-emerald-900 border border-emerald-900/20 font-headline text-[10px] font-semibold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[13px] text-emerald-700">check_circle</span>
+                    Delivered
+                  </span>
+<div class="text-[11px] text-[#736A64] mt-1 font-headline">Dual-Signed Handover Confirmed</div>
+</td>
+<td class="py-3.5 px-4 align-top font-headline font-medium text-[#12100E] text-[13px]">
+                  $1,650
+                </td>
+<td class="py-3.5 px-4 align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 bg-[#F2E5DF] hover:bg-[#12100E] hover:text-white border border-[#E2D8D3] text-[#12100E] rounded font-headline text-[10px] uppercase tracking-wider transition-colors" title="View Signed Receipt">
+                      Archived
+                    </button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Manifest PDF">
+<span class="material-symbols-outlined text-[17px]">description</span>
+</button>
+<button class="p-1 hover:bg-[#F2E5DF] rounded text-[#635D5C] hover:text-[#12100E] transition-colors" title="Update Dispatch">
+<span class="material-symbols-outlined text-[17px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-4 py-3 bg-[#F2E5DF]/60 border-t border-[#E2D8D3] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-headline uppercase text-[#736A64]">
+<div class="flex items-center gap-2">
+<span>Showing 1–5 of 18 Master Records</span>
+<span class="text-[#B6ACA7]">·</span>
+<span>Registry Synchronized · UTC+1</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 rounded bg-[#FBF0EC] border border-[#E2D8D3] disabled:opacity-40" disabled="">Previous</button>
+<button class="px-2.5 py-1 rounded bg-[#12100E] text-white font-semibold">1</button>
+<button class="px-2.5 py-1 rounded bg-[#FBF0EC] border border-[#E2D8D3] hover:bg-[#F7E9E3]">2</button>
+<button class="px-2.5 py-1 rounded bg-[#FBF0EC] border border-[#E2D8D3] hover:bg-[#F7E9E3]">3</button>
+<button class="px-2.5 py-1 rounded bg-[#FBF0EC] border border-[#E2D8D3] hover:bg-[#F7E9E3]">Next</button>
+</div>
+</div>
+</section>
+<!-- Waypoint Dispatch Tracking & Crate Release Module (Interactive 2 Columns) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-6">
+<!-- Left Column (7 cols): Waypoint Dispatch Tracking for #XB-8924 -->
+<div class="lg:col-span-7 bg-[#FBF0EC] p-6 rounded-xl border border-[#E2D8D3] flex flex-col justify-between space-y-6 shadow-sm">
+<div>
+<div class="flex items-start justify-between border-b border-[#E2D8D3] pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+<span class="font-headline text-[10.5px] uppercase tracking-wider text-[#736A64] font-semibold">Live Waypoint Itinerary Telemetry</span>
+</div>
+<h3 class="font-headline text-lg font-medium text-[#12100E] mt-1">
+                  Dispatch #XB-8924 — Tehran Atelier to Zurich Vault
+                </h3>
+<p class="font-serif italic text-xs text-[#635D5C] mt-0.5">
+                  Piece: Lumen Void Lounge Chair (Ed. 03/12) · Patron: Studio ZT (Zurich)
+                </p>
+</div>
+<span class="px-2.5 py-1 bg-[#F2E5DF] border border-[#E2D8D3] rounded text-[10px] font-headline font-semibold text-[#12100E] uppercase tracking-wider">
+                In Transit · ETD: 18h
+              </span>
+</div>
+<!-- Vertical Route Timeline -->
+<div class="relative pl-7 space-y-6 mt-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[1.5px] before:bg-[#D5C9C2]">
+<!-- Step 1: Atelier Sealed -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full bg-[#12100E] flex items-center justify-center ring-4 ring-[#FBF0EC]">
+<span class="material-symbols-outlined text-[10px] text-white font-bold">check</span>
+</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline font-semibold text-xs text-[#12100E]">Atelier Tehran — Crate Fabrication &amp; Climate Seal</span>
+<span class="font-headline text-[10px] text-[#736A64]">Oct 19 · 10:30 UTC</span>
+</div>
+<p class="text-xs text-[#635D5C]">
+                  Heavy reinforced kiln-dried pine with 50mm high-density damping foam. Wax seal dual-stamped by Master Joiner K. Vafa.
+                </p>
+</div>
+<!-- Step 2: Carnet ATA Customs Verified -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full bg-[#12100E] flex items-center justify-center ring-4 ring-[#FBF0EC]">
+<span class="material-symbols-outlined text-[10px] text-white font-bold">check</span>
+</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline font-semibold text-xs text-[#12100E]">Airport Cargo Terminal — Carnet ATA &amp; Export Bond</span>
+<span class="font-headline text-[10px] text-[#736A64]">Oct 20 · 14:15 UTC</span>
+</div>
+<p class="text-xs text-[#635D5C]">
+                  Carnet ATA international certificate #CH-9941 cleared without inspection tamper seal violation.
+                </p>
+</div>
+<!-- Step 3: Airborne Flight LX1822 (Active) -->
+<div class="relative flex flex-col gap-0.5">
+<span class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full bg-blue-700 ring-4 ring-blue-100 flex items-center justify-center animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+</span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline font-semibold text-xs text-blue-900">Flight LX1822 Air Freight En Route</span>
+<span class="font-headline text-[10px] text-blue-800 font-semibold uppercase">Currently Airborne</span>
+</div>
+<p class="text-xs text-[#635D5C]">
+                  Pressurized hold temperature maintained at 18.5°C. G-force sensor transmitting baseline nominal (0.02G).
+                </p>
+</div>
+<!-- Step 4: Destination Vault Inspection (Pending) -->
+<div class="relative flex flex-col gap-0.5 opacity-60">
+<span class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full bg-[#B6ACA7] ring-4 ring-[#FBF0EC]"></span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline font-medium text-xs text-[#12100E]">Zurich FreePort Staging Vault</span>
+<span class="font-headline text-[10px] text-[#736A64]">Est. Oct 22 · 06:00 UTC</span>
+</div>
+<p class="text-xs text-[#635D5C]">
+                  Receiving art handlers conduct structural shock check prior to specialized courier van handover.
+                </p>
+</div>
+<!-- Step 5: Final Patron Delivery (Pending) -->
+<div class="relative flex flex-col gap-0.5 opacity-60">
+<span class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full bg-[#B6ACA7] ring-4 ring-[#FBF0EC]"></span>
+<div class="flex items-baseline justify-between">
+<span class="font-headline font-medium text-xs text-[#12100E]">Studio ZT Architectural Residence</span>
+<span class="font-headline text-[10px] text-[#736A64]">Est. Oct 22 · 14:00 UTC</span>
+</div>
+<p class="text-xs text-[#635D5C]">
+                  Two-courier white-glove uncrating, physical certificate verification, and architectural placement.
+                </p>
+</div>
+</div>
+</div>
+<!-- Bottom Telemetry Metric -->
+<div class="pt-3 border-t border-[#E2D8D3] flex items-center justify-between text-[11px] font-headline uppercase text-[#736A64]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">sensors</span>
+<span>Sensor Beacon: BCN-8924-LX (Bat: 92% · 18.4°C)</span>
+</div>
+<a class="text-[#12100E] font-semibold hover:underline inline-flex items-center gap-1" href="#">
+<span>View Sensor Telemetry Log</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right Column (5 cols): Provenance & Dual-Sign Crating Release Checklist -->
+<div class="lg:col-span-5 bg-[#FBF0EC] p-6 rounded-xl border border-[#E2D8D3] flex flex-col justify-between space-y-6 shadow-sm">
+<div>
+<div class="border-b border-[#E2D8D3] pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#9E7852]">gavel</span>
+<span class="font-headline text-[10.5px] uppercase tracking-wider text-[#736A64] font-semibold">Dual-Sign Release Protocol</span>
+</div>
+<h3 class="font-headline text-lg font-medium text-[#12100E] mt-1">
+                Crating Release &amp; Provenance Authorization
+              </h3>
+<p class="font-serif italic text-xs text-[#635D5C] mt-0.5">
+                Staging verification for Order #XB-8921 (Tectonic Monolith Console).
+              </p>
+</div>
+<!-- Signature Badges -->
+<div class="grid grid-cols-2 gap-3 p-3 bg-[#F7E9E3] rounded-lg border border-[#E2D8D3] mt-4">
+<div class="space-y-0.5">
+<span class="font-headline text-[9px] uppercase tracking-wider text-[#736A64] block font-semibold">Signatory 1: Curator</span>
+<div class="font-headline font-semibold text-xs text-[#12100E]">Helena Vane</div>
+<span class="inline-flex items-center gap-1 text-emerald-800 font-headline text-[9.5px] font-bold uppercase">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Signed (Oct 19)
+                </span>
+</div>
+<div class="space-y-0.5 border-l border-[#E2D8D3] pl-3">
+<span class="font-headline text-[9px] uppercase tracking-wider text-[#736A64] block font-semibold">Signatory 2: Logistics Lead</span>
+<div class="font-headline font-semibold text-xs text-[#12100E]">Kourosh Farhad</div>
+<span class="inline-flex items-center gap-1 text-amber-900 font-headline text-[9.5px] font-bold uppercase">
+<span class="material-symbols-outlined text-[12px]">schedule</span> Pending Review
+                </span>
+</div>
+</div>
+<!-- Quality Control Protocol Checklist -->
+<div class="space-y-2.5 mt-5">
+<span class="font-headline text-[10px] uppercase tracking-widest text-[#736A64] font-semibold block">Quality Control Protocol:</span>
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-[#F7E9E3]/70 hover:bg-[#F7E9E3] cursor-pointer transition-colors border border-[#E2D8D3]/80">
+<input checked="" class="w-4 h-4 accent-[#12100E] rounded cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-headline text-xs font-medium text-[#12100E]">Structural integrity &amp; 3-axis drop test verified</span>
+<span class="text-[10px] text-[#736A64]">Kiln-dried pine rated for 2.2 kN lateral load</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-[#F7E9E3]/70 hover:bg-[#F7E9E3] cursor-pointer transition-colors border border-[#E2D8D3]/80">
+<input checked="" class="w-4 h-4 accent-[#12100E] rounded cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-headline text-xs font-medium text-[#12100E]">Wax seal &amp; physical provenance card embedded</span>
+<span class="text-[10px] text-[#736A64]">Dual-embossed token sealed inside timber enclosure</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-[#F7E9E3]/70 hover:bg-[#F7E9E3] cursor-pointer transition-colors border border-[#E2D8D3]/80">
+<input checked="" class="w-4 h-4 accent-[#12100E] rounded cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-headline text-xs font-medium text-[#12100E]">Climate and shock-sensing beacon armed</span>
+<span class="text-[10px] text-[#736A64]">Sensor S-8921 active on 15-minute telemetry burst</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-[#F7E9E3]/70 hover:bg-[#F7E9E3] cursor-pointer transition-colors border border-[#E2D8D3]/80">
+<input class="w-4 h-4 accent-[#12100E] rounded cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-headline text-xs font-medium text-[#12100E]">Encrypted patron uncrating passkey transmitted</span>
+<span class="text-[10px] text-[#736A64]">One-time digital pin issued for art-handler handover</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-4 border-t border-[#E2D8D3] space-y-2">
+<button class="w-full py-2.5 px-4 bg-[#12100E] hover:bg-[#2A2420] text-white font-headline text-xs tracking-wider uppercase rounded-lg transition-colors flex items-center justify-center gap-2 font-medium shadow-sm">
+<span class="material-symbols-outlined text-[17px]">verified</span>
+<span>Authorize Release &amp; Generate Master Waybill</span>
+</button>
+<p class="text-center font-headline text-[9.5px] text-[#736A64] tracking-wider uppercase">
+              Permanent immutable signature recorded in Xadboom Ledger
+            </p>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

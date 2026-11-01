@@ -1,0 +1,727 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#f1dfd9","secondary":"#635d5c","surface-variant":"#f1dfd9","primary-container":"#1c1b1b","on-tertiary":"#ffffff","inverse-on-surface":"#ffede7","on-surface-variant":"#444748","on-tertiary-fixed-variant":"#52433e","secondary-container":"#e6dedc","on-primary-container":"#858383","tertiary-container":"#241915","on-background":"#231a16","primary-fixed":"#e5e2e1","inverse-surface":"#392e2a","secondary-fixed":"#e9e1df","on-tertiary-container":"#92807a","on-primary-fixed-variant":"#474646","on-secondary-fixed":"#1e1b1a","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","on-error":"#ffffff","inverse-primary":"#c9c6c5","surface-bright":"#fff8f6","primary-fixed-dim":"#c9c6c5","secondary-fixed-dim":"#cdc5c3","surface-container-low":"#fff1ec","tertiary-fixed-dim":"#d7c2bb","tertiary":"#000000","on-primary-fixed":"#1c1b1b","on-primary":"#ffffff","primary":"#000000","outline":"#747878","surface-tint":"#5f5e5e","outline-variant":"#c4c7c7","surface":"#fff8f6","on-secondary-fixed-variant":"#4b4644","on-surface":"#231a16","surface-dim":"#e8d6d0","on-secondary-container":"#676160","background":"#fff8f6","surface-container":"#fdeae4","error-container":"#ffdad6","on-error-container":"#93000a","surface-container-high":"#f7e4de","tertiary-fixed":"#f4ded7","error":"#ba1a1a","on-tertiary-fixed":"#241915"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-lg":"1.5rem","space-xs":"0.25rem","margin":"1.25rem","space-2xl":"4rem","margin-desktop":"4rem","space-3xl":"6rem","space-sm":"0.5rem","space-md":"1rem","gutter-desktop":"2.5rem","margin-tablet":"2.5rem","space-xl":"2.5rem"},"fontFamily":{"headline-sm":["Space Grotesk"],"curatorial-quote":["Newsreader"],"headline-lg":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-md":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"display":["Space Grotesk"],"label-md":["Space Grotesk"],"body-lg":["DM Sans"],"display-mobile":["Space Grotesk"],"body-md":["DM Sans"],"curatorial-quote-mobile":["Newsreader"]},"fontSize":{"headline-sm":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"500"}],"curatorial-quote":["1.875rem",{"lineHeight":"2.5rem","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-lg":["3.5rem",{"lineHeight":"3.75rem","letterSpacing":"-0.03em","fontWeight":"400"}],"label-caps":["0.6875rem",{"lineHeight":"1rem","letterSpacing":"0.12em","fontWeight":"600"}],"headline-md":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.02em","fontWeight":"500"}],"headline-lg-mobile":["2.25rem",{"lineHeight":"2.5rem","letterSpacing":"-0.02em","fontWeight":"400"}],"display":["5rem",{"lineHeight":"5.25rem","letterSpacing":"-0.04em","fontWeight":"400"}],"label-md":["0.8125rem",{"lineHeight":"1.125rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"400"}],"display-mobile":["2.75rem",{"lineHeight":"3rem","letterSpacing":"-0.03em","fontWeight":"400"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","letterSpacing":"0","fontWeight":"400"}],"curatorial-quote-mobile":["1.375rem",{"lineHeight":"2rem","letterSpacing":"0","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased" style="background-color: rgb(244, 230, 234);"><aside class="fixed left-0 top-0 h-full w-20 bg-primary-container z-50 flex flex-col items-center justify-between py-space-lg"><div class="flex flex-col items-center w-full gap-space-xl"><div class="w-10 h-10 bg-tertiary-container flex items-center justify-center"><span class="font-label-caps text-label-caps text-on-tertiary tracking-widest font-bold">XB</span></div><nav class="flex flex-col items-center gap-space-sm w-full px-space-xs" data-active-classes="bg-surface text-primary"><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="overview" href="#" title="Overview"><span class="material-symbols-outlined text-[20px]">dashboard</span></a><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="pieces-catalog" href="#" title="Pieces Catalog"><span class="material-symbols-outlined text-[20px]">category</span></a><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="categories" href="#" title="Categories"><span class="material-symbols-outlined text-[20px]">account_tree</span></a><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="designers" href="#" title="Designers"><span class="material-symbols-outlined text-[20px]">architecture</span></a><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="orders" href="#" title="Orders"><span class="material-symbols-outlined text-[20px]">receipt_long</span></a><a class="w-12 h-12 flex items-center justify-center text-on-primary-container hover:text-on-primary hover:bg-surface/10 transition-colors" data-path="users" href="#" title="Users"><span class="material-symbols-outlined text-[20px]">group</span></a><div class="relative flex items-center justify-center"><a aria-current="page" class="w-12 h-12 flex items-center justify-center transition-colors bg-surface text-primary" data-path="inquiries-and-forms" href="#" title="Inquiries &amp; Forms"><span class="material-symbols-outlined text-[20px]">drafts</span></a><span class="absolute top-1 right-1 w-2 h-2 bg-on-tertiary-fixed-variant rounded-full pointer-events-none"></span></div></nav></div><div class="flex flex-col items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-1 ring-on-primary-container/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></aside><div class="pl-20 min-h-screen flex flex-col"><header class="fixed top-0 left-20 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-space-md"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Curatorial Atelier</span><span class="text-outline-variant font-label-caps text-label-caps">/</span><span class="font-label-caps text-label-caps text-on-surface font-semibold tracking-wide uppercase">Client Inquiries &amp; Form Submissions</span></div><div class="flex items-center gap-space-xl"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant pointer-events-none">search</span><input class="w-72 bg-surface-container-low pl-10 pr-4 py-2 font-body-md text-label-md text-on-surface placeholder:text-on-surface-variant outline-none" placeholder="Search index or client registry..." type="text"></div><div class="flex items-center gap-space-sm pl-space-md"><div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div><span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Curator On Duty</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full flex-1 bg-surface" style="background-color: rgb(244, 230, 234);"><div class="flex flex-col w-full">
+<div class="w-full bg-surface-container-high px-space-xl py-space-xl flex flex-col gap-space-xl">
+<!-- Title & Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant font-semibold">
+            Curatorial Atelier / Intake &amp; Inquiries / Form Submissions
+          </span>
+</div>
+<h1 class="font-headline-md text-headline-md tracking-tight text-on-surface">
+          Curatorial Inquiries &amp; Client Form Submissions
+        </h1>
+<p class="font-body-md text-body-md text-secondary">
+          Central intake ledger for bespoke commission requests, private viewing appointments, acquisition inquiries, and trade specification downloads across European and Middle Eastern ateliers.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-auto shrink-0">
+<button class="inline-flex items-center gap-2 px-space-md py-2.5 bg-surface text-on-surface font-label-caps text-label-caps tracking-wider uppercase hover:bg-surface-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+          Export CSV / PDF
+        </button>
+<button class="inline-flex items-center gap-2 px-space-md py-2.5 bg-primary text-on-primary font-label-caps text-label-caps tracking-wider uppercase hover:bg-primary-container transition-colors shadow-sm" onclick="document.getElementById('manual-inquiry-modal').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+          + Log Manual Inquiry
+        </button>
+</div>
+</div>
+<!-- Executive KPI Grid (4 Columns) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Total Inquiries</span>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">inbox</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-headline-lg text-headline-lg leading-none tracking-tight text-on-surface">48</span>
+<span class="font-body-md text-label-md text-secondary mt-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+            +12 this week • 92% SLA met
+          </span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Private Viewings</span>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-headline-lg text-headline-lg leading-none tracking-tight text-on-surface">14</span>
+<span class="font-body-md text-label-md text-secondary mt-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+            Zurich &amp; Tehran Studio Salons
+          </span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Bespoke Commissions</span>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">architecture</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-headline-lg text-headline-lg leading-none tracking-tight text-on-surface">09</span>
+<span class="font-body-md text-label-md text-secondary mt-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+            Pending Curatorial Review
+          </span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Trade Spec Downloads</span>
+<div class="w-8 h-8 bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col">
+<span class="font-headline-lg text-headline-lg leading-none tracking-tight text-on-surface">126</span>
+<span class="font-body-md text-label-md text-secondary mt-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+            Verified Architects &amp; Designers
+          </span>
+</div>
+</div>
+</div>
+<!-- Filter Tab Bar & Refinement Row -->
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Tabs -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-space-md py-1.5 bg-primary text-on-primary font-label-caps text-label-caps tracking-wider uppercase transition-colors">
+          All Submissions (48)
+        </button>
+<button class="px-space-md py-1.5 bg-surface text-secondary hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors">
+          Private Viewing (14)
+        </button>
+<button class="px-space-md py-1.5 bg-surface text-secondary hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors">
+          Bespoke Commission (09)
+        </button>
+<button class="px-space-md py-1.5 bg-surface text-secondary hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors">
+          Acquisition Quote (18)
+        </button>
+<button class="px-space-md py-1.5 bg-surface text-secondary hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase transition-colors">
+          Unassigned / New (07)
+        </button>
+</div>
+<!-- Dropdown Filter Toolbar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-space-sm pt-space-xs">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-secondary">Inquiry Status</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface px-3 py-2 pr-8 font-label-md text-label-md text-on-surface outline-none cursor-pointer">
+<option>All Statuses (Pending, Active, Closed)</option>
+<option>Pending Review</option>
+<option>In Progress</option>
+<option>Contacted</option>
+<option>Archived</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-[18px] text-secondary">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-secondary">Assigned Curator</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface px-3 py-2 pr-8 font-label-md text-label-md text-on-surface outline-none cursor-pointer">
+<option>All Curators</option>
+<option>Helena Vane (Geneva / Zurich)</option>
+<option>Jean-Claude Moreau (Paris)</option>
+<option>Nader Khademi (Tehran)</option>
+<option>Unassigned (Atelier Queue)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-[18px] text-secondary">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-secondary">Regional Atelier Hub</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface px-3 py-2 pr-8 font-label-md text-label-md text-on-surface outline-none cursor-pointer">
+<option>All Regional Hubs</option>
+<option>Zurich Atelier</option>
+<option>Tehran Studio Salon</option>
+<option>Milan Showroom</option>
+<option>Paris Bureau</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-[18px] text-secondary">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-secondary">Sorting Ledger</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface px-3 py-2 pr-8 font-label-md text-label-md text-on-surface outline-none cursor-pointer">
+<option>Newest First (Chronological)</option>
+<option>Highest Commercial Priority</option>
+<option>SLA Breaches Pending</option>
+<option>By Client Entity (A-Z)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-2.5 text-[18px] text-secondary">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Master Inquiries & Submissions Ledger -->
+<div class="bg-surface-container-low shadow-sm flex flex-col">
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container">
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Inquirer &amp; Studio Entity</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Type / Intent</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Referenced Asset / Designer</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Message Snippet &amp; Specs</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Date &amp; Cadence</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary">Status</th>
+<th class="py-3 px-space-md font-label-caps text-label-caps uppercase tracking-wider text-secondary text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1 -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Elena Rostova</span>
+<span class="font-body-md text-label-md text-secondary">VIP Private Collector</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase mt-0.5">Geneva, CH</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-block px-2.5 py-1 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                  Private Viewing
+                </span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col max-w-[200px]">
+<span class="font-label-md text-label-md font-medium text-on-surface">Lumen Void Lounge Chair</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Alireza Taghaboni</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">Edition 03/12</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-sm">
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                  Requesting private salon viewing at Zurich Atelier for Edition 03/12 inspection with interior advisor.
+                </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Zurich Salon</span>
+<span class="text-secondary">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">2 Guests</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface block">Today, 10:24 AM</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">2h ago</span>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-highest text-tertiary-container font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-tertiary-container"></span>
+                  Pending Review
+                </span>
+</td>
+<td class="py-4 px-space-md align-top text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container transition-colors" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                    Review &amp; Reply
+                  </button>
+<button class="p-1.5 text-secondary hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Darius Mehregan</span>
+<span class="font-body-md text-label-md text-secondary">Mehregan Spatial Design</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase mt-0.5">Tehran, IR</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-block px-2.5 py-1 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                  Bespoke Commission
+                </span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col max-w-[200px]">
+<span class="font-label-md text-label-md font-medium text-on-surface">Tectonic Monolith Console</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Alireza Taghaboni</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">Architectural Spec</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-sm">
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                  Custom sizing request for Villa 131 project in Lavasan: extending travertine length to 280cm with bronze patina.
+                </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Travertine / Bronze</span>
+<span class="text-secondary">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Villa 131</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface block">Yesterday, 16:40</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">22h ago</span>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+                  Under Review
+                </span>
+</td>
+<td class="py-4 px-space-md align-top text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container transition-colors" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                    Review &amp; Reply
+                  </button>
+<button class="p-1.5 text-secondary hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Camilla Bertoni</span>
+<span class="font-body-md text-label-md text-secondary">Bertoni Design Group</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase mt-0.5">Milan, IT</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-block px-2.5 py-1 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                  Custom Spec &amp; Quote
+                </span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col max-w-[200px]">
+<span class="font-label-md text-label-md font-medium text-on-surface">Cantilever Cane Daybed</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Mehrdad Zavareh</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">2 Units Hospitality</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-sm">
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                  Specifying 2 units for boutique hotel lounge in Lake Como. Needs material tear sheet and freight timeline.
+                </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Como Project</span>
+<span class="text-secondary">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Tear Sheet Req</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface block">Oct 20, 2024</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">2 days ago</span>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+                  In Progress
+                </span>
+</td>
+<td class="py-4 px-space-md align-top text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container transition-colors" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                    Review &amp; Reply
+                  </button>
+<button class="p-1.5 text-secondary hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Studio ZT / Zaha &amp; Thomas</span>
+<span class="font-body-md text-label-md text-secondary">Trade Architecture Studio</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase mt-0.5">Zurich, CH</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-block px-2.5 py-1 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                  Trade Spec &amp; 3D
+                </span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col max-w-[200px]">
+<span class="font-label-md text-label-md font-medium text-on-surface">Luma Wood Arc Lamp</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Atelier Arpa</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">Batch 4 Units</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-sm">
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                  Downloaded 3D model and request commercial batch quote for 4 units with custom dimmer module.
+                </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Asset Pack #82</span>
+<span class="text-secondary">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">STEP/OBJ Included</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface block">Oct 19, 2024</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">3 days ago</span>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+                  Contacted
+                </span>
+</td>
+<td class="py-4 px-space-md align-top text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container transition-colors" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                    Review &amp; Reply
+                  </button>
+<button class="p-1.5 text-secondary hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Jean-Paul Laurent</span>
+<span class="font-body-md text-label-md text-secondary">Laurent Architecture</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase mt-0.5">Paris, FR</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-block px-2.5 py-1 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                  Acquisition In-situ
+                </span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="flex flex-col max-w-[200px]">
+<span class="font-label-md text-label-md font-medium text-on-surface">Radial Carved Ash Dining Chair</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Studio Khazeni</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">Set of 8</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top max-w-sm">
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">
+                  Checking stock availability for 8 chairs in blackened Iranian ash finish with lead-time to Paris.
+                </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Residential Fitout</span>
+<span class="text-secondary">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Paris 7th Arr.</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="font-label-md text-label-md text-on-surface block">Oct 18, 2024</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">4 days ago</span>
+</td>
+<td class="py-4 px-space-md align-top whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+                  Closed / Converted
+                </span>
+</td>
+<td class="py-4 px-space-md align-top text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1.5 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider hover:bg-surface-container transition-colors" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                    Inspect Thread
+                  </button>
+<button class="p-1.5 text-secondary hover:text-on-surface transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between p-space-md bg-surface-container gap-space-sm">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">
+          Showing 1 - 5 of 48 Inquiries
+        </span>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1.5 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface">Prev</button>
+<button class="px-3 py-1.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider">1</button>
+<button class="px-3 py-1.5 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface">2</button>
+<button class="px-3 py-1.5 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface">3</button>
+<span class="px-2 text-secondary font-label-caps">...</span>
+<button class="px-3 py-1.5 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface">10</button>
+<button class="px-3 py-1.5 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface">Next</button>
+</div>
+</div>
+</div>
+<!-- Deep-Dive Panels / Curatorial Intake Queues -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md">
+<!-- Panel 1: Active Bespoke Commission Queue -->
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">draw</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Active Bespoke Commission Queue</h2>
+</div>
+<span class="px-2 py-0.5 bg-primary text-on-primary font-label-caps text-label-caps uppercase">3 Priority Items</span>
+</div>
+<p class="font-body-md text-label-md text-secondary">
+            Custom dimensional adaptations and bespoke bronze casts requiring direct review with resident craftspersons.
+          </p>
+<div class="flex flex-col gap-space-sm mt-space-sm">
+<!-- Commission 1 -->
+<div class="bg-surface p-space-md flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Villa 131 Custom Console (280cm)</h3>
+<span class="font-curatorial-quote italic text-secondary text-sm">Mehregan Spatial Design • Alireza Taghaboni</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-0.5 text-on-surface">€24,500 Est.</span>
+</div>
+<p class="font-body-md text-label-md text-secondary">
+                Schematic elevation uploaded. Structural engineering check pending for cantilever travertine anchor point.
+              </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Lead: Nader Khademi</span>
+<button class="font-label-caps text-label-caps uppercase text-primary hover:underline flex items-center gap-1" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                  Open Dossier →
+                </button>
+</div>
+</div>
+<!-- Commission 2 -->
+<div class="bg-surface p-space-md flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Lake Como Daybed Duo (Extended Rattan)</h3>
+<span class="font-curatorial-quote italic text-secondary text-sm">Bertoni Design Group • Mehrdad Zavareh</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-0.5 text-on-surface">€18,200 Est.</span>
+</div>
+<p class="font-body-md text-label-md text-secondary">
+                Commercial contract spec: fire-retardant foam substitution and marine lacquer for semi-covered terrace.
+              </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Lead: Helena Vane</span>
+<button class="font-label-caps text-label-caps uppercase text-primary hover:underline flex items-center gap-1" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                  Open Dossier →
+                </button>
+</div>
+</div>
+<!-- Commission 3 -->
+<div class="bg-surface p-space-md flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Pillar Void Pedestal (Monolithic Blackened Granite)</h3>
+<span class="font-curatorial-quote italic text-secondary text-sm">Private Collector • Studio Khazeni</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-0.5 text-on-surface">€12,800 Est.</span>
+</div>
+<p class="font-body-md text-label-md text-secondary">
+                Quarry material sample sent to Geneva for collector approval. Awaiting client signature on proof.
+              </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Lead: Jean-Claude Moreau</span>
+<button class="font-label-caps text-label-caps uppercase text-primary hover:underline flex items-center gap-1" onclick="document.getElementById('inquiry-modal').classList.remove('hidden')" type="button">
+                  Open Dossier →
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Curator Assignment & SLA Telemetry -->
+<div class="bg-surface-container-low p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">speed</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Curator Telemetry &amp; SLA Pulse</h2>
+</div>
+<span class="px-2 py-0.5 bg-surface text-secondary font-label-caps text-label-caps uppercase">Weekly Benchmark</span>
+</div>
+<p class="font-body-md text-label-md text-secondary">
+            Response cadence monitored across ateliers to preserve collector intimacy and high-touch advisory standards.
+          </p>
+<!-- Metric highlights -->
+<div class="grid grid-cols-2 gap-space-sm mt-space-xs">
+<div class="bg-surface p-space-md flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Avg. Response Time</span>
+<span class="font-headline-md text-headline-md tracking-tight text-on-surface mt-1">2.4 <span class="text-sm font-normal text-secondary font-body-md">Hours</span></span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant mt-1">Target: &lt; 4.0h</span>
+</div>
+<div class="bg-surface p-space-md flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Inquiry Conversion</span>
+<span class="font-headline-md text-headline-md tracking-tight text-on-surface mt-1">38.4%</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant mt-1">+4.2% vs last cycle</span>
+</div>
+</div>
+<!-- Active Curators workload -->
+<div class="bg-surface p-space-md flex flex-col gap-space-sm mt-space-xs">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Active Ateliers on Duty</span>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps font-bold">HV</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Helena Vane</span>
+<span class="font-body-md text-label-md text-secondary">Zurich &amp; Geneva Hub</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-1 text-on-surface">11 Inquiries (Active)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps font-bold">NK</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Nader Khademi</span>
+<span class="font-body-md text-label-md text-secondary">Tehran Studio Salon</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-1 text-on-surface">08 Inquiries (Active)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps font-bold">JM</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Jean-Claude Moreau</span>
+<span class="font-body-md text-label-md text-secondary">Paris &amp; Milan Bureau</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps uppercase bg-surface-container px-2 py-1 text-on-surface">06 Inquiries (Active)</span>
+</div>
+</div>
+<!-- Quick Template Trigger -->
+<div class="p-space-sm bg-surface-container flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Ready-to-dispatch curatorial templates</span>
+<button class="font-label-caps text-label-caps uppercase text-primary font-semibold hover:underline">
+              Access Templates →
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Detail Modal Dialog (Hidden by default, opened on 'Review & Reply') -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" id="inquiry-modal">
+<div class="bg-surface-container-high max-w-3xl w-full p-space-xl shadow-xl flex flex-col gap-space-lg max-h-[921px] overflow-y-auto">
+<!-- Modal Header -->
+<div class="flex items-start justify-between pb-space-md bg-surface-container">
+<div class="flex flex-col gap-1 p-space-md">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps uppercase bg-primary text-on-primary px-2 py-0.5">INQ-2024-810</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">• Private Viewing Intake</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Curatorial Inquiry Dossier: Elena Rostova</h2>
+<span class="font-body-md text-label-md text-secondary">VIP Private Collector • Geneva, Switzerland</span>
+</div>
+<button class="p-space-md text-secondary hover:text-on-surface" onclick="document.getElementById('inquiry-modal').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<!-- Dossier Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Client & Context Metadata -->
+<div class="flex flex-col gap-space-sm bg-surface p-space-md">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Referenced Piece</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Lumen Void Lounge Chair</span>
+<span class="font-curatorial-quote italic text-secondary text-sm">Alireza Taghaboni</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase mt-1">Edition: 03/12</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Valuation: €32,000</span>
+</div>
+<div class="pt-space-sm flex flex-col gap-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Requested Schedule</span>
+<span class="font-body-md text-label-md text-on-surface">Thursday, Nov 02 — 15:00</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Location: Zurich Salon</span>
+</div>
+<div class="pt-space-sm flex flex-col gap-1">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Assigned Curator</span>
+<select class="w-full bg-surface-container px-2 py-1.5 font-label-md text-label-md text-on-surface outline-none">
+<option selected="">Helena Vane (Zurich)</option>
+<option>Nader Khademi (Tehran)</option>
+<option>Jean-Claude Moreau (Paris)</option>
+</select>
+</div>
+</div>
+<!-- Full Transcript & Specs -->
+<div class="md:col-span-2 flex flex-col gap-space-md">
+<div class="bg-surface p-space-md flex flex-col gap-2">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Inquirer Message &amp; Intent</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              "We would like to inspect the patina and joinery details of Edition 03/12 in person ahead of the acquisition confirmation for our Geneva estate residence. My interior advisor, Marc Vigneron, will accompany me. Please ensure material samples for raw oxidized bronze are on hand."
+            </p>
+</div>
+<div class="bg-surface p-space-md flex flex-col gap-2">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Internal Atelier Notes</span>
+<textarea class="w-full bg-surface-container-low p-2 font-body-md text-label-md text-on-surface outline-none" placeholder="Add confidential curator remarks or salon prep requests..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="flex items-center justify-between pt-space-sm bg-surface-container p-space-md">
+<button class="px-space-md py-2 bg-surface text-secondary font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface" type="button">
+          Mark as Archived
+        </button>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-2 bg-surface text-on-surface font-label-caps text-label-caps uppercase tracking-wider hover:bg-surface-container" onclick="document.getElementById('inquiry-modal').classList.add('hidden')" type="button">
+            Cancel
+          </button>
+<button class="px-space-md py-2 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container" onclick="document.getElementById('inquiry-modal').classList.add('hidden')" type="button">
+            Send Atelier Response
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Manual Inquiry Modal (Hidden by default) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" id="manual-inquiry-modal">
+<div class="bg-surface-container-high max-w-xl w-full p-space-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Log Manual Curatorial Intake</h3>
+<button class="text-secondary hover:text-on-surface" onclick="document.getElementById('manual-inquiry-modal').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-1">Client Full Name / Entity</label>
+<input class="w-full bg-surface px-3 py-2 font-label-md text-label-md text-on-surface outline-none" placeholder="e.g. Baroness von Richter / Studio K" type="text">
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-1">Inquiry Type</label>
+<select class="w-full bg-surface px-3 py-2 font-label-md text-label-md text-on-surface outline-none">
+<option>Private Viewing Appointment</option>
+<option>Bespoke Commission Consultation</option>
+<option>Acquisition Quote</option>
+<option>Direct Trade Specification</option>
+</select>
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-1">Referenced Catalog Piece</label>
+<input class="w-full bg-surface px-3 py-2 font-label-md text-label-md text-on-surface outline-none" placeholder="e.g. Tectonic Monolith Console" type="text">
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-1">Intake Details &amp; Specifics</label>
+<textarea class="w-full bg-surface px-3 py-2 font-body-md text-label-md text-on-surface outline-none" placeholder="Record client channel, requirements, and salon requirements..." rows="3"></textarea>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 bg-surface text-secondary font-label-caps text-label-caps uppercase hover:text-on-surface" onclick="document.getElementById('manual-inquiry-modal').classList.add('hidden')" type="button">
+          Cancel
+        </button>
+<button class="px-space-md py-2 bg-primary text-on-primary font-label-caps text-label-caps uppercase hover:bg-primary-container" onclick="document.getElementById('manual-inquiry-modal').classList.add('hidden')" type="button">
+          Save to Ledger
+        </button>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

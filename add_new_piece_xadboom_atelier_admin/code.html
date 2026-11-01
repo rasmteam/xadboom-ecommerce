@@ -1,0 +1,571 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#000000", "inverse-primary": "#c9c6c5", "primary-container": "#1c1b1b", "tertiary-container": "#241915", "surface": "#fff8f6", "secondary-fixed-dim": "#cdc5c3", "background": "#fff8f6", "on-primary-fixed": "#1c1b1b", "secondary-container": "#e6dedc", "on-tertiary-container": "#92807a", "tertiary": "#000000", "secondary-fixed": "#e9e1df", "on-primary-container": "#858383", "outline": "#747878", "surface-container-low": "#fff1ec", "on-error": "#ffffff", "on-secondary-container": "#676160", "on-tertiary-fixed-variant": "#52433e", "error": "#ba1a1a", "secondary": "#635d5c", "inverse-surface": "#392e2a", "on-tertiary-fixed": "#241915", "surface-bright": "#fff8f6", "on-primary-fixed-variant": "#474646", "outline-variant": "#c4c7c7", "on-surface": "#231a16", "surface-dim": "#e8d6d0", "on-primary": "#ffffff", "surface-variant": "#f1dfd9", "on-background": "#231a16", "tertiary-fixed-dim": "#d7c2bb", "on-tertiary": "#ffffff", "on-surface-variant": "#444748", "surface-container-highest": "#f1dfd9", "surface-tint": "#5f5e5e", "on-secondary-fixed-variant": "#4b4644", "on-secondary": "#ffffff", "on-error-container": "#93000a", "inverse-on-surface": "#ffede7", "tertiary-fixed": "#f4ded7", "primary-fixed-dim": "#c9c6c5", "surface-container-lowest": "#ffffff", "primary-fixed": "#e5e2e1", "surface-container": "#fdeae4", "error-container": "#ffdad6", "surface-container-high": "#f7e4de", "on-secondary-fixed": "#1e1b1a" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-3xl": "6rem", "gutter": "1.5rem", "space-xl": "2.5rem", "margin-desktop": "4rem", "margin": "1.25rem", "space-lg": "1.5rem", "gutter-desktop": "2.5rem", "space-xs": "0.25rem", "space-2xl": "4rem", "space-sm": "0.5rem", "margin-tablet": "2.5rem", "space-md": "1rem" }, "fontFamily": { "body-lg": ["DM Sans"], "curatorial-quote-mobile": ["Newsreader"], "headline-sm": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "label-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "display": ["Space Grotesk"], "display-mobile": ["Space Grotesk"], "body-md": ["DM Sans"], "curatorial-quote": ["Newsreader"], "label-caps": ["Space Grotesk"], "headline-lg": ["Space Grotesk"] }, "fontSize": { "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" }], "curatorial-quote-mobile": ["1.375rem", { "lineHeight": "2rem", "letterSpacing": "0", "fontWeight": "400" }], "headline-sm": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-md": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "500" }], "label-md": ["0.8125rem", { "lineHeight": "1.125rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "400" }], "display": ["5rem", { "lineHeight": "5.25rem", "letterSpacing": "-0.04em", "fontWeight": "400" }], "display-mobile": ["2.75rem", { "lineHeight": "3rem", "letterSpacing": "-0.03em", "fontWeight": "400" }], "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0", "fontWeight": "400" }], "curatorial-quote": ["1.875rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-caps": ["0.6875rem", { "lineHeight": "1rem", "letterSpacing": "0.12em", "fontWeight": "600" }], "headline-lg": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.03em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface-dim font-body-md text-on-surface antialiased" style="background-color: rgb(247, 233, 227);"><aside class="fixed left-0 top-0 h-full w-[72px] bg-surface-container-low z-50 flex flex-col justify-between items-center py-space-md border-r border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col items-center gap-space-lg w-full"><a class="flex flex-col items-center justify-center p-space-xs transition-opacity hover:opacity-80" data-path="overview-dashboard" href="#" title="Xadboom Atelier Admin"><span class="font-headline-sm text-headline-sm tracking-tighter text-primary font-bold">XA</span></a><nav class="flex flex-col items-center gap-space-xs w-full px-space-xs" data-active-classes="bg-primary text-on-primary rounded-none shadow-none"><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="overview-dashboard" href="#" title="Overview / Dashboard"><span class="material-symbols-outlined text-[20px]">grid_view</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="pieces-catalog" href="#" title="Pieces Catalog"><span class="material-symbols-outlined text-[20px]">chair</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="categories" href="#" title="Categories"><span class="material-symbols-outlined text-[20px]">category</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="designers-and-collaborators" href="#" title="Designers &amp; Collaborators"><span class="material-symbols-outlined text-[20px]">architecture</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="orders" href="#" title="Orders"><span class="material-symbols-outlined text-[20px]">receipt_long</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="users" href="#" title="Users"><span class="material-symbols-outlined text-[20px]">group</span></a><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="inquiries" href="#" title="Inquiries"><span class="material-symbols-outlined text-[20px]">mail</span></a></nav></div><div class="flex flex-col items-center gap-space-xs w-full px-space-xs"><a class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[20px]">tune</span></a></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 h-16 bg-surface-container-low/95 backdrop-blur-md z-40 border-b border-outline-variant/30 px-gutter-desktop flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-lg"><img alt="logo-sign.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wk0-0X9HkDV8LQxnb_5jBTel0WAkRdos1tcICkrZsV7mwIf7La27Nf5-q9jzV5I1FiFhYRYEoQRv4nxfLgr0oF_M08ZWBdjdF-nJgwnn6OUlx5het2dcfh_jf7B0JcfyfcVBfoQPdAo9ozGFyyGopwooHXhD2Kq8U96kkT_yl9Mi4sbyg1nDGkQRwNwmdHhDHzT8Ik3nR0nYVm_XXJ52KqSpciOThdo6oR4ZYB5SRe-7ijO04sinliodg0uwEf-ffpjprqU4vkD-k"><div class="flex items-center gap-space-xs font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant"><span class="text-secondary">Curatorial Atelier</span><span class="text-outline-variant">/</span><span class="text-secondary">Pieces Catalog</span><span class="text-outline-variant">/</span><span class="text-primary font-semibold">Add New Piece</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 bg-surface-container border border-outline-variant/40"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span><span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Vault Synced</span></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-secondary text-[18px]">search</span><input class="w-72 bg-surface-container py-1.5 pl-9 pr-3 text-body-md font-body-md text-on-surface placeholder:text-secondary placeholder:font-label-caps placeholder:text-label-caps border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" placeholder="Search catalog archive, provenance, designers..." type="text"></div><div class="flex items-center gap-space-sm pl-space-md border-l border-outline-variant/30"><div class="text-right hidden sm:block"><div class="font-headline-sm text-label-md font-medium text-primary leading-tight">Jean-Claude M.</div><div class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Chief Curator</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface-dim min-h-screen" style="background-color: rgb(247, 233, 227);"><div class="flex flex-col w-full">
+<!-- Sub-header / Atelier Intake Ribbon -->
+<section class="w-full px-gutter-desktop py-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-surface-variant">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Archive Ingestion · Form XB-74</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase">Batch 2026/Q2</span>
+</div>
+<h1 class="font-headline-md text-headline-md tracking-tight text-primary">Register New Curated Piece</h1>
+<p class="font-body-md text-body-md text-secondary max-w-3xl mt-1">
+        Curatorial intake, edition allocation quota, dimension schematics &amp; 3D asset pipeline for limited-run interior architecture objects.
+      </p>
+</div>
+<!-- Global Intake Actions -->
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="px-5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-caps text-label-caps uppercase tracking-wider hover:bg-secondary-container transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+        Save Draft
+      </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:opacity-90 transition-all flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+        Publish &amp; Allocate to Vault
+      </button>
+</div>
+</section>
+<!-- Intake Step Progression Bar -->
+<nav aria-label="Intake progression" class="w-full px-gutter-desktop py-3 bg-surface-container-low/70 flex items-center justify-between overflow-x-auto text-on-surface-variant text-label-caps font-label-caps uppercase tracking-wider">
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">1</span>
+<span class="">Core Identity &amp; Designer</span>
+</div>
+<span class="text-secondary/40 font-mono">——</span>
+<div class="flex items-center gap-2 text-primary font-semibold">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">2</span>
+<span class="">Media &amp; Gallery</span>
+</div>
+<span class="text-secondary/40 font-mono">——</span>
+<div class="flex items-center gap-2 text-primary font-semibold">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">3</span>
+<span class="">Schematics &amp; 3D Pipeline</span>
+</div>
+<span class="text-secondary/40 font-mono">——</span>
+<div class="flex items-center gap-2 text-secondary">
+<span class="w-5 h-5 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[10px]">4</span>
+<span class="">Vault Quota &amp; Pricing</span>
+</div>
+</nav>
+<!-- Main 12-Column Grid Canvas -->
+<div class="px-gutter-desktop py-space-xl grid grid-cols-12 gap-gutter-desktop items-start">
+<!-- Left Column: Registration Sections (8 Columns) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-space-xl">
+<!-- SECTION 1: Core Identity & Designer Attribution -->
+<section class="bg-surface-container-low rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">01 / Core Identity &amp; Designer Attribution</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Monograph Catalog Entry</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Piece Title -->
+<div class="md:col-span-2">
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="piece-title">
+              Piece Official Title *
+            </label>
+<input class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-body-md text-body-md placeholder:text-secondary focus:outline-none focus:ring-1 focus:ring-primary shadow-xs" id="piece-title" placeholder="e.g. Cantilever Cane Daybed" type="text" value="Lumen Void Lounge Chair">
+</div>
+<!-- Collaborating Designer / Architect -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider" for="designer-select">
+                Collaborating Architect / Atelier *
+              </label>
+<a class="font-label-caps text-label-caps text-primary hover:underline uppercase" href="#">+ New Designer</a>
+</div>
+<select class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer" id="designer-select">
+<option selected="" value="at-no">Alireza Taghaboni — NextOffice</option>
+<option value="mz">Mehrdad Zavareh</option>
+<option value="sk">Studio Khazeni</option>
+<option value="aa">Atelier Arpa</option>
+<option value="fm">Farshid Moussavi Architecture</option>
+</select>
+</div>
+<!-- Typology / Category -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="category-select">
+              Category &amp; Spatial Typology *
+            </label>
+<select class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer" id="category-select">
+<option selected="" value="sl">Seating &amp; Lounges (Armchairs, Daybeds)</option>
+<option value="tc">Tables, Consoles &amp; Low Platters</option>
+<option value="al">Architectural Lighting &amp; Pendants</option>
+<option value="db">Daybeds &amp; Low Benches</option>
+<option value="sa">Spatial Accents, Screens &amp; Storage</option>
+</select>
+</div>
+<!-- Serial Stamp Prefix -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="serial-prefix">
+              Vault Serial Stamp Prefix
+            </label>
+<div class="flex items-center gap-2">
+<input class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-headline-sm text-label-md tracking-wider uppercase focus:outline-none focus:ring-1 focus:ring-primary font-mono" id="serial-prefix" type="text" value="XB-2026-LV-03">
+<button class="p-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-secondary-container" title="Regenerate Serial Stamp" type="button">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Production Provenance City -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="provenance-origin">
+              Fabrication Studio &amp; Provenance
+            </label>
+<input class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary" id="provenance-origin" type="text" value="Atelier Tehran / Woodwork Kiln Isfahan">
+</div>
+<!-- Curatorial Monograph / Description -->
+<div class="md:col-span-2">
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="curatorial-monograph">
+              Curatorial Monograph &amp; Tectonic Concept
+            </label>
+<textarea class="w-full bg-surface-bright rounded-lg p-4 font-curatorial-quote text-body-lg text-on-surface leading-relaxed focus:outline-none focus:ring-1 focus:ring-primary" id="curatorial-monograph" placeholder="Detail the joinery tension, spatial scale, balance of mass, and dialogue between soft upholstery and sculpted timber..." rows="4">Engineered as a dialogue between negative interior space and sculpted solid walnut. The chair gestures toward low Iranian lounging archetypes while maintaining an assertive European constructivist silhouette. The rear lumbar support floats through a double-mortise arch, allowing the bouclé volume to register as a suspended mineral mass within the room.</textarea>
+</div>
+<!-- Material Tags -->
+<div class="md:col-span-2">
+<span class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-2 tracking-wider">
+              Primary Materials &amp; Tactile Finishes
+            </span>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-caps text-label-caps uppercase">
+                Solid Oiled Iranian Walnut <button aria-label="Remove Solid Oiled Iranian Walnut" class="hover:text-surface-dim" type="button">×</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-caps text-label-caps uppercase">
+                Dark Olive Bouclé Wool <button aria-label="Remove Dark Olive Bouclé Wool" class="hover:text-surface-dim" type="button">×</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-caps text-label-caps uppercase">
+                Sand-Cast Bronze Dowels <button aria-label="Remove Sand-Cast Bronze Dowels" class="hover:text-surface-dim" type="button">×</button>
+</span>
+<button class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-bright hover:bg-secondary-container text-on-surface font-label-caps text-label-caps uppercase transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Material
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Visual Media & Archival Gallery -->
+<section class="bg-surface-container-low rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">02 / Archival Photography &amp; Studio Gallery</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary uppercase">2400 × 1600 Raw Format</span>
+</div>
+<!-- Primary Hero Dropzone -->
+<div class="mb-space-md">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold tracking-wider">
+              Primary Studio Plate (Lookbook Hero)
+            </span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Status: 1 Plate Uploaded</span>
+</div>
+<div class="relative group rounded-lg overflow-hidden bg-surface-dim h-72 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Architectural photograph of a sculptural lounge chair crafted from dark oiled walnut with olive green boucle upholstery, positioned at a dynamic angle in a serene minimalist lime-washed plaster gallery with soft natural daylight casting subtle soft shadows onto the floor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl8pddSfYRsmXajTrQgK2dd2GkTQ7yWr1swNUBxXlt-QSzwlES40NwJeHn1IOJ1v8bvk2HEYdOAjx_lOSSnGupeyRiYtllEI3pjjX53EG1UivRRWtozhkoYTI1HUZWuJs_xLYZxREck0AnzonaUSaPCzzI9hzVtpKoYEOnEc7hbruz2a8kzryjDjohOBFNLrFB-RRKwLVDqIeOT5bd6yfiL_U-6KR-9CYlM-Zagk-M">
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-space-sm">
+<button class="px-4 py-2 rounded-lg bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider hover:bg-surface-container" type="button">
+                Replace Plate
+              </button>
+<button class="p-2 rounded-lg bg-surface-bright text-error hover:bg-error-container" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="absolute bottom-3 left-3 px-3 py-1 rounded bg-primary/80 backdrop-blur-sm text-on-primary font-label-caps text-label-caps uppercase tracking-wider">
+              PLATE 01 — Atelier Studio Daylight (Primary)
+            </div>
+</div>
+</div>
+<!-- Detail / Context Gallery Mosaic -->
+<div>
+<span class="block font-label-caps text-label-caps uppercase text-on-surface font-semibold tracking-wider mb-2">
+            Secondary Monograph Plates (Tectonic Details &amp; Spatial In-Situ)
+          </span>
+<div class="grid grid-cols-3 gap-space-sm">
+<div class="h-32 rounded-lg bg-surface-bright p-3 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Joinery 01</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<div class="font-body-md text-label-md text-on-surface font-medium truncate">walnut_lap_joint_macro.jpg</div>
+<span class="font-label-caps text-label-caps text-secondary">6.4 MB · 3200 × 2400</span>
+</div>
+<div class="h-32 rounded-lg bg-surface-bright p-3 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Boucle 02</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<div class="font-body-md text-label-md text-on-surface font-medium truncate">textile_olive_weave.webp</div>
+<span class="font-label-caps text-label-caps text-secondary">4.1 MB · 2800 × 2100</span>
+</div>
+<label class="h-32 rounded-lg bg-surface-bright/50 hover:bg-surface-bright transition-colors cursor-pointer flex flex-col items-center justify-center gap-1.5 text-center p-3">
+<input accept="image/*" class="hidden" multiple="" type="file">
+<span class="material-symbols-outlined text-secondary text-[28px]">add_photo_alternate</span>
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-wider">Upload Detail Plate</span>
+<span class="text-[11px] text-secondary">Drag or click · Max 25MB</span>
+</label>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Dimension Schematics & 3D Model Asset Pipeline (CRITICAL) -->
+<section class="bg-surface-container-low rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">03 / Dimension Schematics &amp; 3D Model Asset Pipeline</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary uppercase">CAD, Mesh &amp; Orthographic Spec</span>
+</div>
+<div class="flex flex-col gap-space-lg">
+<!-- Part A: Dimension Schematic Image Upload Zone -->
+<div class="p-space-md bg-surface-bright rounded-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">architecture</span>
+<h3 class="font-headline-sm text-label-md uppercase tracking-wider text-primary font-bold">
+                  A. Dimension Schematic Image (Elevation &amp; Angular Rake)
+                </h3>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase">
+                Uploaded &amp; Linked
+              </span>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-space-sm">
+              Orthographic architectural drawing showing frontal width, seat profile rake, seat back angle, and vertical elevation lines.
+            </p>
+<!-- Schematic Preview Card -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center bg-surface-container-low rounded-lg p-3">
+<div class="md:col-span-6 bg-surface-bright rounded-lg h-44 flex items-center justify-center p-2 overflow-hidden">
+<img class="h-full w-auto object-contain" data-alt="Technical architectural dimension schematic drawing showing black silhouette profile of the lounge chair with dimension lines in millimeters and inches: width 500mm, depth 600mm, height 830mm, seat height 415mm on a clean alabaster background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxeHvFWHKQ1-6_jKIQwTDyojyD_DmPxIxEmxwV6PJhHQnoZWbgPSd1LVbihnP8V3w2HsuyuL5MoZuaJyAPwjWt0_vgbIzrF0ma_MUxoGBme8HXdCd8XEddQiijAQdz9MVw5jfrCcbAaOVIEf1TPyA46XOvzMHny07LQtNfmPo_CH0p578V1p2o70P_Nam-GyC-rU2Avj5Ep2tI_BX0boYdAuKI1lPzjschoRenZRc6">
+</div>
+<div class="md:col-span-6 flex flex-col justify-between h-full gap-2">
+<div>
+<div class="font-headline-sm text-label-md text-primary font-bold">schematic_elevation_v1.png</div>
+<div class="font-label-caps text-label-caps text-secondary uppercase mt-0.5">Vector CAD Export · 300 DPI Transparent PNG</div>
+</div>
+<div class="space-y-1 text-label-caps font-label-caps text-on-surface-variant uppercase">
+<div class="flex justify-between py-0.5 border-b border-surface-variant">
+<span class="">Height / Seat Rake</span>
+<span class="font-mono text-primary font-bold">830 mm / 415 mm</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-surface-variant">
+<span class="">Width / Seat Width</span>
+<span class="font-mono text-primary font-bold">500 mm / 490 mm</span>
+</div>
+<div class="flex justify-between py-0.5">
+<span class="">Depth / Seat Depth</span>
+<span class="font-mono text-primary font-bold">600 mm / 455 mm</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-3 py-1.5 rounded bg-surface-bright hover:bg-secondary-container text-on-surface font-label-caps text-label-caps uppercase transition-colors" type="button">
+                    Re-Upload Schematic
+                  </button>
+<button class="px-3 py-1.5 rounded bg-surface-bright hover:bg-secondary-container text-on-surface font-label-caps text-label-caps uppercase transition-colors" type="button">
+                    Full Screen Vector
+                  </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Part B: Dimensional Numerical Data (Excel / CSV Spreadsheet) Upload Zone -->
+<div class="p-space-md bg-surface-bright rounded-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">table_view</span>
+<h3 class="font-headline-sm text-label-md uppercase tracking-wider text-primary font-bold">
+                  B. Dimensional Numerical Data (Excel / CSV Spreadsheet)
+                </h3>
+</div>
+<a class="font-label-caps text-label-caps text-primary hover:underline uppercase inline-flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">download</span> Download Spec Template (.xlsx)
+              </a>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-space-sm">
+              Upload the standard dimension parameters spreadsheet (.xlsx or .csv). Our server automatically parses length, depth, height, seat elevation, clearance, gross weight, and spatial volume envelopes.
+            </p>
+<!-- Parsed Excel Result Card -->
+<div class="rounded-lg bg-surface-container-low p-4 flex flex-col gap-3">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-xs">
+                    XLSX
+                  </div>
+<div>
+<div class="font-headline-sm text-label-md text-primary font-bold">lumen_void_dimensions_iso9001.xlsx</div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">14 KB · Parsed 2 minutes ago by Server Engine</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check</span> Valid Schema
+                  </span>
+<button class="p-2 rounded bg-surface-bright hover:bg-secondary-container text-on-surface" title="Upload new spreadsheet" type="button">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<!-- Metric Table parsed directly from XLSX -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-surface-variant text-label-caps font-label-caps uppercase">
+<div class="bg-surface-bright p-2.5 rounded">
+<span class="text-secondary block">Envelope Dimensions</span>
+<span class="font-mono text-primary font-bold text-[13px]">830 × 500 × 600 mm</span>
+</div>
+<div class="bg-surface-bright p-2.5 rounded">
+<span class="text-secondary block">Seat Rake &amp; Elevation</span>
+<span class="font-mono text-primary font-bold text-[13px]">415 mm / 16.25"</span>
+</div>
+<div class="bg-surface-bright p-2.5 rounded">
+<span class="text-secondary block">Gross Dry Weight</span>
+<span class="font-mono text-primary font-bold text-[13px]">18.4 kg / 40.5 lbs</span>
+</div>
+<div class="bg-surface-bright p-2.5 rounded">
+<span class="text-secondary block">Volumetric Freight</span>
+<span class="font-mono text-primary font-bold text-[13px]">0.36 CBM (Crated)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Part C: 3D Object Model File Upload Zone -->
+<div class="p-space-md bg-surface-bright rounded-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">view_in_ar</span>
+<h3 class="font-headline-sm text-label-md uppercase tracking-wider text-primary font-bold">
+                  C. 3D Object Model File &amp; CAD Wireframe Pipeline
+                </h3>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase">
+                OBJ + GLB Ready
+              </span>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-space-sm">
+              Dedicated 3D asset dropzone for standalone architectural models (.OBJ, .GLB, .GLTF, .3DM). Client viewing pipeline generates interactive WebGL CAD mesh overlay automatically.
+            </p>
+<!-- 3D Mesh Wireframe Preview Container -->
+<div class="relative rounded-lg overflow-hidden bg-surface-dim h-80 flex items-center justify-center group">
+<img class="w-full h-full object-contain" data-alt="Technical 3D perspective rendering of the lounge chair with the left half rendered with photo-realistic olive green boucle upholstery and dark walnut legs, transitioning through a subtle diagonal dissolve into a clean wireframe CAD polygon mesh grid with coordinate axes and dimension lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8sI5S8rqAKyq0JvgGAt-3YLsoMjSU11_p1JHCpf6DLO2rGrIylDRG0qAG4S50eDTXYGn0GZXGGHTFk-D6DGM8clIvT3l3gbcL253VbvZ_ASw_dPExx1_j5724tdB-Ap4oS-x7d5ZoOUw0xI41y4ykeD7IfGvZ9F60nSNl-pU6zpK06x_SnshBRzZLfkl5NYLjTGztiPdcnJE4rSPUI66f3F84NEx0yAJ7owWxBV2O">
+<!-- Top Left Mesh Overlay Badges -->
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="px-2.5 py-1 rounded bg-primary/90 text-on-primary font-label-caps text-label-caps uppercase tracking-wider backdrop-blur-sm">
+                  Format: OBJ + GLB Calibrated
+                </span>
+<span class="px-2.5 py-1 rounded bg-surface-bright/90 text-on-surface font-label-caps text-label-caps uppercase tracking-wider backdrop-blur-sm">
+                  Polygon Count: 48,200 · 24.2 MB
+                </span>
+</div>
+<!-- Top Right 3D Orbit Controller Toggle -->
+<div class="absolute top-3 right-3 flex items-center gap-1 bg-surface-bright/90 backdrop-blur-sm p-1 rounded-lg">
+<button class="px-2 py-1 rounded bg-primary text-on-primary font-label-caps text-label-caps uppercase" type="button">
+                  Wireframe Split
+                </button>
+<button class="px-2 py-1 rounded hover:bg-secondary-container text-on-surface font-label-caps text-label-caps uppercase" type="button">
+                  Shaded
+                </button>
+<button class="px-2 py-1 rounded hover:bg-secondary-container text-on-surface font-label-caps text-label-caps uppercase" type="button">
+                  Normals
+                </button>
+</div>
+<!-- Bottom Bar Status -->
+<div class="absolute bottom-3 inset-x-3 bg-surface-bright/90 backdrop-blur-sm rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase">WebGL Viewport Calibrated (Z-Up Coordinate Frame)</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 rounded bg-primary text-on-primary font-label-caps text-label-caps uppercase hover:opacity-90" type="button">
+                    Replace .OBJ / .GLB
+                  </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Edition Batch, Vault Allocation & Commercials -->
+<section class="bg-surface-container-low rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">04 / Edition Batch, Vault Allocation &amp; Commercials</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Strict Limited Quota</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Total Edition Units -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="edition-run-total">
+              Total Edition Batch Run
+            </label>
+<div class="relative">
+<input class="w-full bg-surface-bright rounded-lg px-4 py-2.5 font-headline-sm text-headline-sm text-primary font-bold focus:outline-none focus:ring-1 focus:ring-primary" id="edition-run-total" type="number" value="12">
+<span class="absolute right-3 top-3.5 font-label-caps text-label-caps text-secondary uppercase">Units Total</span>
+</div>
+<p class="font-body-md text-label-md text-secondary mt-1">Strict limitation; foundry molds retired after unit 12.</p>
+</div>
+<!-- Immediate Vault Allocation -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="vault-allocation-count">
+              Immediate Vault Allocation
+            </label>
+<div class="relative">
+<input class="w-full bg-surface-bright rounded-lg px-4 py-2.5 font-headline-sm text-headline-sm text-primary font-bold focus:outline-none focus:ring-1 focus:ring-primary" id="vault-allocation-count" type="number" value="3">
+<span class="absolute right-3 top-3.5 font-label-caps text-label-caps text-secondary uppercase">Available Drop</span>
+</div>
+<p class="font-body-md text-label-md text-secondary mt-1">Initial drop allocation for authenticated collectors.</p>
+</div>
+<!-- Studio Acquisition Price ($ USD) -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="acquisition-price">
+              Acquisition Price (USD $)
+            </label>
+<div class="relative">
+<input class="w-full bg-surface-bright rounded-lg pl-8 pr-4 py-2.5 font-headline-sm text-headline-sm text-primary font-bold focus:outline-none focus:ring-1 focus:ring-primary font-mono" id="acquisition-price" type="text" value="2,450">
+<span class="absolute left-3 top-3 font-headline-sm text-label-md text-secondary">$</span>
+<span class="absolute right-3 top-3.5 font-label-caps text-label-caps text-secondary uppercase">USD NET</span>
+</div>
+<p class="font-body-md text-label-md text-secondary mt-1">Net studio acquisition value prior to bespoke freight.</p>
+</div>
+<!-- Lead Time Selector -->
+<div class="md:col-span-2">
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider" for="production-lead">
+              Estimated Kiln &amp; Joinery Lead Time
+            </label>
+<select class="w-full bg-surface-bright rounded-lg px-4 py-2.5 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer" id="production-lead">
+<option value="ready">In Vault Storage (Ready for immediate crating · 72 Hours)</option>
+<option selected="" value="mid">Made to Order (4–6 Weeks · Atelier Woodwork &amp; Upholstery)</option>
+<option value="long">Extended Craft Cycle (8–10 Weeks · Bronze Cast &amp; Kiln Drying)</option>
+</select>
+</div>
+<!-- Packaging & COA -->
+<div class="md:col-span-1">
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1.5 tracking-wider">
+              Crating &amp; Authentication
+            </label>
+<div class="p-2.5 rounded-lg bg-surface-bright text-label-caps font-label-caps text-on-surface uppercase flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="">Numbered Metal Seal</span>
+</div>
+<div class="text-secondary text-[11px] leading-tight">Reinforced ISPM-15 Timber Crate with Embossed Brass Plaque</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Live Sticky Spec Sheet & Verification Ledger (4 Columns) -->
+<aside class="col-span-12 lg:col-span-4 lg:sticky lg:top-20 flex flex-col gap-space-md">
+<!-- Live Curatorial Spec Sheet Preview Card -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">preview</span>
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-widest font-bold">
+              Live Spec Sheet Preview
+            </span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-bright text-on-surface text-[10px] font-mono uppercase">
+            ID: XB-2026-LV-03
+          </span>
+</div>
+<!-- Thumbnail & Visual Summary -->
+<div class="rounded-lg overflow-hidden bg-surface-bright mb-space-sm relative aspect-4/3 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Side profile view of the contemporary walnut armchair highlighting the cantilevered armrest curves and refined upholstery joints in warm museum lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB53qvxNjlTrfXqThGiP7rrxI2eBOuU7_bJ2fDTIK6NKt6RNJXMKkZN9P-B4KnNwYN7KZtvcPkGc2ZIS1EKN7f19jDQmZ5pMymHo4ZoXcpTELp6ATqSIW2IjcNVWoJIV7_z0IHxn0XWwKQy9_A2ekTBroYmSPRuakOXs3FVC959iuOhkr4_JJQpGKv47YEq5xFHHQeiW_soe0WQXvZ9QKB_0UD_AimUDi7dBfcKru_Z">
+<div class="absolute top-2 right-2 bg-primary text-on-primary px-2 py-0.5 rounded font-label-caps text-label-caps uppercase tracking-wider">
+            Edition 01 / 12
+          </div>
+</div>
+<!-- Monograph Metadata Preview -->
+<div class="space-y-2 pb-space-md border-b border-surface-variant">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-widest">Typology: Seating · Armchair</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight leading-tight mt-0.5">
+              Lumen Void Lounge Chair
+            </h3>
+<p class="font-body-md text-label-md text-secondary">
+              By <span class="text-primary font-medium">Alireza Taghaboni (NextOffice)</span>
+</p>
+</div>
+<!-- Price & Stocking Line -->
+<div class="flex items-center justify-between pt-2">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Studio Price</span>
+<div class="font-headline-sm text-headline-sm font-bold text-primary font-mono leading-none">$2,450</div>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Vault Release</span>
+<div class="font-headline-sm text-headline-sm font-bold text-primary leading-none">03 / 12 Units</div>
+</div>
+</div>
+</div>
+<!-- Parsed Technical Dimensions Brief -->
+<div class="py-space-sm border-b border-surface-variant space-y-1.5 font-label-caps text-label-caps uppercase">
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Dimensions</span>
+<span class="font-mono text-primary font-semibold">830H × 500W × 600D mm</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="">Seat Height &amp; Angle</span>
+<span class="font-mono text-primary font-semibold">415 mm / 16.25″ · 12° Rake</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="">3D Asset Pipeline</span>
+<span class="text-primary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> .OBJ / .GLB Calibrated
+            </span>
+</div>
+</div>
+<!-- Intake Verification Checklist -->
+<div class="pt-space-sm">
+<span class="block font-label-caps text-label-caps uppercase text-on-surface-variant font-bold tracking-wider mb-2">
+            Archival Intake Readiness (5/5)
+          </span>
+<div class="space-y-1.5 font-body-md text-label-md">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_box</span>
+<span class="">Core Attributions &amp; Monograph Complete</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_box</span>
+<span class="">Primary Hero Studio Plate Attached</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_box</span>
+<span class="">Orthographic Schematic Image Linked</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_box</span>
+<span class="">Excel Dimensional Spreadsheet Parsed</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_box</span>
+<span class="">3D Object Model (.OBJ/.GLB) Calibrated</span>
+</div>
+</div>
+</div>
+<!-- Submit Button in Sticky Box -->
+<div class="mt-space-md pt-space-sm border-t border-surface-variant flex flex-col gap-2">
+<button class="w-full py-3 rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+            Publish &amp; Commit to Vault
+          </button>
+<div class="text-center font-label-caps text-label-caps text-secondary uppercase">
+            Commits metadata to distributed archival index
+          </div>
+</div>
+</div>
+<!-- Quick Guidance Monograph Note -->
+<div class="p-space-md rounded-lg bg-surface-container-low font-body-md text-body-md text-secondary">
+<div class="flex items-center gap-2 mb-2 text-primary font-bold font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[16px]">info</span>
+          Curatorial Ingestion Standards
+        </div>
+<p class="leading-relaxed">
+          Ensure CAD schematics comply with millimeter-standard orthographic drawings. The 3D pipeline automatically feeds into the client spatial viewer for architect spec downloads.
+        </p>
+</div>
+</aside>
+</div>
+</div></main></div>
+
+</body></html>

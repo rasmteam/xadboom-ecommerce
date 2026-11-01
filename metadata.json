@@ -1,0 +1,8 @@
+{
+  "name": "Xadboom Design System & Atelier",
+  "description": "Curated interior architecture assets, collectible furniture catalog, and curatorial atelier administration portal.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}
