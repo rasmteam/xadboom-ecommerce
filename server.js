@@ -380,6 +380,8 @@ const SCREENS = [
 
 // Helper to inject navigation enhancement and interactive 15-minute Cart Drawer into served HTML
 function enhanceHtml(html, activeScreenId) {
+  // Clean Express routes vary in depth; root-absolute local assets work on all of them.
+  html = html.replace(/(src=["'])\.\.\/src\//g, '$1/src/');
   const currentScreen = SCREENS.find(s => s.id === activeScreenId) || SCREENS[0];
 
   const storefrontLinks = SCREENS.filter(s => s.group === 'Storefront').map(s => {
