@@ -362,7 +362,7 @@ f 9//1 10//1 11//1 12//1
 
 // Design System Screens Definition
 const SCREENS = [
-  { id: 'home', group: 'Storefront', label: 'Curated Home', route: '/', file: 'xadboom_curated_interior_architecture_homepage_harmonized/code.html' },
+  { id: 'home', group: 'Storefront', label: 'Curated Home', route: '/', file: 'index.html' },
   { id: 'catalog', group: 'Storefront', label: 'Typologies Catalog', route: '/catalog', file: 'curated_architectural_assets_physical_typologies_xadboom/code.html' },
   { id: 'product', group: 'Storefront', label: 'Lumen Void Chair', route: '/product', file: 'lumen_void_lounge_chair_product_detail_xadboom/code.html' },
   { id: 'designers', group: 'Storefront', label: 'Visionaries (1)', route: '/designers', file: 'designers_collaborating_visionaries_xadboom_1/code.html' },
@@ -381,7 +381,7 @@ const SCREENS = [
 // Helper to inject navigation enhancement and interactive 15-minute Cart Drawer into served HTML
 function enhanceHtml(html, activeScreenId) {
   // Clean Express routes vary in depth; root-absolute local assets work on all of them.
-  html = html.replace(/(src=["'])\.\.\/src\//g, '$1/src/');
+  html = html.replace(/((?:src|href)=["'])\.\.\/src\//g, '$1/src/');
   const currentScreen = SCREENS.find(s => s.id === activeScreenId) || SCREENS[0];
 
   const storefrontLinks = SCREENS.filter(s => s.group === 'Storefront').map(s => {
@@ -441,7 +441,7 @@ function enhanceHtml(html, activeScreenId) {
       <span id="xadboom-cart-total" style="font-family:'Space Grotesk',monospace;">$9,400</span>
     </div>
     <button id="xadboom-checkout-btn" style="width:100%;padding:14px;background:#0A0A0A;color:#FFF8F6;border:0;border-radius:9999px;font-family:'Space Grotesk',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;margin-bottom:8px;transition:opacity 0.2s;">
-      PROCEED TO ALLOCATION CHECKOUT ↗
+      PROCEED TO ALLOCATION CHECKOUT →
     </button>
     <button id="xadboom-release-btn" style="width:100%;padding:8px;background:transparent;color:#7A6E69;border:0;font-family:'Space Grotesk',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;">
       Release Vault Lock Back to Inventory
@@ -523,12 +523,32 @@ function enhanceHtml(html, activeScreenId) {
   function openCart() {
     drawer.style.display = 'flex';
     backdrop.style.display = 'block';
+    if (window.Motion && window.XadboomMotion && !window.XadboomMotion.reduce) {
+      window.Motion.animate(backdrop, { opacity: [0, 1] }, { duration: 0.2, ease: [0.22, 1, 0.36, 1] });
+      window.Motion.animate(drawer, { opacity: [0, 1], x: ['100%', '0%'] }, { duration: 0.36, ease: [0.22, 1, 0.36, 1] });
+    }
     refreshCart();
   }
 
   function closeCart() {
-    drawer.style.display = 'none';
-    backdrop.style.display = 'none';
+    if (window.Motion && window.XadboomMotion && !window.XadboomMotion.reduce) {
+      window.Motion.animate(backdrop, { opacity: 0 }, { duration: 0.18, ease: [0.4, 0, 0.2, 1] });
+      var controls = window.Motion.animate(drawer, { opacity: 0, x: '100%' }, { duration: 0.22, ease: [0.4, 0, 0.2, 1] });
+      var finish = function () {
+        drawer.style.display = 'none';
+        backdrop.style.display = 'none';
+        drawer.style.opacity = '';
+        drawer.style.transform = '';
+      };
+      if (controls && controls.finished && controls.finished.then) {
+        controls.finished.then(finish, finish);
+      } else {
+        setTimeout(finish, 240);
+      }
+    } else {
+      drawer.style.display = 'none';
+      backdrop.style.display = 'none';
+    }
   }
 
   if (closeBtn) closeBtn.addEventListener('click', closeCart);
@@ -569,7 +589,7 @@ function enhanceHtml(html, activeScreenId) {
         if (data.remainingSeconds) remainingSeconds = data.remainingSeconds;
 
         if (data.items.length === 0) {
-          itemsContainer.innerHTML = '<div style="text-align:center;padding:40px 10px;color:#7A6E69;font-family:monospace;font-size:12px;">NO ACTIVE ALLOCATIONS IN BAG.<br><br><a href="/catalog" style="display:inline-block;padding:8px 16px;background:#0A0A0A;color:#fff;border-radius:9999px;text-decoration:none;font-size:11px;margin-top:10px;">EXPLORE CATALOG ↗</a></div>';
+          itemsContainer.innerHTML = '<div style="text-align:center;padding:40px 10px;color:#7A6E69;font-family:monospace;font-size:12px;">NO ACTIVE ALLOCATIONS IN BAG.<br><br><a href="/catalog" style="display:inline-block;padding:8px 16px;background:#0A0A0A;color:#fff;border-radius:9999px;text-decoration:none;font-size:11px;margin-top:10px;">EXPLORE CATALOG →</a></div>';
           totalEl.innerText = '$0';
           return;
         }

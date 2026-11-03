@@ -80,7 +80,7 @@
       border: 1px solid #D8C3BC;
     }
     .spec-row:hover .spec-arrow {
-      transform: translateX(3px) translateY(-3px);
+      transform: translateX(3px);
     }
     .spec-arrow {
       transition: transform 0.2s ease-in-out;
@@ -95,39 +95,54 @@
       transform: rotate(45deg);
     }
   </style>
+<!-- Material Symbols (shared header icons) -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<!-- Xadboom Motion: reveal FOUC guard + shared styles -->
+<script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion-enabled');window.addEventListener('load',function(){setTimeout(function(){if(!d.classList.contains('motion-loaded'))d.classList.remove('motion-enabled')},1200)})})()</script>
+<link rel="stylesheet" href="./src/xadboom-motion.css">
 </head>
 <body class="selection:bg-brand-dark selection:text-brand-surface">
 <!-- BEGIN: SiteNavigation -->
 <!-- Persistent architectural header bar with brand sign and navigation links -->
-<header class="w-full hairline-bottom px-6 md:px-12 py-5 flex items-center justify-between bg-brand-canvas/90 backdrop-blur-md sticky top-0 z-50">
-<div class="flex items-center space-x-3">
-<a aria-label="Xadboom Home" class="transition-transform hover:rotate-12 duration-300 block" href="#">
-<img alt="Xadboom Icon" class="w-7 h-7 object-contain" src="./src/assets/images/xadboom-sign.png"/>
+<header data-motion-header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8f6] border-b border-[#e8d6d0] backdrop-blur-md bg-opacity-95" style="background-color: rgba(236, 218, 212, 0.95);">
+<div class="h-20 w-full px-6 md:px-12 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group" data-path="shop" href="/">
+<img alt="Xadboom mark" class="h-8 w-auto object-contain transition-transform group-hover:scale-95 duration-200" src="./src/assets/images/xadboom-sign.png">
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#0a0a0a] font-bold hidden sm:inline-block">XADBOOM</span>
 </a>
 </div>
-<!-- Navigation directory links -->
-<nav class="flex items-center space-x-7 text-xs font-medium tracking-widest uppercase">
-<a class="hover:text-brand-dark/60 transition-colors" href="/catalog">Shop</a>
-<a class="hover:text-brand-dark/60 transition-colors" href="/designers">Designers</a>
-<a class="hover:text-brand-dark/60 transition-colors" href="#dispatch">Journal</a>
-<a class="hover:text-brand-dark/60 transition-colors inline-flex items-center gap-1 font-semibold" href="/contact">
-        Contact <span class="text-[10px]">↗</span>
-</a>
-<a class="px-3 py-1 rounded-full border border-brand-border bg-brand-surface text-brand-dark hover:bg-brand-dark hover:text-white transition-all text-[11px] tracking-wider uppercase font-mono font-medium inline-flex items-center gap-1 ml-2" href="/admin">
-  Atelier Admin ↗
-</a>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="shop" href="/catalog" href="#">SHOP</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="designers" href="/designers">DESIGNERS</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="spec-library" href="#">SPEC LIBRARY</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="journal" href="#">JOURNAL</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="contact" href="/contact">CONTACT</a>
 </nav>
+<div class="flex items-center gap-5">
+<button aria-label="Search" class="text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center justify-center p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="font-['Space_Grotesk'] text-xs uppercase tracking-wider text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center gap-1.5" type="button">
+<span class="">Bag</span>
+<span class="text-[#78716C] font-mono">(0)</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-[#0a0a0a] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#fff8f6] text-[18px]">person</span>
+</div>
+</div>
+</div>
 </header>
 <!-- END: SiteNavigation -->
 <main>
 <!-- BEGIN: HeroSection -->
 <!-- Architectural Hero with Wordmark, Tagline, Studio Meta Data, and Quad Image Gallery -->
-<section class="px-6 md:px-12 pt-10 pb-16" data-purpose="hero-section">
+<section class="px-6 md:px-12 pt-28 pb-16" data-purpose="hero-section">
 <div class="max-w-[1360px] mx-auto">
 <!-- Hero Header Row: Logotype & Meta Status Block -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
 <!-- Left Column: Wordmark & CTA Buttons -->
-<div class="lg:col-span-8 space-y-7">
+<div data-reveal class="lg:col-span-8 space-y-7">
 <div>
 <img alt="xadboom" class="h-14 sm:h-20 md:h-24 w-auto object-contain -ml-1" src="./src/assets/images/xadboom-wordmark.png"/>
 </div>
@@ -139,12 +154,12 @@
                 The Collection
               </a>
 <a class="px-4 py-2.5 text-xs tracking-wider uppercase font-semibold text-brand-dark hover:opacity-75 transition-all inline-flex items-center gap-1.5" href="#about">
-                Our Approach <span class="text-xs">↗</span>
+                Our Approach <span class="text-xs">→</span>
 </a>
 </div>
 </div>
 <!-- Right Column: Studio Verification Status -->
-<div class="lg:col-span-4 lg:text-right pt-2 space-y-2 font-mono text-[11px] tracking-wider text-brand-dark/70 uppercase">
+<div data-reveal data-reveal-delay="0.1" class="lg:col-span-4 lg:text-right pt-2 space-y-2 font-mono text-[11px] tracking-wider text-brand-dark/70 uppercase">
 <div class="flex justify-between lg:justify-end lg:gap-8 hairline-bottom pb-1.5">
 <span>Response Time</span>
 <span class="font-semibold text-brand-dark">3h</span>
@@ -160,31 +175,31 @@
 </div>
 </div>
 <!-- Hero 4-Card Architectural Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="hero-gallery">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="hero-gallery" data-reveal-group>
 <!-- Card 1: Botanical Embossed Fabric Motif -->
-<div class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-900 border border-brand-border/60">
-<img alt="Textile exploration" class="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700" src="./src/assets/images/textile-emblem.jpg"/>
+<div data-reveal-item class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-900 border border-brand-border/60">
+<img alt="Textile exploration" class="w-full h-full object-cover grayscale-[20%] group-hover:scale-[1.035] transition-transform duration-700" src="./src/assets/images/textile-emblem.jpg"/>
 <div class="absolute bottom-3 left-3 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded text-[10px] tracking-widest text-white/90 font-mono uppercase">
               Archive 01
             </div>
 </div>
 <!-- Card 2: Minimalist sculptural seat -->
-<div class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-200 border border-brand-border/60">
-<img alt="Sculptural lounge chair in timber and dark upholstery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="./src/assets/images/xadboom_hero_piece_1793524952436.jpg"/>
+<div data-reveal-item class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-200 border border-brand-border/60">
+<img alt="Sculptural lounge chair in timber and dark upholstery" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="./src/assets/images/xadboom_hero_piece_1793524952436.jpg"/>
 <div class="absolute bottom-3 left-3 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded text-[10px] tracking-widest text-white/90 font-mono uppercase">
               Seat / Ash
             </div>
 </div>
 <!-- Card 3: Deep Green Modernist Velvet Sofa -->
-<div class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-300 border border-brand-border/60">
-<img alt="Dark green modernist sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZHcECIeZ7J-KrqU3ikRaHli8Hy54A1gCnueAigg2398P-78AzABU7WB8H87-MzsxPa9OwQJwBUSNMKCcN-JQLha74a-lk82Rm75mDI8kC71QZhJRLjpwgGKgajvy_3gwvKasbvTqc-QKzNP_-qEBow0E5Zy0NcAzlUPGoZWym27dVLzPsyQP8jcaLK2hkJ4RMHOiZQnwF2oLsEHrKJBmLrUnWzRaxO36OmTXLAX9O"/>
+<div data-reveal-item class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-300 border border-brand-border/60">
+<img alt="Dark green modernist sofa" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZHcECIeZ7J-KrqU3ikRaHli8Hy54A1gCnueAigg2398P-78AzABU7WB8H87-MzsxPa9OwQJwBUSNMKCcN-JQLha74a-lk82Rm75mDI8kC71QZhJRLjpwgGKgajvy_3gwvKasbvTqc-QKzNP_-qEBow0E5Zy0NcAzlUPGoZWym27dVLzPsyQP8jcaLK2hkJ4RMHOiZQnwF2oLsEHrKJBmLrUnWzRaxO36OmTXLAX9O"/>
 <div class="absolute bottom-3 left-3 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded text-[10px] tracking-widest text-white/90 font-mono uppercase">
               Lounge Studio
             </div>
 </div>
 <!-- Card 4: Terracotta Modular Sofa in Gallery -->
-<div class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-300 border border-brand-border/60">
-<img alt="Terracotta modular couch in gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB220EWbIZeDdQHKeUrGGrDmHiRSBZlbVKNFp7KvKTdZWVo6ETauAiIzSJoboJipRX6grdgqP2LieX-rfglExuV9ZUKexUsCc-PGvQ__S_6WXYT32ZPovDoJMaLJvHH9vDkAe1s0jAR4vxWEaV-GR4X8nc53FRD58wemIJ5xed0tBTXn3sIaTkk2iXLMACRNFYPoSDq0qSi7e91Jt_MszsgLaDMT1UCuUyVlA0bYazS"/>
+<div data-reveal-item class="relative aspect-[3/4] rounded-lg overflow-hidden group bg-stone-300 border border-brand-border/60">
+<img alt="Terracotta modular couch in gallery" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB220EWbIZeDdQHKeUrGGrDmHiRSBZlbVKNFp7KvKTdZWVo6ETauAiIzSJoboJipRX6grdgqP2LieX-rfglExuV9ZUKexUsCc-PGvQ__S_6WXYT32ZPovDoJMaLJvHH9vDkAe1s0jAR4vxWEaV-GR4X8nc53FRD58wemIJ5xed0tBTXn3sIaTkk2iXLMACRNFYPoSDq0qSi7e91Jt_MszsgLaDMT1UCuUyVlA0bYazS"/>
 <div class="absolute top-3 right-3 bg-brand-dark/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] tracking-wider text-white font-mono uppercase">
               Edition 2026
             </div>
@@ -198,7 +213,7 @@
 <!-- END: HeroSection -->
 <!-- BEGIN: PropositionSection -->
 <!-- Architectural Curation statement & Studio collaborator ticker -->
-<section class="px-6 md:px-12 py-16 hairline-top hairline-bottom bg-[#ECDAD4]" data-purpose="proposition-statement">
+<section data-reveal class="px-6 md:px-12 py-16 hairline-top hairline-bottom bg-[#ECDAD4]" data-purpose="proposition-statement">
 <div class="max-w-[1360px] mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
 <div class="lg:col-span-4">
@@ -212,10 +227,10 @@
             </h2>
 <div class="flex flex-wrap items-center gap-6 pt-2">
 <a class="text-xs uppercase tracking-widest font-semibold text-brand-dark border-b border-brand-dark pb-0.5 hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="/catalog">
-                View Catalogues ↗
+                View Catalogues →
               </a>
 <a class="text-xs uppercase tracking-widest font-semibold text-brand-dark/70 hover:text-brand-dark transition-colors inline-flex items-center gap-1" href="#spectools">
-                Membership &amp; Spec Tools ↗
+                Membership &amp; Spec Tools →
               </a>
 </div>
 </div>
@@ -244,7 +259,7 @@
 <!-- END: PropositionSection -->
 <!-- BEGIN: CuratedAssetsSection -->
 <!-- 2x2 Architectural Product Grid with Badges and Edition Verification -->
-<section class="px-6 md:px-12 py-20" data-purpose="curated-assets" id="assets">
+<section data-reveal class="px-6 md:px-12 py-20" data-purpose="curated-assets" id="assets">
 <div class="max-w-[1360px] mx-auto">
 <!-- Section Header -->
 <div class="flex flex-col md:flex-row md:items-end justify-between hairline-bottom pb-5 mb-10 gap-4">
@@ -263,7 +278,7 @@
 <!-- Product Card 1: Lumen Void Lounge Chair -->
 <article class="group" data-purpose="product-card">
 <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-stone-200 border border-brand-border mb-4">
-<img alt="Lumen Void Lounge Chair in living room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwnCJLKLvhum3BMndM9-PH1frfIJppinysZwrLcPhUH0AV8GsVaqmZzF_M8GR6ESpCju6fnmTN7DFWKy-DiVCqZTxDLyhEPeC_IK_4w1soWZTFD96uhfpWmYlACXw6RMIu_Ap3-uZEyc31P9IHs_fpfl-sHnMMRmb6sBFJmXzGKlrdhEMF1NJT0AXLqQslhbsDqWiBXrgLGrfsPHfnJUGqunRKntyorrnZb5qlDbMt"/>
+<img alt="Lumen Void Lounge Chair in living room" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwnCJLKLvhum3BMndM9-PH1frfIJppinysZwrLcPhUH0AV8GsVaqmZzF_M8GR6ESpCju6fnmTN7DFWKy-DiVCqZTxDLyhEPeC_IK_4w1soWZTFD96uhfpWmYlACXw6RMIu_Ap3-uZEyc31P9IHs_fpfl-sHnMMRmb6sBFJmXzGKlrdhEMF1NJT0AXLqQslhbsDqWiBXrgLGrfsPHfnJUGqunRKntyorrnZb5qlDbMt"/>
 <!-- Floating Tags -->
 <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-sm text-white px-2.5 py-1 rounded text-[10px] font-mono tracking-widest uppercase">
                 New Edition
@@ -281,13 +296,13 @@
                   Lumen Void Lounge Chair
                 </h3>
 </div>
-<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 <!-- Product Card 2: Primary Form Low Table -->
 <article class="group" data-purpose="product-card">
 <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-stone-200 border border-brand-border mb-4">
-<img alt="Primary Form Low Table with sculptural seating" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSM-jyvzR-1NVMWLBLLQZkkIA68_3il6a96K7KRZOcY4-oGLfawAgfPkwIEGkgK9MGb4zK_A7jbeLztlxbx8aMIfQPh60nSL7DYInV59YgyxpHeHU92oFd1dUCnnuo5xOeyuUTA2tSIJ-lTaxDylHC8AqW30txUkaRmlkwAGL-I2-WWO60kJ0lRFyhN85FtYHrbUYBs-b1F6yF1DHZNwxoI9vl7WYf9X1ZkhtMTBhK"/>
+<img alt="Primary Form Low Table with sculptural seating" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSM-jyvzR-1NVMWLBLLQZkkIA68_3il6a96K7KRZOcY4-oGLfawAgfPkwIEGkgK9MGb4zK_A7jbeLztlxbx8aMIfQPh60nSL7DYInV59YgyxpHeHU92oFd1dUCnnuo5xOeyuUTA2tSIJ-lTaxDylHC8AqW30txUkaRmlkwAGL-I2-WWO60kJ0lRFyhN85FtYHrbUYBs-b1F6yF1DHZNwxoI9vl7WYf9X1ZkhtMTBhK"/>
 <!-- Floating Tags -->
 <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-sm text-white px-2.5 py-1 rounded text-[10px] font-mono tracking-widest uppercase">
                 Available
@@ -305,13 +320,13 @@
                   Primary Form Low Table
                 </h3>
 </div>
-<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 <!-- Product Card 3: Luma Wood Arc Lamp -->
 <article class="group" data-purpose="product-card">
 <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-stone-200 border border-brand-border mb-4">
-<img alt="Luma Wood Arc Lamp in minimal architectural space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0_nr4QU43k3k8QFJ3UX96jFWqBNw0IvU2pIGg3vnP28KZ7kLOVMQaxg_IEw_3PaitSV_4LQ1T-19Hmqm043EPrIgXTodTpLmp31w4E6Cnpb_cOrP33frmD9KjGmJpcusy44C9RqBiLm586cM00gN5rgyhFkXcK2yOeX_T2Xif_ISQeRTEof6Dcbo9jypmXVgqR2FUMVTBbL--veCNmY2ThyoNl_wOaFc9YwMvN4qN"/>
+<img alt="Luma Wood Arc Lamp in minimal architectural space" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0_nr4QU43k3k8QFJ3UX96jFWqBNw0IvU2pIGg3vnP28KZ7kLOVMQaxg_IEw_3PaitSV_4LQ1T-19Hmqm043EPrIgXTodTpLmp31w4E6Cnpb_cOrP33frmD9KjGmJpcusy44C9RqBiLm586cM00gN5rgyhFkXcK2yOeX_T2Xif_ISQeRTEof6Dcbo9jypmXVgqR2FUMVTBbL--veCNmY2ThyoNl_wOaFc9YwMvN4qN"/>
 <!-- Floating Tags -->
 <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-sm text-white px-2.5 py-1 rounded text-[10px] font-mono tracking-widest uppercase">
                 Lighting
@@ -329,13 +344,13 @@
                   Luma Wood Arc Lamp
                 </h3>
 </div>
-<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 <!-- Product Card 4: Silence Fluted Credenza -->
 <article class="group" data-purpose="product-card">
 <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-stone-200 border border-brand-border mb-4">
-<img alt="Sculptural fluted architectural acoustic credenza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1NRAUZPKx7VJYHaPFPAVgx3ogJF31MVXSdHmwEp0AEypHs1tKZNk1KLa5fjRQ3-Pr_XdEz9PPgzgO-CRQMtk-U7NJMBqXu9HRweamguFhwRjHLkCTNo-tHE3tTnljwBpy0PVoNiqVnh6nRr91r7_QrtmlC6_os40KKDHRSId748ctZdZrdB9G0Dj6muVXmhTFtXrxzWwJK2x6XUiaca0kMGW_tfFaUbniFaRsaEF"/>
+<img alt="Sculptural fluted architectural acoustic credenza" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1NRAUZPKx7VJYHaPFPAVgx3ogJF31MVXSdHmwEp0AEypHs1tKZNk1KLa5fjRQ3-Pr_XdEz9PPgzgO-CRQMtk-U7NJMBqXu9HRweamguFhwRjHLkCTNo-tHE3tTnljwBpy0PVoNiqVnh6nRr91r7_QrtmlC6_os40KKDHRSId748ctZdZrdB9G0Dj6muVXmhTFtXrxzWwJK2x6XUiaca0kMGW_tfFaUbniFaRsaEF"/>
 <!-- Floating Tags -->
 <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-sm text-white px-2.5 py-1 rounded text-[10px] font-mono tracking-widest uppercase">
                 Accent
@@ -353,7 +368,7 @@
                   Silence Fluted Credenza
                 </h3>
 </div>
-<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-brand-dark text-sm group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 </div>
@@ -363,7 +378,7 @@
             Numbered editions produced in strict batch limits. Once archived, designs are never reproduced.
           </p>
 <a class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all inline-flex items-center gap-1.5 shrink-0" href="#">
-            See All Assets ↗
+            See All Assets →
           </a>
 </div>
 </div>
@@ -371,7 +386,7 @@
 <!-- END: CuratedAssetsSection -->
 <!-- BEGIN: SpecToolsSection -->
 <!-- Technical tools, BIM library, inventory reservation and patron access -->
-<section class="px-6 md:px-12 py-20 bg-brand-canvas hairline-top hairline-bottom" data-purpose="spec-tools-section" id="spectools">
+<section data-reveal class="px-6 md:px-12 py-20 bg-brand-canvas hairline-top hairline-bottom" data-purpose="spec-tools-section" id="spectools">
 <div class="max-w-[1360px] mx-auto">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between hairline-bottom pb-5 mb-10 gap-4">
 <div class="flex items-baseline gap-3">
@@ -405,7 +420,7 @@
 <p class="text-xs text-brand-dark/80 leading-relaxed max-w-sm">
                 Download ready-to-render CAD models and technical drawings for immediate integration into your architectural visualizations and specifications.
               </p>
-<span class="spec-arrow text-sm text-brand-dark ml-4">↗</span>
+<span class="spec-arrow text-sm text-brand-dark ml-4">→</span>
 </div>
 </div>
 <!-- Spec Row 02 -->
@@ -427,7 +442,7 @@
 <p class="text-xs text-brand-dark/80 leading-relaxed max-w-sm">
                 Every design is produced in strict, verifiable runs. Real-time availability badges and checkout reservation locks protect against double allocation.
               </p>
-<span class="spec-arrow text-sm text-brand-dark ml-4">↗</span>
+<span class="spec-arrow text-sm text-brand-dark ml-4">→</span>
 </div>
 </div>
 <!-- Spec Row 03 -->
@@ -449,7 +464,7 @@
 <p class="text-xs text-brand-dark/80 leading-relaxed max-w-sm">
                 Generate standardized tear sheets with complete dimensional data, finish variants, and project quotation tools tailored for trade professionals.
               </p>
-<span class="spec-arrow text-sm text-brand-dark ml-4">↗</span>
+<span class="spec-arrow text-sm text-brand-dark ml-4">→</span>
 </div>
 </div>
 <!-- Spec Row 04 -->
@@ -471,7 +486,7 @@
 <p class="text-xs text-brand-dark/80 leading-relaxed max-w-sm">
                 Tiered access offering architects and connoisseurs 48-hour priority access on upcoming drops, offline events, and direct designer dialogue.
               </p>
-<span class="spec-arrow text-sm text-brand-dark ml-4">↗</span>
+<span class="spec-arrow text-sm text-brand-dark ml-4">→</span>
 </div>
 </div>
 <!-- Spec Row 05 -->
@@ -493,7 +508,7 @@
 <p class="text-xs text-brand-dark/80 leading-relaxed max-w-sm">
                 Each edition is manufactured by specialized artisans using enduring materials—raw travertine, cast metals, and hand-finished hardwoods.
               </p>
-<span class="spec-arrow text-sm text-brand-dark ml-4">↗</span>
+<span class="spec-arrow text-sm text-brand-dark ml-4">→</span>
 </div>
 </div>
 </div>
@@ -503,7 +518,7 @@
             Verified architecture studios and interior designers receive complimentary access to all digital 3D libraries and spec tools.
           </span>
 <a class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all inline-flex items-center gap-1.5 shrink-0" href="#">
-            Access Spec Tools ↗
+            Access Spec Tools →
           </a>
 </div>
 </div>
@@ -511,7 +526,7 @@
 <!-- END: SpecToolsSection -->
 <!-- BEGIN: CurationDropFlowSection -->
 <!-- 4-Stage Architectural Production Timeline Cards -->
-<section class="px-6 md:px-12 py-20" data-purpose="curation-drop-flow">
+<section data-reveal class="px-6 md:px-12 py-20" data-purpose="curation-drop-flow">
 <div class="max-w-[1360px] mx-auto">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between hairline-bottom pb-5 mb-10 gap-4">
 <div class="flex items-baseline gap-3">
@@ -607,7 +622,7 @@
 <!-- END: CurationDropFlowSection -->
 <!-- BEGIN: AboutCuratorArchive -->
 <!-- Editorial Spotlight on Xadboom Philosophy with Pink Sculptural Lounger Feature -->
-<section class="px-6 md:px-12 py-20 hairline-top hairline-bottom bg-[#ECDAD4]" data-purpose="about-curator" id="about">
+<section data-reveal class="px-6 md:px-12 py-20 hairline-top hairline-bottom bg-[#ECDAD4]" data-purpose="about-curator" id="about">
 <div class="max-w-[1360px] mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
 <div class="lg:col-span-4">
@@ -621,10 +636,10 @@
             </h2>
 <div class="flex flex-wrap items-center gap-5 pt-2">
 <a class="px-5 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all" href="#">
-                Our Philosophy ↗
+                Our Philosophy →
               </a>
 <a class="text-xs uppercase tracking-widest font-semibold text-brand-dark/70 hover:text-brand-dark transition-colors inline-flex items-center gap-1" href="#architects">
-                Designer Directory ↗
+                Designer Directory →
               </a>
 </div>
 </div>
@@ -663,7 +678,7 @@
 <!-- END: AboutCuratorArchive -->
 <!-- BEGIN: SpecifierTestimonials -->
 <!-- Architectural Quotes, Verified Studio Specifiers -->
-<section class="px-6 md:px-12 py-20" data-purpose="testimonials">
+<section data-reveal class="px-6 md:px-12 py-20" data-purpose="testimonials">
 <div class="max-w-[1360px] mx-auto">
 <div class="flex items-end justify-between hairline-bottom pb-5 mb-10">
 <div>
@@ -682,7 +697,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 <!-- Card 1: Studio Photo -->
 <div class="relative rounded-lg overflow-hidden h-72 border border-brand-border bg-stone-300 group">
-<img alt="Architectural design studio team at conference table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByok-_iaMu_xruFd-zWjV37TEM5WRMs6wGpY5mYZFMNnLYTGUIwrJQrFs16stxH7qdpjWqkGd82RUNty6Y2RU7m4ilKxBJU2NQp9RXaF7DsjJMh2qJh9We4_B6BcGEzVly-r2PVhW4-ZVVBhCl-UA4ygHjHc4rK-Nrq-jbPqZStPeXKX1F37TplBAyNSMTwzsnVeMag81YfSeIW8M4QuQZmh49OJ1aWl6pjQFNPVrB"/>
+<img alt="Architectural design studio team at conference table" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByok-_iaMu_xruFd-zWjV37TEM5WRMs6wGpY5mYZFMNnLYTGUIwrJQrFs16stxH7qdpjWqkGd82RUNty6Y2RU7m4ilKxBJU2NQp9RXaF7DsjJMh2qJh9We4_B6BcGEzVly-r2PVhW4-ZVVBhCl-UA4ygHjHc4rK-Nrq-jbPqZStPeXKX1F37TplBAyNSMTwzsnVeMag81YfSeIW8M4QuQZmh49OJ1aWl6pjQFNPVrB"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-5 flex flex-col justify-end text-white">
 <span class="font-mono text-[10px] tracking-wider text-white/70 uppercase">In-Situ Review</span>
 <p class="text-xs font-medium mt-1 leading-snug">Design fidelity matches the render precision.</p>
@@ -749,7 +764,7 @@
             • Specified Spaces: Specified across over 120 notable architectural residences and cultural spaces. Inquire for dedicated trade terms.
           </p>
 <a class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" href="#consultation">
-            Inquire With Curator ↗
+            Inquire With Curator →
           </a>
 </div>
 </div>
@@ -757,7 +772,7 @@
 <!-- END: SpecifierTestimonials -->
 <!-- BEGIN: ArchitectsAteliersSection -->
 <!-- 4 Designer Profiles & Collaborative Dossiers -->
-<section class="px-6 md:px-12 py-20 hairline-top bg-[#ECDAD4]" data-purpose="architect-profiles" id="architects">
+<section data-reveal class="px-6 md:px-12 py-20 hairline-top bg-[#ECDAD4]" data-purpose="architect-profiles" id="architects">
 <div class="max-w-[1360px] mx-auto">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between hairline-bottom pb-5 mb-10 gap-4">
 <div>
@@ -791,7 +806,7 @@
 <span class="text-brand-dark/50">Commission:</span> Lumen Void Chair
               </div>
 <a class="text-[11px] font-semibold uppercase tracking-wider text-brand-dark hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="#">
-                View Designer Profile ↗
+                View Designer Profile →
               </a>
 </div>
 </div>
@@ -814,7 +829,7 @@
 <span class="text-brand-dark/50">Commission:</span> Radial Carved Ash Chair
               </div>
 <a class="text-[11px] font-semibold uppercase tracking-wider text-brand-dark hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="#">
-                View Designer Profile ↗
+                View Designer Profile →
               </a>
 </div>
 </div>
@@ -837,7 +852,7 @@
 <span class="text-brand-dark/50">Commission:</span> Cantilever Cane Daybed
               </div>
 <a class="text-[11px] font-semibold uppercase tracking-wider text-brand-dark hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="#">
-                View Designer Profile ↗
+                View Designer Profile →
               </a>
 </div>
 </div>
@@ -860,7 +875,7 @@
 <span class="text-brand-dark/50">Commission:</span> Primary Form Low Table
               </div>
 <a class="text-[11px] font-semibold uppercase tracking-wider text-brand-dark hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="#">
-                View Designer Profile ↗
+                View Designer Profile →
               </a>
 </div>
 </div>
@@ -871,7 +886,7 @@
             All participating studios maintain perpetual copyright and serialized edition stamps on each manufactured piece.
           </p>
 <a class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" href="#">
-            Explore All 07 Collaborators &amp; Directory ↗
+            Explore All 07 Collaborators &amp; Directory →
           </a>
 </div>
 </div>
@@ -879,7 +894,7 @@
 <!-- END: ArchitectsAteliersSection -->
 <!-- BEGIN: AcquisitionsFAQSection -->
 <!-- Two Column Advisory & Accordion Module -->
-<section class="px-6 md:px-12 py-20 hairline-top" data-purpose="faq-acquisitions">
+<section data-reveal class="px-6 md:px-12 py-20 hairline-top" data-purpose="faq-acquisitions">
 <div class="max-w-[1360px] mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <!-- Left Column: Advisory Desk Box -->
@@ -894,7 +909,7 @@
                 Our curatorial team is available to assist specifiers with CAD models, custom dimensions, or delivery coordination.
               </p>
 <a class="inline-block px-5 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all" href="#consultation">
-                Contact Curatorial Desk ↗
+                Contact Curatorial Desk →
               </a>
 </div>
 </div>
@@ -967,7 +982,7 @@
 <!-- END: AcquisitionsFAQSection -->
 <!-- BEGIN: DispatchJournalSection -->
 <!-- Architectural Journal & Theoretical Essays -->
-<section class="px-6 md:px-12 py-20 hairline-top bg-[#ECDAD4]" data-purpose="architectural-dispatch" id="dispatch">
+<section data-reveal class="px-6 md:px-12 py-20 hairline-top bg-[#ECDAD4]" data-purpose="architectural-dispatch" id="dispatch">
 <div class="max-w-[1360px] mx-auto">
 <div class="flex items-end justify-between hairline-bottom pb-5 mb-10">
 <div>
@@ -977,7 +992,7 @@
             </h2>
 </div>
 <a class="text-xs uppercase tracking-widest font-semibold text-brand-dark hover:opacity-75 transition-opacity inline-flex items-center gap-1" href="#">
-            Read All Issues ↗
+            Read All Issues →
           </a>
 </div>
 <!-- 2 Article Cards -->
@@ -997,7 +1012,7 @@
 </div>
 <div class="pt-6 mt-6 hairline-top flex items-center justify-between">
 <span class="text-xs font-mono uppercase tracking-wider text-brand-dark">Dispatch Issue #14</span>
-<span class="text-sm text-brand-dark group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-sm text-brand-dark group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 <!-- Article 2 -->
@@ -1015,7 +1030,7 @@
 </div>
 <div class="pt-6 mt-6 hairline-top flex items-center justify-between">
 <span class="text-xs font-mono uppercase tracking-wider text-brand-dark">Dispatch Issue #13</span>
-<span class="text-sm text-brand-dark group-hover:translate-x-1 duration-200">↗</span>
+<span class="text-sm text-brand-dark group-hover:translate-x-1 duration-200">→</span>
 </div>
 </article>
 </div>
@@ -1024,7 +1039,7 @@
 <!-- END: DispatchJournalSection -->
 <!-- BEGIN: CuratorialConsultationBanner -->
 <!-- Large dual-box CTA banner linking curation with the textile emblem -->
-<section class="px-6 md:px-12 py-16 hairline-top" data-purpose="consultation-banner" id="consultation">
+<section data-reveal class="px-6 md:px-12 py-16 hairline-top" data-purpose="consultation-banner" id="consultation">
 <div class="max-w-[1360px] mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-brand-tintCard/70 p-8 sm:p-12 rounded-2xl border border-brand-border">
 <!-- Left Column -->
@@ -1038,7 +1053,7 @@
             </p>
 <div class="pt-2">
 <a class="px-7 py-3 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all inline-flex items-center gap-2" href="#">
-                Schedule a Curator Consultation ↗
+                Schedule a Curator Consultation →
               </a>
 </div>
 </div>
@@ -1055,111 +1070,111 @@
 </main>
 <!-- BEGIN: MasterFooter -->
 <!-- Architectural Footer with Newsletter, Spec Sheet Quick-Access, Brand Directory & Credits -->
-<footer class="hairline-top bg-brand-canvas px-6 md:px-12 pt-16 pb-12" data-purpose="master-footer">
+<footer class="border-t border-[#D8C3BC] bg-#ECDAD4 px-6 md:px-12 pt-16 pb-12" data-purpose="master-footer">
 <div class="max-w-[1360px] mx-auto space-y-16">
 <!-- Top Newsletter & Spec Dispatch Row -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end hairline-bottom pb-14">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end border-b border-[#D8C3BC] pb-14">
 <!-- Left: Newsletter Subscription -->
 <div class="lg:col-span-7 space-y-4">
 <img alt="xadboom" class="h-10 sm:h-12 w-auto object-contain -ml-1" src="./src/assets/images/xadboom-wordmark.png"/>
-<p class="text-xs sm:text-sm text-brand-dark/80 max-w-md font-normal leading-relaxed">
+<p class="text-xs sm:text-sm text-#0A0A0A/80 max-w-md font-normal leading-relaxed">
             Subscribe for upcoming designer editions, catalogue drops, and private architectural viewings.
           </p>
 <form class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 max-w-md" onsubmit="event.preventDefault()">
 <label class="sr-only" for="newsletter-email">Your email address</label>
-<input class="w-full bg-brand-tintCard/80 border border-brand-border rounded-full px-5 py-2.5 text-xs text-brand-dark focus:outline-none focus:border-brand-dark focus:ring-0 placeholder:text-brand-dark/40 font-mono" id="newsletter-email" placeholder="Your architecture practice email" type="email"/>
-<button class="px-6 py-2.5 rounded-full bg-brand-dark text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" type="submit">
-              Submit ↗
+<input class="w-full bg-#FFF1EC/80 border border-#E2CECB rounded-full px-5 py-2.5 text-xs text-#0A0A0A focus:outline-none focus:border-#0A0A0A focus:ring-0 placeholder:text-#0A0A0A/40 font-mono" id="newsletter-email" placeholder="Your architecture practice email" type="email"/>
+<button class="px-6 py-2.5 rounded-full bg-#0A0A0A text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" type="submit">
+              Submit →
             </button>
 </form>
 </div>
 <!-- Right: Mini Spec Sheet Links -->
 <div class="lg:col-span-5 space-y-3 font-mono text-xs">
-<div class="flex items-center justify-between p-2.5 rounded-lg bg-brand-tintCard/60 border border-brand-border">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
 <div class="flex items-center gap-2">
 <span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
 <img alt="Lumen Void icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKjkrRTHpB-nAlIN0hPyv9GycHF-_Flci7FjasFohXzRnqQ2pTwsMEljgFzSeQDK-JR9dez7HGscBSCsyCWcG1GMfdr6MkBHxTYYX9KnqbOOY6k1eZUVpThY2-lmeUjEFrcGDtog1jb67_ub5gPHthnFpMF7c9por8QPIlq8S518YQ_L18kcPQDrexmMnOqluIGqLBY-mGx9HjpzLD05Os2dnUAOhZnRdOOgh6rFWC"/>
 </span>
 <div>
-<span class="font-bold uppercase text-[11px] block text-brand-dark">Lumen Void Lounge Chair</span>
-<span class="text-[9px] text-brand-dark/50">Alireza Taghaboni · Seating</span>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Lumen Void Lounge Chair</span>
+<span class="text-[9px] text-#0A0A0A/50">Alireza Taghaboni · Seating</span>
 </div>
 </div>
-<a class="text-[10px] uppercase font-bold text-brand-dark/70 hover:text-brand-dark" href="#">View Spec Sheet ↗</a>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
 </div>
-<div class="flex items-center justify-between p-2.5 rounded-lg bg-brand-tintCard/60 border border-brand-border">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
 <div class="flex items-center gap-2">
 <span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
 <img alt="Primary Form Table icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXVuIfmhxPWAV7zGZmjv0h9GUYBfb-Gxbln1naJR3L34oCbXG_gwUuTDJ0S5HdqBH-JMPx3n7f91ROw4UWgI52rdZFTo_fSSbN1D0VmLUjxgaBT4Yf2qkdqHMbJGbhdNNVpkqVxXjVyoHzkY1HMjeIbJz2WclzyhXJkl5obsPj1IJ0zZvROSuvGbroqqoH3_gkjXUAUPqsZt6KTfJzjfFlMvLz1NCp8cqgcuk55bM"/>
 </span>
 <div>
-<span class="font-bold uppercase text-[11px] block text-brand-dark">Primary Form Low Table</span>
-<span class="text-[9px] text-brand-dark/50">Studio Khazeni · Tables</span>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Primary Form Low Table</span>
+<span class="text-[9px] text-#0A0A0A/50">Studio Khazeni · Tables</span>
 </div>
 </div>
-<a class="text-[10px] uppercase font-bold text-brand-dark/70 hover:text-brand-dark" href="#">View Spec Sheet ↗</a>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
 </div>
-<div class="flex items-center justify-between p-2.5 rounded-lg bg-brand-tintCard/60 border border-brand-border">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
 <div class="flex items-center gap-2">
 <span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
 <img alt="Luma Arc Lamp icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1R1rSGIdnrFIGw0qKUE3npiZkdVu1caJcA_2U0Ka4i_g6qjSOpOFJryvZ5XdegOXN7Vl7eoHzM5RJUHRobeoTM2kc1_JkeDzb_NiuJqaNqGdmOSAhCcGdrsDDoFZ6UuFe0HXxfX2vylJDvNJLbBIlh-EYOPdoY1Q398Czuj1t0TontnKMe0sK0-grX1rF4o-_hAOKh6m1nA3_WDu3kxWGa388UiqiSqHE9chHleWT"/>
 </span>
 <div>
-<span class="font-bold uppercase text-[11px] block text-brand-dark">Luma Wood Arc Lamp</span>
-<span class="text-[9px] text-brand-dark/50">Atelier Arpa · Lighting</span>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Luma Wood Arc Lamp</span>
+<span class="text-[9px] text-#0A0A0A/50">Atelier Arpa · Lighting</span>
 </div>
 </div>
-<a class="text-[10px] uppercase font-bold text-brand-dark/70 hover:text-brand-dark" href="#">View Spec Sheet ↗</a>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
 </div>
 </div>
 </div>
 <!-- Navigation Matrix Columns -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8 font-mono text-xs">
+<div class="xdm-footer-nav grid grid-cols-2 md:grid-cols-4 gap-8 font-mono text-xs">
 <!-- Column 1: Editions -->
 <div class="space-y-3">
-<span class="text-[10px] text-brand-dark/50 uppercase tracking-widest block">Editions</span>
-<ul class="space-y-2 text-brand-dark/80">
-<li><a class="hover:text-brand-dark transition-colors" href="#assets">All Assets</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#architects">Designers</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#spectools">Explicit Library</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#assets">Catalogues</a></li>
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Editions</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">All Assets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/designers">Designers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Explicit Library</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">Catalogues</a></li>
 </ul>
 </div>
 <!-- Column 2: Spec Tools -->
 <div class="space-y-3">
-<span class="text-[10px] text-brand-dark/50 uppercase tracking-widest block">Spec Tools</span>
-<ul class="space-y-2 text-brand-dark/80">
-<li><a class="hover:text-brand-dark transition-colors" href="#spectools">3D &amp; BIM Files</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#spectools">Tear Sheets</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#spectools">Material Samples</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#spectools">Trade Quotations</a></li>
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Spec Tools</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">3D &amp; BIM Files</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Tear Sheets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Material Samples</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Trade Quotations</a></li>
 </ul>
 </div>
 <!-- Column 3: The Company -->
 <div class="space-y-3">
-<span class="text-[10px] text-brand-dark/50 uppercase tracking-widest block">The Company</span>
-<ul class="space-y-2 text-brand-dark/80">
-<li><a class="hover:text-brand-dark transition-colors" href="#about">About Xadboom</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#about">Design Philosophy</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#">Careers</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#dispatch">Press &amp; Journal</a></li>
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">The Company</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">About Xadboom</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">Design Philosophy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#dispatch">Press &amp; Journal</a></li>
 </ul>
 </div>
 <!-- Column 4: Legal -->
 <div class="space-y-3">
-<span class="text-[10px] text-brand-dark/50 uppercase tracking-widest block">Legal</span>
-<ul class="space-y-2 text-brand-dark/80">
-<li><a class="hover:text-brand-dark transition-colors" href="#">Terms of Acquisition</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="hover:text-brand-dark transition-colors" href="#">Authenticity Guarantee</a></li>
-<li class="pt-2 text-[10px] text-brand-dark/50">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Legal</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Terms of Acquisition</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Authenticity Guarantee</a></li>
+<li class="pt-2 text-[10px] text-#0A0A0A/50">
               © 2026 XADBOOM. Curated Interior Architecture Assets.
             </li>
 </ul>
 </div>
 </div>
 <!-- Bottom Credits & Registry Bar -->
-<div class="hairline-top pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-brand-dark/60 uppercase gap-3">
+<div class="border-t border-[#D8C3BC] pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-#0A0A0A/60 uppercase gap-3">
 <div class="flex items-center gap-2">
 <img alt="Xadboom Sign" class="w-4 h-4 object-contain" src="./src/assets/images/xadboom-sign.png"/>
 <span>Xadboom · Limited Physical Architecture Editions</span>
@@ -1172,4 +1187,6 @@
 </footer>
 <!-- END: MasterFooter -->
 <script src="./src/prototype-navigation.js" defer></script>
+<!-- Xadboom Motion loader -->
+<script src="./src/xadboom-motion.js" defer></script>
 </body></html>

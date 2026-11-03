@@ -210,9 +210,40 @@
         }
       },
     },
-  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.03)] border-b border-surface-dim"><div class="h-20 w-full px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="logo-sign.png" class="h-8 w-auto object-contain" src="../src/assets/images/xadboom-sign.png"><a class="font-label-caps text-label-caps uppercase text-on-surface tracking-[0.2em] font-semibold" data-path="atelier" href="#">XADBOOM</a><span class="hidden lg:inline-block font-label-caps text-label-caps uppercase text-secondary border-l border-surface-dim pl-space-md tracking-widest">Atelier d'Architecture</span></div><nav class="hidden md:flex items-center gap-space-lg lg:gap-space-xl" data-active-classes="text-primary font-semibold border-b border-primary pb-0.5"><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface transition-colors tracking-widest" data-path="shop" href="#">Shop</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface transition-colors tracking-widest" data-path="designers" href="#">Designers</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface transition-colors tracking-widest" data-path="spec-library" href="#">Spec Library</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface transition-colors tracking-widest" data-path="journal" href="#">Journal</a><a aria-current="page" class="uppercase transition-colors tracking-widest text-primary font-semibold border-b border-primary pb-0.5" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-space-md lg:gap-space-lg"><button aria-label="Search Archive" class="text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><a aria-label="Cart and allocations" class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span class="font-label-caps text-label-caps bg-surface-container-high text-on-surface px-space-xs py-0.5 border border-surface-dim font-medium">02</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full bg-surface-container">
+  }</script><!-- Xadboom Motion: reveal FOUC guard + shared styles -->
+<script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion-enabled');window.addEventListener('load',function(){setTimeout(function(){if(!d.classList.contains('motion-loaded'))d.classList.remove('motion-enabled')},1200)})})()</script>
+<link rel="stylesheet" href="../src/xadboom-motion.css">
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header data-motion-header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8f6] border-b border-[#e8d6d0] backdrop-blur-md bg-opacity-95" style="background-color: rgba(236, 218, 212, 0.95);">
+<div class="h-20 w-full px-6 md:px-12 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group" data-path="shop" href="/">
+<img alt="Xadboom mark" class="h-8 w-auto object-contain transition-transform group-hover:scale-95 duration-200" src="../src/assets/images/xadboom-sign.png">
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#0a0a0a] font-bold hidden sm:inline-block">XADBOOM</span>
+</a>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="shop" href="/catalog" href="#">SHOP</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="designers" href="/designers">DESIGNERS</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="spec-library" href="#">SPEC LIBRARY</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="journal" href="#">JOURNAL</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium xdm-nav-active" data-path="contact" href="/contact" aria-current="page">CONTACT</a>
+</nav>
+<div class="flex items-center gap-5">
+<button aria-label="Search" class="text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center justify-center p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="font-['Space_Grotesk'] text-xs uppercase tracking-wider text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center gap-1.5" type="button">
+<span class="">Bag</span>
+<span class="text-[#78716C] font-mono">(0)</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-[#0a0a0a] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#fff8f6] text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full bg-surface-container">
 <!-- Minimalist Status & Temporal Bar -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-xl pb-space-lg">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-xl pb-space-lg">
 <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-md">
 <div class="flex items-center gap-space-sm text-secondary">
 <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
@@ -230,7 +261,7 @@
 </div>
 </section>
 <!-- Editorial Spatial Intro -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pb-space-2xl">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pb-space-2xl">
 <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-gutter-desktop items-end">
 <div class="lg:col-span-8 space-y-space-md">
 <span class="font-label-caps text-label-caps uppercase tracking-[0.25em] text-secondary block">Liaison &amp; Provenance Registry</span>
@@ -246,7 +277,7 @@
 </div>
 </section>
 <!-- Main Workstation: Form & Atelier Directory -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pb-space-3xl">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pb-space-3xl">
 <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-gutter-desktop items-start">
 <!-- Dominant Inquiry Interface -->
 <div class="lg:col-span-7 bg-surface-container-low p-space-lg md:p-space-2xl shadow-sm flex flex-col justify-between">
@@ -410,7 +441,7 @@
 </div>
 </section>
 <!-- Curatorial Credo Monograph Quote -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-3xl bg-surface-container-low">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-3xl bg-surface-container-low">
 <div class="max-w-4xl mx-auto pl-space-lg md:pl-space-xl">
 <blockquote class="font-curatorial-quote text-curatorial-quote text-on-surface leading-snug">
         “Every physical asset we manufacture exists in strictly numbered editions. Dialogue between specifier and atelier ensures uncompromised spatial resonance.”
@@ -467,7 +498,123 @@
       banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
-</script></main><footer class="w-full bg-surface-container-low border-t border-surface-dim"><div class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-2xl pb-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter lg:gap-gutter-desktop pb-space-2xl border-b border-surface-dim"><div class="lg:col-span-4 flex flex-col justify-between pr-space-lg"><div class="space-y-space-md"><div class="font-label-caps text-label-caps uppercase tracking-[0.2em] text-on-surface font-semibold">Xadboom Atelier</div><p class="font-curatorial-quote text-curatorial-quote-mobile text-secondary leading-relaxed">"Architecture as sovereign tactile medium. Limited structural expressions and monolithic physical assets produced in singular provenance."</p></div><div class="mt-space-lg font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Edition Registry · Vol. 04 / 2025</div></div><div class="lg:col-span-2 space-y-space-md"><div class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface font-semibold">Discover</div><ul class="space-y-space-sm font-label-caps text-label-caps uppercase tracking-wider"><li data-path="shop" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="shop" href="#">Acquisitions</a></li><li data-path="designers" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="designers" href="#">Master Architects</a></li><li data-path="rare-editions" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="rare-editions" href="#">Rare Editions</a></li><li data-path="exhibitions" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="exhibitions" href="#">Monographs</a></li></ul></div><div class="lg:col-span-2 space-y-space-md"><div class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface font-semibold">Spec Tools</div><ul class="space-y-space-sm font-label-caps text-label-caps uppercase tracking-wider"><li data-path="spec-library" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="spec-library" href="#">BIM &amp; CAD Models</a></li><li data-path="material-certificates" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="material-certificates" href="#">Stone Certificates</a></li><li data-path="provenance-chain" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="provenance-chain" href="#">Custody Ledgers</a></li><li data-path="freight-logistics" class=""><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="freight-logistics" href="#">Secure Freight</a></li></ul></div><div class="lg:col-span-4 space-y-space-md"><div class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface font-semibold">Dispatch Inquiry</div><p class="font-body-md text-body-md text-secondary">Direct notifications for closed architectural drops and stone releases.</p><form class="flex items-center border-b border-on-surface pt-space-sm pb-space-xs"><input class="w-full bg-transparent font-label-caps text-label-caps uppercase tracking-widest placeholder:text-outline text-on-surface focus:outline-none" placeholder="ARCHITECT@OFFICE.COM" type="email"><button aria-label="Submit Inquiry" class="text-on-surface hover:text-secondary transition-colors pl-space-sm" type="submit"><span class="material-symbols-outlined text-[18px]">arrow_forward</span></button></form><div class="pt-space-md flex flex-wrap gap-x-space-md gap-y-space-xs font-label-caps text-label-caps uppercase tracking-widest text-secondary"><span class="">Zürich</span><span class="">·</span><span class="">Tehran</span><span class="">·</span><span class="">New York</span></div></div></div><div class="pt-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"><div class="font-label-caps text-label-caps uppercase tracking-widest text-secondary">© 2025 XADBOOM COLLECTIVE. ALL RIGHTS RESERVED.</div><div class="flex items-center gap-space-lg font-label-caps text-label-caps uppercase tracking-wider text-secondary"><a class="hover:text-on-surface transition-colors" data-path="privacy" href="#">Confidentiality</a><a class="hover:text-on-surface transition-colors" data-path="terms" href="#">Atelier Terms</a><a class="hover:text-on-surface transition-colors" data-path="legal" href="#">Authentication</a></div></div></div></footer>
+</script></main><footer class="border-t border-[#D8C3BC] bg-#ECDAD4 px-6 md:px-12 pt-16 pb-12" data-purpose="master-footer">
+<div class="max-w-[1360px] mx-auto space-y-16">
+<!-- Top Newsletter & Spec Dispatch Row -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end border-b border-[#D8C3BC] pb-14">
+<!-- Left: Newsletter Subscription -->
+<div class="lg:col-span-7 space-y-4">
+<img alt="xadboom" class="h-10 sm:h-12 w-auto object-contain -ml-1" src="../src/assets/images/xadboom-wordmark.png"/>
+<p class="text-xs sm:text-sm text-#0A0A0A/80 max-w-md font-normal leading-relaxed">
+            Subscribe for upcoming designer editions, catalogue drops, and private architectural viewings.
+          </p>
+<form class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 max-w-md" onsubmit="event.preventDefault()">
+<label class="sr-only" for="newsletter-email">Your email address</label>
+<input class="w-full bg-#FFF1EC/80 border border-#E2CECB rounded-full px-5 py-2.5 text-xs text-#0A0A0A focus:outline-none focus:border-#0A0A0A focus:ring-0 placeholder:text-#0A0A0A/40 font-mono" id="newsletter-email" placeholder="Your architecture practice email" type="email"/>
+<button class="px-6 py-2.5 rounded-full bg-#0A0A0A text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" type="submit">
+              Submit →
+            </button>
+</form>
+</div>
+<!-- Right: Mini Spec Sheet Links -->
+<div class="lg:col-span-5 space-y-3 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Lumen Void icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKjkrRTHpB-nAlIN0hPyv9GycHF-_Flci7FjasFohXzRnqQ2pTwsMEljgFzSeQDK-JR9dez7HGscBSCsyCWcG1GMfdr6MkBHxTYYX9KnqbOOY6k1eZUVpThY2-lmeUjEFrcGDtog1jb67_ub5gPHthnFpMF7c9por8QPIlq8S518YQ_L18kcPQDrexmMnOqluIGqLBY-mGx9HjpzLD05Os2dnUAOhZnRdOOgh6rFWC"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Lumen Void Lounge Chair</span>
+<span class="text-[9px] text-#0A0A0A/50">Alireza Taghaboni · Seating</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Primary Form Table icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXVuIfmhxPWAV7zGZmjv0h9GUYBfb-Gxbln1naJR3L34oCbXG_gwUuTDJ0S5HdqBH-JMPx3n7f91ROw4UWgI52rdZFTo_fSSbN1D0VmLUjxgaBT4Yf2qkdqHMbJGbhdNNVpkqVxXjVyoHzkY1HMjeIbJz2WclzyhXJkl5obsPj1IJ0zZvROSuvGbroqqoH3_gkjXUAUPqsZt6KTfJzjfFlMvLz1NCp8cqgcuk55bM"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Primary Form Low Table</span>
+<span class="text-[9px] text-#0A0A0A/50">Studio Khazeni · Tables</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Luma Arc Lamp icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1R1rSGIdnrFIGw0qKUE3npiZkdVu1caJcA_2U0Ka4i_g6qjSOpOFJryvZ5XdegOXN7Vl7eoHzM5RJUHRobeoTM2kc1_JkeDzb_NiuJqaNqGdmOSAhCcGdrsDDoFZ6UuFe0HXxfX2vylJDvNJLbBIlh-EYOPdoY1Q398Czuj1t0TontnKMe0sK0-grX1rF4o-_hAOKh6m1nA3_WDu3kxWGa388UiqiSqHE9chHleWT"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Luma Wood Arc Lamp</span>
+<span class="text-[9px] text-#0A0A0A/50">Atelier Arpa · Lighting</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+</div>
+</div>
+<!-- Navigation Matrix Columns -->
+<div class="xdm-footer-nav grid grid-cols-2 md:grid-cols-4 gap-8 font-mono text-xs">
+<!-- Column 1: Editions -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Editions</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">All Assets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/designers">Designers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Explicit Library</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">Catalogues</a></li>
+</ul>
+</div>
+<!-- Column 2: Spec Tools -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Spec Tools</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">3D &amp; BIM Files</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Tear Sheets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Material Samples</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Trade Quotations</a></li>
+</ul>
+</div>
+<!-- Column 3: The Company -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">The Company</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">About Xadboom</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">Design Philosophy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#dispatch">Press &amp; Journal</a></li>
+</ul>
+</div>
+<!-- Column 4: Legal -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Legal</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Terms of Acquisition</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Authenticity Guarantee</a></li>
+<li class="pt-2 text-[10px] text-#0A0A0A/50">
+              © 2026 XADBOOM. Curated Interior Architecture Assets.
+            </li>
+</ul>
+</div>
+</div>
+<!-- Bottom Credits & Registry Bar -->
+<div class="border-t border-[#D8C3BC] pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-#0A0A0A/60 uppercase gap-3">
+<div class="flex items-center gap-2">
+<img alt="Xadboom Sign" class="w-4 h-4 object-contain" src="../src/assets/images/xadboom-sign.png"/>
+<span>Xadboom · Limited Physical Architecture Editions</span>
+</div>
+<div>
+          Zurich · Tehran · New York
+        </div>
+</div>
+</div>
+</footer>
 
 <script src="../src/prototype-navigation.js" defer></script>
+<!-- Xadboom Motion loader -->
+<script src="../src/xadboom-motion.js" defer></script>
 </body></html>

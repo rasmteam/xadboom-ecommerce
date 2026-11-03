@@ -83,29 +83,32 @@
       display: none;
     }
   </style>
+<!-- Xadboom Motion: reveal FOUC guard + shared styles -->
+<script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion-enabled');window.addEventListener('load',function(){setTimeout(function(){if(!d.classList.contains('motion-loaded'))d.classList.remove('motion-enabled')},1200)})})()</script>
+<link rel="stylesheet" href="../src/xadboom-motion.css">
 </head>
 
 <!-- TOP HEADER NAVIGATION -->
-<body><header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8f6] border-b border-[#e8d6d0] backdrop-blur-md bg-opacity-95" style="background-color: rgba(236, 218, 212, 0.95);">
-<div class="h-20 w-full px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between">
-<div class="flex items-center gap-space-lg">
-<a class="flex items-center gap-3 group" data-path="shop" href="#">
+<body><header data-motion-header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8f6] border-b border-[#e8d6d0] backdrop-blur-md bg-opacity-95" style="background-color: rgba(236, 218, 212, 0.95);">
+<div class="h-20 w-full px-6 md:px-12 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group" data-path="shop" href="/">
 <img alt="Xadboom mark" class="h-8 w-auto object-contain transition-transform group-hover:scale-95 duration-200" src="../src/assets/images/xadboom-sign.png">
-<span class="font-label-caps text-xs uppercase tracking-widest text-[#0a0a0a] font-bold hidden sm:inline-block">XADBOOM</span>
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#0a0a0a] font-bold hidden sm:inline-block">XADBOOM</span>
 </a>
 </div>
 <nav class="hidden lg:flex items-center gap-8">
-<a aria-current="page" class="font-label-caps text-xs uppercase tracking-widest text-[#0a0a0a] underline underline-offset-8 decoration-1 decoration-obsidian font-semibold" data-path="shop" href="#">SHOP</a>
-<a class="font-label-caps text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="designers" href="#">DESIGNERS</a>
-<a class="font-label-caps text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="spec-library" href="#">SPEC LIBRARY</a>
-<a class="font-label-caps text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="journal" href="#">JOURNAL</a>
-<a class="font-label-caps text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="contact" href="#">CONTACT</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium xdm-nav-active" data-path="shop" href="/catalog" href="#" aria-current="page">SHOP</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="designers" href="/designers">DESIGNERS</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="spec-library" href="#">SPEC LIBRARY</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="journal" href="#">JOURNAL</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="contact" href="/contact">CONTACT</a>
 </nav>
 <div class="flex items-center gap-5">
 <button aria-label="Search" class="text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center justify-center p-1" type="button">
 <span class="material-symbols-outlined text-[20px]">search</span>
 </button>
-<button class="font-label-caps text-xs uppercase tracking-wider text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center gap-1.5" type="button">
+<button class="font-['Space_Grotesk'] text-xs uppercase tracking-wider text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center gap-1.5" type="button">
 <span class="">Bag</span>
 <span class="text-[#78716C] font-mono">(0)</span>
 </button>
@@ -119,7 +122,7 @@
 <main class="w-full pt-20 bg-[#fff8f6] min-h-screen" style="background-color: rgb(236, 218, 212);">
 <div class="flex flex-col w-full text-on-surface">
 <!-- TOP LEDGER / ARCHIVAL INDEX BAR -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-3.5 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-3.5 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-2.5 font-label-caps text-[0.6875rem] tracking-wider">
 <div class="flex flex-wrap items-center gap-2 text-[#78716C]">
 <a class="hover:text-[#0a0a0a] transition-colors" data-path="shop" href="#">INDEX</a>
@@ -141,7 +144,7 @@
 </div>
 </section>
 <!-- PRODUCT HERO / PRIMARY ARCHIVAL SPLIT -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-12 border-b border-[#e8d6d0]">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-12 border-b border-[#e8d6d0]">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-gutter-desktop items-start">
 <!-- LEFT COLUMN: ARCHIVAL PLATES & LEDGER -->
 <div class="lg:col-span-7 flex flex-col gap-5">
@@ -341,7 +344,7 @@
 </div>
 </section>
 <!-- SECTION 01 / CURATORIAL MONOGRAPH & TECTONIC CONCEPT -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-gutter-desktop items-center">
 <!-- Text & Philosophical Treatise (7 Cols) -->
 <div class="lg:col-span-7 space-y-6">
@@ -408,7 +411,7 @@
 </div>
 </section>
 <!-- SECTION 02 / DIMENSIONAL PRECISION, BLUEPRINT & SPECIFICATION -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="spatial-3d-section" style="background-color: rgb(236, 218, 212);">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="spatial-3d-section" style="background-color: rgb(236, 218, 212);">
 <div class="max-w-screen-xl mx-auto space-y-8">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-3 border-b border-[#e8d6d0]">
 <div>
@@ -443,7 +446,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: linear-gradient(to right, #FAF3F0 1px, transparent 1px), linear-gradient(to bottom, #FAF3F0 1px, transparent 1px); background-size: 40px 40px;"></div>
 
 <div class="relative z-10 w-full h-full flex items-center justify-center p-8">
-<img class="max-h-full max-w-full object-contain filter drop-shadow-2xl transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1Vv7NgI7Ohy1xQflxmyjLm04KyqaRwccSCki4-a1kPj8RwR5ffirtzLDo5b4NZfrMnScOBKJZAJxdCwNYOww479kwaEZ5uHxY2eVCdVESLpf4XeEFlhoXxrM-tOjVK_MHy60M7c5N1eeANfdnntyOITS7y6DxwXdGR0lqYFJHpjnLgCB2pmpumid1GqAyFwutEC4Nx2Ivp03v6na0qwzQFZU6Uz8YdmsUCvnfPsInZ5qKlq6EjEzHqsr5cH" alt="Lumen Void Lounge Chair 3D spatial interactive viewport with walnut grain and olive upholstery in orbit inspection mode">
+<img class="max-h-full max-w-full object-contain filter drop-shadow-2xl transition-transform duration-500 hover:scale-[1.035]" src="https://lh3.googleusercontent.com/aida/AEtjO1Vv7NgI7Ohy1xQflxmyjLm04KyqaRwccSCki4-a1kPj8RwR5ffirtzLDo5b4NZfrMnScOBKJZAJxdCwNYOww479kwaEZ5uHxY2eVCdVESLpf4XeEFlhoXxrM-tOjVK_MHy60M7c5N1eeANfdnntyOITS7y6DxwXdGR0lqYFJHpjnLgCB2pmpumid1GqAyFwutEC4Nx2Ivp03v6na0qwzQFZU6Uz8YdmsUCvnfPsInZ5qKlq6EjEzHqsr5cH" alt="Lumen Void Lounge Chair 3D spatial interactive viewport with walnut grain and olive upholstery in orbit inspection mode">
 </div>
 
 <div class="absolute top-4 left-4 z-20 flex flex-col gap-2 font-label-caps text-[0.625rem]">
@@ -497,7 +500,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 </div>
 </div>
 </div>
-</section><section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="blueprint-section" style="background-color: rgb(236, 218, 212);">
+</section><section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="blueprint-section" style="background-color: rgb(236, 218, 212);">
 <div class="max-w-screen-xl mx-auto space-y-8">
 <!-- Section Header -->
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-3 border-b border-[#e8d6d0]">
@@ -603,7 +606,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 </div>
 </section>
 <!-- SECTION 03 / COLLABORATING ARCHITECT PROFILE -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="architect-section" style="background-color: rgb(236, 218, 212);">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" id="architect-section" style="background-color: rgb(236, 218, 212);">
 <div class="max-w-screen-xl mx-auto space-y-8">
 <div class="flex items-center justify-between pb-3 border-b border-[#e8d6d0]">
 <span class="font-label-caps text-xs uppercase text-[#78716C] tracking-widest">
@@ -674,7 +677,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 </div>
 </section>
 <!-- SECTION 04 / SPATIAL HARMONY & COMPLEMENTARY EDITIONS -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl lg:py-20 border-b border-[#e8d6d0] bg-[#fff8f6]" style="background-color: rgb(236, 218, 212);">
 <div class="max-w-screen-xl mx-auto space-y-8">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-3 border-b border-[#e8d6d0]">
 <div>
@@ -695,7 +698,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 <div class="bg-[#fff1ec] border border-[#e8d6d0] p-4 flex flex-col justify-between group hover:border-obsidian transition-all">
 <div>
 <div class="aspect-[16/10] bg-[#fdeae4] overflow-hidden border border-[#e8d6d0] mb-3 relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist sculptural travertine and timber console piece resting in a quiet concrete gallery with daylight casting soft shadows" src="https://lh3.googleusercontent.com/aida/AEtjO1WCS3h4N2DXdCkn71XXTTlGRf2Z5_ejaOo6KbenGdA1U0AiYiEHlHoZpxLlQOq1DEcU1vxWazQ0OVR1SCAo1NDGPAao42DQ0ivkG83Woc8Vsg9ZGexwyRMXtf3Q0V6kdRpMZjxPXq1olAxkOgG_IakGgaqG_FYAOpQMFXYJfF1G-9f2O-81327R44o-Sjn-TZ9T6F23wKexBTX2osfJeMV5axyjhjxDwzDPjF-uYiC6QgqNF05ChkKKCUk_">
+<img class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500" data-alt="Minimalist sculptural travertine and timber console piece resting in a quiet concrete gallery with daylight casting soft shadows" src="https://lh3.googleusercontent.com/aida/AEtjO1WCS3h4N2DXdCkn71XXTTlGRf2Z5_ejaOo6KbenGdA1U0AiYiEHlHoZpxLlQOq1DEcU1vxWazQ0OVR1SCAo1NDGPAao42DQ0ivkG83Woc8Vsg9ZGexwyRMXtf3Q0V6kdRpMZjxPXq1olAxkOgG_IakGgaqG_FYAOpQMFXYJfF1G-9f2O-81327R44o-Sjn-TZ9T6F23wKexBTX2osfJeMV5axyjhjxDwzDPjF-uYiC6QgqNF05ChkKKCUk_">
 <span class="absolute top-2 left-2 px-2 py-0.5 bg-[#0a0a0a] text-[#fff8f6] font-label-caps text-[0.625rem] tracking-wider uppercase font-semibold">
                     ED. 05/08
                   </span>
@@ -719,7 +722,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 <div class="bg-[#fff1ec] border border-[#e8d6d0] p-4 flex flex-col justify-between group hover:border-obsidian transition-all">
 <div>
 <div class="aspect-[16/10] bg-[#fdeae4] overflow-hidden border border-[#e8d6d0] mb-3 relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Architectural daybed bench made of cast dark bronze legs and natural woven cane surface in clean gallery space" src="https://lh3.googleusercontent.com/aida/AEtjO1U0j5RiYcMBDyqAz-tPht7qIKcmb3av0siaDojZEctBpBy9-YG6qBWlkzpnPm9rQM0yYfaVMGEzJacBvde2tzDm_MQEzIebSspi4qYKxI6MpLgpgWLge-mDdPc01vpXhGigconzaZbwaf8iNat8XXAeH3odA4rLldQXvemQ6K83TNGw3U_oejT7ORbrv2pvgkVKBWR7gGMGpGgl1LABDQK55WEIGmI_p3icUucMYyAnGMV33tHIlTKDcYT9">
+<img class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500" data-alt="Architectural daybed bench made of cast dark bronze legs and natural woven cane surface in clean gallery space" src="https://lh3.googleusercontent.com/aida/AEtjO1U0j5RiYcMBDyqAz-tPht7qIKcmb3av0siaDojZEctBpBy9-YG6qBWlkzpnPm9rQM0yYfaVMGEzJacBvde2tzDm_MQEzIebSspi4qYKxI6MpLgpgWLge-mDdPc01vpXhGigconzaZbwaf8iNat8XXAeH3odA4rLldQXvemQ6K83TNGw3U_oejT7ORbrv2pvgkVKBWR7gGMGpGgl1LABDQK55WEIGmI_p3icUucMYyAnGMV33tHIlTKDcYT9">
 <span class="absolute top-2 left-2 px-2 py-0.5 bg-[#0a0a0a] text-[#fff8f6] font-label-caps text-[0.625rem] tracking-wider uppercase font-semibold">
                     ED. 02/06
                   </span>
@@ -743,7 +746,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 <div class="bg-[#fff1ec] border border-[#e8d6d0] p-4 flex flex-col justify-between group hover:border-obsidian transition-all">
 <div>
 <div class="aspect-[16/10] bg-[#fdeae4] overflow-hidden border border-[#e8d6d0] mb-3 relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sculptural architectural floor lamp in bent dark oak and frosted opaline glass globe with warm soft glow" src="https://lh3.googleusercontent.com/aida/AEtjO1WJ7VDI1LjSJcdm6jm9TsSG1_X8ldnz6rDNkMcocgdcPMNwI-p82B-KzLuqY6XlZm1XRiNaHvGqlACu0f3F0iL17AtwoYy34ko2zShYZhIvj4oS-9Bo4MIcQSJLELO6wp6BMtMG76h-JLhCIGJx1gP3lZOZ7xu6BJWjdpw31Ava12rLsd3PideRFPiWcx1q1aiI0Zruh9awl7Vf6OEgY18ReVhkDcdPXw-M8npQO4H7jlpnX_TNwQD0iEfw">
+<img class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500" data-alt="Sculptural architectural floor lamp in bent dark oak and frosted opaline glass globe with warm soft glow" src="https://lh3.googleusercontent.com/aida/AEtjO1WJ7VDI1LjSJcdm6jm9TsSG1_X8ldnz6rDNkMcocgdcPMNwI-p82B-KzLuqY6XlZm1XRiNaHvGqlACu0f3F0iL17AtwoYy34ko2zShYZhIvj4oS-9Bo4MIcQSJLELO6wp6BMtMG76h-JLhCIGJx1gP3lZOZ7xu6BJWjdpw31Ava12rLsd3PideRFPiWcx1q1aiI0Zruh9awl7Vf6OEgY18ReVhkDcdPXw-M8npQO4H7jlpnX_TNwQD0iEfw">
 <span class="absolute top-2 left-2 px-2 py-0.5 bg-[#0a0a0a] text-[#fff8f6] font-label-caps text-[0.625rem] tracking-wider uppercase font-semibold">
                     ED. 07/15
                   </span>
@@ -767,7 +770,7 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 </div>
 </section>
 <!-- ARCHITECTURAL COMMISSION & TRADE SUPPORT BANNER -->
-<section class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl bg-[#0A0A0A] text-[#FAF3F0]">
+<section data-reveal class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl bg-[#0A0A0A] text-[#FAF3F0]">
 <div class="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 <div class="space-y-2 max-w-2xl">
 <span class="font-label-caps text-xs uppercase tracking-widest text-[#A8A29E]">
@@ -795,74 +798,118 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 </div>
 </main>
 <!-- ARCHITECTURAL FOOTER -->
-<footer class="w-full bg-[#fff8f6] border-t border-[#e8d6d0]" style="background-color: rgb(236, 218, 212);">
-<div class="w-full px-margin md:px-margin-tablet lg:px-margin-desktop py-12 lg:py-16">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-[#e8d6d0]">
-<div class="lg:col-span-4 flex flex-col justify-between pr-0 lg:pr-8">
+<footer class="border-t border-[#D8C3BC] bg-#ECDAD4 px-6 md:px-12 pt-16 pb-12" data-purpose="master-footer">
+<div class="max-w-[1360px] mx-auto space-y-16">
+<!-- Top Newsletter & Spec Dispatch Row -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end border-b border-[#D8C3BC] pb-14">
+<!-- Left: Newsletter Subscription -->
+<div class="lg:col-span-7 space-y-4">
+<img alt="xadboom" class="h-10 sm:h-12 w-auto object-contain -ml-1" src="../src/assets/images/xadboom-wordmark.png"/>
+<p class="text-xs sm:text-sm text-#0A0A0A/80 max-w-md font-normal leading-relaxed">
+            Subscribe for upcoming designer editions, catalogue drops, and private architectural viewings.
+          </p>
+<form class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 max-w-md" onsubmit="event.preventDefault()">
+<label class="sr-only" for="newsletter-email">Your email address</label>
+<input class="w-full bg-#FFF1EC/80 border border-#E2CECB rounded-full px-5 py-2.5 text-xs text-#0A0A0A focus:outline-none focus:border-#0A0A0A focus:ring-0 placeholder:text-#0A0A0A/40 font-mono" id="newsletter-email" placeholder="Your architecture practice email" type="email"/>
+<button class="px-6 py-2.5 rounded-full bg-#0A0A0A text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" type="submit">
+              Submit →
+            </button>
+</form>
+</div>
+<!-- Right: Mini Spec Sheet Links -->
+<div class="lg:col-span-5 space-y-3 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Lumen Void icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKjkrRTHpB-nAlIN0hPyv9GycHF-_Flci7FjasFohXzRnqQ2pTwsMEljgFzSeQDK-JR9dez7HGscBSCsyCWcG1GMfdr6MkBHxTYYX9KnqbOOY6k1eZUVpThY2-lmeUjEFrcGDtog1jb67_ub5gPHthnFpMF7c9por8QPIlq8S518YQ_L18kcPQDrexmMnOqluIGqLBY-mGx9HjpzLD05Os2dnUAOhZnRdOOgh6rFWC"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Lumen Void Lounge Chair</span>
+<span class="text-[9px] text-#0A0A0A/50">Alireza Taghaboni · Seating</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Primary Form Table icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXVuIfmhxPWAV7zGZmjv0h9GUYBfb-Gxbln1naJR3L34oCbXG_gwUuTDJ0S5HdqBH-JMPx3n7f91ROw4UWgI52rdZFTo_fSSbN1D0VmLUjxgaBT4Yf2qkdqHMbJGbhdNNVpkqVxXjVyoHzkY1HMjeIbJz2WclzyhXJkl5obsPj1IJ0zZvROSuvGbroqqoH3_gkjXUAUPqsZt6KTfJzjfFlMvLz1NCp8cqgcuk55bM"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Primary Form Low Table</span>
+<span class="text-[9px] text-#0A0A0A/50">Studio Khazeni · Tables</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Luma Arc Lamp icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1R1rSGIdnrFIGw0qKUE3npiZkdVu1caJcA_2U0Ka4i_g6qjSOpOFJryvZ5XdegOXN7Vl7eoHzM5RJUHRobeoTM2kc1_JkeDzb_NiuJqaNqGdmOSAhCcGdrsDDoFZ6UuFe0HXxfX2vylJDvNJLbBIlh-EYOPdoY1Q398Czuj1t0TontnKMe0sK0-grX1rF4o-_hAOKh6m1nA3_WDu3kxWGa388UiqiSqHE9chHleWT"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Luma Wood Arc Lamp</span>
+<span class="text-[9px] text-#0A0A0A/50">Atelier Arpa · Lighting</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+</div>
+</div>
+<!-- Navigation Matrix Columns -->
+<div class="xdm-footer-nav grid grid-cols-2 md:grid-cols-4 gap-8 font-mono text-xs">
+<!-- Column 1: Editions -->
 <div class="space-y-3">
-<span class="font-label-caps text-lg uppercase tracking-tight text-[#0a0a0a] block font-bold">XADBOOM</span>
-<p class="font-body-md text-xs text-[#78716C] max-w-sm leading-relaxed">
-              Curated architectural monographs, material editions, and collectible design objects engineered with tectonic discipline.
-            </p>
-</div>
-<div class="mt-6">
-<div class="font-label-caps text-[0.6875rem] uppercase text-[#0a0a0a] mb-2 font-semibold tracking-wider">Dispatch Journal</div>
-<div class="flex border-b border-obsidian pb-1.5">
-<input class="w-full bg-transparent font-label-caps text-xs placeholder:text-[#78716C] text-[#0a0a0a] focus:outline-none" placeholder="SUBSCRIBE TO EDITIONS" type="email">
-<button aria-label="Submit newsletter" class="font-label-caps text-xs text-[#0a0a0a] hover:opacity-70 transition-opacity p-0.5" type="button">
-<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-<div class="lg:col-span-2 space-y-3">
-<div class="font-label-caps text-xs uppercase text-[#0a0a0a] font-bold tracking-wider">DISCOVER</div>
-<ul class="space-y-2 font-label-caps text-xs">
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="shop" href="#">Collections</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="designers" href="#">Ateliers</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="journal" href="#">Monographs</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="shop" href="#">Limited Editions</a></li>
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Editions</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">All Assets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/designers">Designers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Explicit Library</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">Catalogues</a></li>
 </ul>
 </div>
-<div class="lg:col-span-2 space-y-3">
-<div class="font-label-caps text-xs uppercase text-[#0a0a0a] font-bold tracking-wider">SPEC TOOLS</div>
-<ul class="space-y-2 font-label-caps text-xs">
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="spec-library" href="#">Material Archive</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="spec-library" href="#">CAD &amp; 3D Blocks</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="spec-library" href="#">Finishes Index</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="contact" href="#">Architect Trade</a></li>
+<!-- Column 2: Spec Tools -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Spec Tools</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">3D &amp; BIM Files</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Tear Sheets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Material Samples</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Trade Quotations</a></li>
 </ul>
 </div>
-<div class="lg:col-span-2 space-y-3">
-<div class="font-label-caps text-xs uppercase text-[#0a0a0a] font-bold tracking-wider">THE COMPANY</div>
-<ul class="space-y-2 font-label-caps text-xs">
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="contact" href="#">Studios</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="journal" href="#">Editorial Board</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="contact" href="#">Curatorial Desk</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="contact" href="#">Inquiries</a></li>
+<!-- Column 3: The Company -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">The Company</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">About Xadboom</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">Design Philosophy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#dispatch">Press &amp; Journal</a></li>
 </ul>
 </div>
-<div class="lg:col-span-2 space-y-3">
-<div class="font-label-caps text-xs uppercase text-[#0a0a0a] font-bold tracking-wider">LEGAL</div>
-<ul class="space-y-2 font-label-caps text-xs">
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="privacy-terms" href="#">Provenance &amp; Terms</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="privacy-terms" href="#">Privacy Policy</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="privacy-terms" href="#">Spec Guarantee</a></li>
-<li class=""><a class="text-[#78716C] hover:text-[#0a0a0a] transition-colors" data-path="privacy-terms" href="#">Authentication</a></li>
+<!-- Column 4: Legal -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Legal</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Terms of Acquisition</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Authenticity Guarantee</a></li>
+<li class="pt-2 text-[10px] text-#0A0A0A/50">
+              © 2026 XADBOOM. Curated Interior Architecture Assets.
+            </li>
 </ul>
 </div>
 </div>
-<div class="pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-label-caps text-[0.6875rem] text-[#78716C]">
-<div class="flex items-center gap-3">
-<span class="">ZURICH</span>
-<span class="text-[#e8d6d0]">/</span>
-<span class="">TEHRAN</span>
-<span class="text-[#e8d6d0]">/</span>
-<span class="">BERLIN</span>
+<!-- Bottom Credits & Registry Bar -->
+<div class="border-t border-[#D8C3BC] pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-#0A0A0A/60 uppercase gap-3">
+<div class="flex items-center gap-2">
+<img alt="Xadboom Sign" class="w-4 h-4 object-contain" src="../src/assets/images/xadboom-sign.png"/>
+<span>Xadboom · Limited Physical Architecture Editions</span>
 </div>
 <div>
-<span class="">© 2025 XADBOOM ARCHITECTURAL EDITIONS. ALL RIGHTS RESERVED.</span>
-</div>
+          Zurich · Tehran · New York
+        </div>
 </div>
 </div>
 </footer>
@@ -930,4 +977,6 @@ Inspect full volumetric mesh, material sub-surface scattering, and joinery in 36
 
 
 <script src="../src/prototype-navigation.js" defer></script>
+<!-- Xadboom Motion loader -->
+<script src="../src/xadboom-motion.js" defer></script>
 </body></html>

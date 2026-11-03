@@ -64,6 +64,9 @@
       background: #c5b0a9;
     }
   </style>
+<!-- Xadboom Motion: reveal FOUC guard + shared styles -->
+<script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion-enabled');window.addEventListener('load',function(){setTimeout(function(){if(!d.classList.contains('motion-loaded'))d.classList.remove('motion-enabled')},1200)})})()</script>
+<link rel="stylesheet" href="../src/xadboom-motion.css">
 </head>
 <body class="min-h-screen antialiased flex flex-col lg:flex-row text-[13.5px] bg-[#fff8f6] selection:bg-terracotta selection:text-white" style="background-color: rgb(247, 233, 227);">
 <!-- ==================== SIDEBAR ==================== -->
@@ -171,7 +174,7 @@
 <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
 <div class="flex-1 lg:pl-[268px] flex flex-col min-w-0 bg-[#fff8f6]" style="background-color: rgb(247, 233, 227);">
 <!-- TOP HEADER BAR -->
-<header class="sticky top-0 z-30 bg-[#fff8f6]/95 backdrop-blur-md border-b border-border-hairline px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4" style="background-color: rgba(247, 233, 227, 0.95);">
+<header data-motion-header class="sticky top-0 z-30 bg-[#fff8f6]/95 backdrop-blur-md border-b border-border-hairline px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4" style="background-color: rgba(247, 233, 227, 0.95);">
 <!-- Breadcrumbs & Quick Metric Pill -->
 <div class="flex flex-wrap items-center gap-3 sm:gap-4">
 <div class="flex items-center gap-1.5 text-[12px] font-medium text-[#7d706b] font-sans">
@@ -795,7 +798,7 @@ $1,650 <span class="text-[10px] text-[#91837e]">USD</span>
 <span class="font-sans"><strong>Vault Security Protocol Active:</strong> Zurich Hard-Wallet Ledger synchronization running at 15.00s integrity cycle.</span>
 </div>
 <div class="flex items-center gap-4 font-mono text-[11px]">
-<a class="text-terracotta hover:underline font-medium" href="#">Cryptographic Audit Log ↗</a>
+<a class="text-terracotta hover:underline font-medium" href="#">Cryptographic Audit Log →</a>
 <span class="text-[#a4928b]">·</span>
 <span class="text-[#8c7c75]">NODE: EU-WEST-CUR-04</span>
 </div>
@@ -807,4 +810,6 @@ $1,650 <span class="text-[10px] text-[#91837e]">USD</span>
 
 
 <script src="../src/prototype-navigation.js" defer></script>
+<!-- Xadboom Motion loader -->
+<script src="../src/xadboom-motion.js" defer></script>
 </body></html>

@@ -70,35 +70,38 @@
       }
     };
   </script>
+<!-- Xadboom Motion: reveal FOUC guard + shared styles -->
+<script>(function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('motion-enabled');window.addEventListener('load',function(){setTimeout(function(){if(!d.classList.contains('motion-loaded'))d.classList.remove('motion-enabled')},1200)})})()</script>
+<link rel="stylesheet" href="../src/xadboom-motion.css">
 </head>
 <body class="bg-canvas-base font-body text-[15px] leading-relaxed text-on-surface antialiased selection:bg-primary selection:text-on-primary">
 <!-- Minimalist Persistent Global Header -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-canvas-base/85 backdrop-blur-md border-b border-canvas-border transition-colors">
-<div class="h-20 max-w-[1400px] mx-auto px-6 md:px-margin flex items-center justify-between">
-<div class="flex items-center gap-4">
-<a class="flex items-center gap-3 group" href="#">
-<img alt="Xadboom logo sign" class="h-8 w-auto object-contain transition-transform group-hover:rotate-12 duration-300" src="../src/assets/images/xadboom-sign.png">
-<span class="font-headline font-semibold text-lg tracking-tight uppercase text-on-surface">Xadboom</span>
+<header data-motion-header class="fixed top-0 left-0 right-0 z-50 bg-[#fff8f6] border-b border-[#e8d6d0] backdrop-blur-md bg-opacity-95" style="background-color: rgba(236, 218, 212, 0.95);">
+<div class="h-20 w-full px-6 md:px-12 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group" data-path="shop" href="/">
+<img alt="Xadboom mark" class="h-8 w-auto object-contain transition-transform group-hover:scale-95 duration-200" src="../src/assets/images/xadboom-sign.png">
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#0a0a0a] font-bold hidden sm:inline-block">XADBOOM</span>
 </a>
-<span class="hidden lg:inline-block font-mono-label text-[11px] uppercase tracking-[0.2em] text-outline pl-2 border-l border-canvas-border">Curated Architectural Assets</span>
 </div>
-<nav class="hidden md:flex items-center gap-8 font-mono-label text-[12px] tracking-[0.14em] uppercase">
-<a class="text-on-surface-variant hover:text-primary transition-colors" data-path="shop" href="#">SHOP</a>
-<a aria-current="page" class="text-primary font-bold border-b border-primary pb-0.5" data-path="designers" href="#">DESIGNERS</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" data-path="spec-library" href="#">SPEC LIBRARY</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" data-path="journal" href="#">JOURNAL</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" data-path="contact" href="#">CONTACT</a>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="shop" href="/catalog" href="#">SHOP</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium xdm-nav-active" data-path="designers" href="/designers" aria-current="page">DESIGNERS</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="spec-library" href="#">SPEC LIBRARY</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="journal" href="#">JOURNAL</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#78716C] hover:text-[#0a0a0a] transition-colors font-medium" data-path="contact" href="/contact">CONTACT</a>
 </nav>
-<div class="flex items-center gap-2">
-<button aria-label="Search Assets" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-canvas-card transition-colors" type="button">
+<div class="flex items-center gap-5">
+<button aria-label="Search" class="text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center justify-center p-1" type="button">
 <span class="material-symbols-outlined text-[20px]">search</span>
 </button>
-<button aria-label="Saved Specifications" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-canvas-card transition-colors" type="button">
-<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+<button class="font-['Space_Grotesk'] text-xs uppercase tracking-wider text-[#0a0a0a] hover:opacity-70 transition-opacity flex items-center gap-1.5" type="button">
+<span class="">Bag</span>
+<span class="text-[#78716C] font-mono">(0)</span>
 </button>
-<button aria-label="User Account" class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center ml-1 hover:opacity-90 transition-opacity">
-<span class="material-symbols-outlined text-[17px]">person</span>
-</button>
+<div class="w-8 h-8 rounded-full bg-[#0a0a0a] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#fff8f6] text-[18px]">person</span>
+</div>
 </div>
 </div>
 </header>
@@ -106,7 +109,7 @@
 <main class="w-full pt-20 bg-canvas-base min-h-screen">
 <div class="flex flex-col w-full">
 <!-- Archival Index Marker Sub-bar -->
-<section class="w-full border-b border-canvas-border">
+<section data-reveal class="w-full border-b border-canvas-border">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin py-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-on-surface-variant">
 <div class="flex items-center gap-2 font-mono-label text-[11px] tracking-[0.16em] uppercase">
 <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
@@ -120,7 +123,7 @@
 </div>
 </section>
 <!-- Editorial Introduction Header -->
-<section class="w-full pt-16 pb-12">
+<section data-reveal class="w-full pt-16 pb-12">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-canvas-border">
 <div class="max-w-3xl">
@@ -172,7 +175,7 @@
 </div>
 </section>
 <!-- Featured Master Architect Spotlight: Alireza Taghaboni -->
-<section class="w-full py-12">
+<section data-reveal class="w-full py-12">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin">
 <div class="flex items-center justify-between mb-6 pb-3 border-b border-canvas-border">
 <div class="flex items-center gap-2">
@@ -246,7 +249,7 @@
 <div class="bg-canvas-card p-4 rounded border border-canvas-border flex flex-col justify-between hover:border-canvas-border-strong hover:bg-canvas-card-highlight transition-all group">
 <div>
 <div class="aspect-[4/3] rounded overflow-hidden bg-canvas-subtle mb-3.5 relative border border-canvas-border">
-<img alt="Lumen Void Lounge Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1Vv7NgI7Ohy1xQflxmyjLm04KyqaRwccSCki4-a1kPj8RwR5ffirtzLDo5b4NZfrMnScOBKJZAJxdCwNYOww479kwaEZ5uHxY2eVCdVESLpf4XeEFlhoXxrM-tOjVK_MHy60M7c5N1eeANfdnntyOITS7y6DxwXdGR0lqYFJHpjnLgCB2pmpumid1GqAyFwutEC4Nx2Ivp03v6na0qwzQFZU6Uz8YdmsUCvnfPsInZ5qKlq6EjEzHqsr5cH">
+<img alt="Lumen Void Lounge Chair" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1Vv7NgI7Ohy1xQflxmyjLm04KyqaRwccSCki4-a1kPj8RwR5ffirtzLDo5b4NZfrMnScOBKJZAJxdCwNYOww479kwaEZ5uHxY2eVCdVESLpf4XeEFlhoXxrM-tOjVK_MHy60M7c5N1eeANfdnntyOITS7y6DxwXdGR0lqYFJHpjnLgCB2pmpumid1GqAyFwutEC4Nx2Ivp03v6na0qwzQFZU6Uz8YdmsUCvnfPsInZ5qKlq6EjEzHqsr5cH">
 <div class="absolute bottom-2 left-2 bg-canvas-base/90 px-2 py-0.5 rounded font-mono-label text-[9px] uppercase font-bold tracking-[0.15em] text-on-surface border border-canvas-border">
                           Edition of 12
                         </div>
@@ -266,7 +269,7 @@
 <div class="bg-canvas-card p-4 rounded border border-canvas-border flex flex-col justify-between hover:border-canvas-border-strong hover:bg-canvas-card-highlight transition-all group">
 <div>
 <div class="aspect-[4/3] rounded overflow-hidden bg-canvas-subtle mb-3.5 relative border border-canvas-border">
-<img alt="Tectonic Monolith Console" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WCS3h4N2DXdCkn71XXTTlGRf2Z5_ejaOo6KbenGdA1U0AiYiEHlHoZpxLlQOq1DEcU1vxWazQ0OVR1SCAo1NDGPAao42DQ0ivkG83Woc8Vsg9ZGexwyRMXtf3Q0V6kdRpMZjxPXq1olAxkOgG_IakGgaqG_FYAOpQMFXYJfF1G-9f2O-81327R44o-Sjn-TZ9T6F23wKexBTX2osfJeMV5axyjhjxDwzDPjF-uYiC6QgqNF05ChkKKCUk_">
+<img alt="Tectonic Monolith Console" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WCS3h4N2DXdCkn71XXTTlGRf2Z5_ejaOo6KbenGdA1U0AiYiEHlHoZpxLlQOq1DEcU1vxWazQ0OVR1SCAo1NDGPAao42DQ0ivkG83Woc8Vsg9ZGexwyRMXtf3Q0V6kdRpMZjxPXq1olAxkOgG_IakGgaqG_FYAOpQMFXYJfF1G-9f2O-81327R44o-Sjn-TZ9T6F23wKexBTX2osfJeMV5axyjhjxDwzDPjF-uYiC6QgqNF05ChkKKCUk_">
 <div class="absolute bottom-2 left-2 bg-canvas-base/90 px-2 py-0.5 rounded font-mono-label text-[9px] uppercase font-bold tracking-[0.15em] text-on-surface border border-canvas-border">
                           Edition of 08
                         </div>
@@ -289,7 +292,7 @@
 </div>
 </section>
 <!-- Collaborators Roster Grid (Comprehensive Dossiers) -->
-<section class="w-full py-14">
+<section data-reveal class="w-full py-14">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-canvas-border">
 <div>
@@ -302,7 +305,7 @@ Limited-manufactured physical furniture and spatial objects author-designed by c
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 <!-- Piece 1: Lumen Void Lounge Chair by Alireza Taghaboni -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Lumen Void Lounge Chair" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1Vv7NgI7Ohy1xQflxmyjLm04KyqaRwccSCki4-a1kPj8RwR5ffirtzLDo5b4NZfrMnScOBKJZAJxdCwNYOww479kwaEZ5uHxY2eVCdVESLpf4XeEFlhoXxrM-tOjVK_MHy60M7c5N1eeANfdnntyOITS7y6DxwXdGR0lqYFJHpjnLgCB2pmpumid1GqAyFwutEC4Nx2Ivp03v6na0qwzQFZU6Uz8YdmsUCvnfPsInZ5qKlq6EjEzHqsr5cH">
@@ -333,7 +336,7 @@ Cantilevered joinery with oiled walnut framework, articulating spatial void geom
 </div>
 </article>
 <!-- Piece 2: Tectonic Monolith Console by Alireza Taghaboni & Atelier -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Tectonic Monolith Console" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WCS3h4N2DXdCkn71XXTTlGRf2Z5_ejaOo6KbenGdA1U0AiYiEHlHoZpxLlQOq1DEcU1vxWazQ0OVR1SCAo1NDGPAao42DQ0ivkG83Woc8Vsg9ZGexwyRMXtf3Q0V6kdRpMZjxPXq1olAxkOgG_IakGgaqG_FYAOpQMFXYJfF1G-9f2O-81327R44o-Sjn-TZ9T6F23wKexBTX2osfJeMV5axyjhjxDwzDPjF-uYiC6QgqNF05ChkKKCUk_">
@@ -364,7 +367,7 @@ Polished natural travertine mass anchored with unlacquered sand-cast bronze join
 </div>
 </article>
 <!-- Piece 3: Radial Carved Ash Chair by Studio Khazeni -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Radial Carved Ash Chair" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1X-4Y23RJocII8r7tOKcyU2KuHIslfNPR1bUVGz_RUkiqdy6kWPBcxXWKkA9VIjJhk5nznCm574f4htMMNdDDLXhE7Lqs0M6gAnep-SdNqeK_aFF0-G7jKKf2DHCvR5QU0RY9SkumzrSM-GkCWj0sOtsVgib4MKHe5rwT_uQnlmrQHv5nLMK5C9qlGIb5bFfZanjeott-PobsJ8EY_G7-EKeuacrgoM0JEwuUvRT-EQNCkWeS3DHCNAAL8a">
@@ -395,7 +398,7 @@ Solid blackened ash wood shaped through continuous 5-axis CNC radial relief with
 </div>
 </article>
 <!-- Piece 4: Cantilever Cane Daybed by Mehrdad Zavareh -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Cantilever Cane Daybed" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1U0j5RiYcMBDyqAz-tPht7qIKcmb3av0siaDojZEctBpBy9-YG6qBWlkzpnPm9rQM0yYfaVMGEzJacBvde2tzDm_MQEzIebSspi4qYKxI6MpLgpgWLge-mDdPc01vpXhGigconzaZbwaf8iNat8XXAeH3odA4rLldQXvemQ6K83TNGw3U_oejT7ORbrv2pvgkVKBWR7gGMGpGgl1LABDQK55WEIGmI_p3icUucMYyAnGMV33tHIlTKDcYT9">
@@ -426,7 +429,7 @@ Foundry-cast patinated bronze trestle frame strung with hand-woven Persian cane 
 </div>
 </article>
 <!-- Piece 5: Luma Wood Arc Lamp by Atelier Arpa -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Luma Wood Arc Lamp" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WJ7VDI1LjSJcdm6jm9TsSG1_X8ldnz6rDNkMcocgdcPMNwI-p82B-KzLuqY6XlZm1XRiNaHvGqlACu0f3F0iL17AtwoYy34ko2zShYZhIvj4oS-9Bo4MIcQSJLELO6wp6BMtMG76h-JLhCIGJx1gP3lZOZ7xu6BJWjdpw31Ava12rLsd3PideRFPiWcx1q1aiI0Zruh9awl7Vf6OEgY18ReVhkDcdPXw-M8npQO4H7jlpnX_TNwQD0iEfw">
@@ -457,7 +460,7 @@ Gravity suspension luminaire formed from steam-bent French oak and mouth-blown I
 </div>
 </article>
 <!-- Piece 6: Acoustic Lamella Chaise by Reza Shirazi -->
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="aspect-[16/10] rounded overflow-hidden bg-canvas-subtle mb-4 relative border border-canvas-border">
 <img alt="Acoustic Lamella Chaise" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1WlmWVfjFnB59ew-qS7gFf_SobxCTyNcZWibUX3vyXI8IST41-fC6Oa-KfSYziocR2DvnWkd-4TUYu5cbFDzX9dCs26h11Pnuf4QYNP7GAgueCPyqV-SG3Z7xwmKw8eshy3UT5Asp4DPJ8QSgGPnAI4cVtHg_ZaV0ZfLi4iC2VKeEA7immYQy3oJOmL6ckUZ6KX9RKDPR3ktwMopvSRcJFDdRtXItRwLzHnznaMJi5ntL58mcvkw5tkPBTO">
@@ -491,7 +494,7 @@ Parametrically arranged layered walnut lamellas engineered to diffuse spatial ac
 </div>
 </section>
 <!-- Alphabetical Atelier Index (Tabular Architecture Navigation) -->
-<section class="w-full py-16 border-t border-canvas-border"><div class="max-w-[1400px] mx-auto px-6 md:px-margin"><div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-canvas-border"><div><div class="flex items-center gap-2 mb-1.5"><span class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-primary font-bold">03 / Collaborating Monograph &amp; Biography</span><span class="text-outline-variant">/</span><span class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-outline">Architectural Retrospective</span></div><h2 class="font-headline font-normal text-3xl sm:text-4xl text-on-surface tracking-tight">Farshid Moussavi / FMA</h2></div><div class="font-mono-label text-[11px] uppercase tracking-[0.16em] text-outline">Practice: London · Tehran · Harvard GSD</div></div><div class="mb-10 rounded overflow-hidden border border-canvas-border bg-canvas-card relative shadow-sm"><div class="w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden relative"><img alt="Alireza Taghaboni - Architectural Studio &amp; Monograph Retrospective" class="w-full h-full object-cover filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1WlmWVfjFnB59ew-qS7gFf_SobxCTyNcZWibUX3vyXI8IST41-fC6Oa-KfSYziocR2DvnWkd-4TUYu5cbFDzX9dCs26h11Pnuf4QYNP7GAgueCPyqV-SG3Z7xwmKw8eshy3UT5Asp4DPJ8QSgGPnAI4cVtHg_ZaV0ZfLi4iC2VKeEA7immYQy3oJOmL6ckUZ6KX9RKDPR3ktwMopvSRcJFDdRtXItRwLzHnznaMJi5ntL58mcvkw5tkPBTO"><div class="absolute bottom-3 left-3 bg-canvas-base/90 backdrop-blur-md px-3 py-1.5 rounded font-mono-label text-[10px] uppercase font-bold tracking-[0.18em] text-on-surface border border-canvas-border">In-Situ Architectural Retrospective · Gallery Villa Lavasan</div><div class="absolute top-3 right-3 bg-primary text-on-primary px-3 py-1 rounded font-mono-label text-[10px] uppercase tracking-[0.18em] font-semibold">Curatorial Commission 2026</div></div></div><div class="grid grid-cols-12 gap-8 items-start"><div class="col-span-12 lg:col-span-7"><h3 class="font-headline font-semibold text-2xl text-on-surface tracking-tight mb-4">Architectural Envelope Geometries Translated to Monolithic Collectible Scale</h3><div class="font-body text-sm text-on-surface-variant leading-relaxed space-y-4 mb-6"><p class="">Farshid Moussavi OBE RA is an internationally acclaimed architect, educator, and author. Founder of Farshid Moussavi Architecture (FMA) and Professor in Practice of Architecture at Harvard University Graduate School of Design, her seminal trajectory spans pioneering masterworks including the Yokohama International Port Terminal and the Museum of Contemporary Art Cleveland.</p><p class="">In her ongoing collaboration with Xadboom Atelier, Moussavi translates the rigorous micro-tectonics of tessellated ceramic facade systems into heavy monolithic furniture objects. Each limited piece embodies spatial mutability, balancing geometric exactitude with hand-cast bronze and tactile subterranean travertine.</p></div><div class="flex flex-wrap items-center gap-3 pt-4 border-t border-canvas-border"><a class="inline-flex items-center gap-2 bg-primary text-on-primary font-mono-label text-[11px] uppercase tracking-[0.16em] py-3 px-6 rounded hover:bg-neutral-800 transition-colors font-semibold" href="#"><span class="">View Monograph Portfolio</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a><a class="inline-flex items-center gap-2 bg-canvas-card text-on-surface hover:bg-canvas-card-highlight font-mono-label text-[11px] uppercase tracking-[0.16em] py-3 px-6 rounded border border-canvas-border transition-colors font-semibold" href="#"><span class="material-symbols-outlined text-[16px]">description</span><span class="">Download Biography Spec PDF</span></a></div></div><div class="col-span-12 lg:col-span-5 bg-canvas-card p-6 md:p-8 rounded border border-canvas-border shadow-xs"><span class="font-mono-label text-[10px] uppercase tracking-[0.2em] text-primary font-bold block mb-4">Institutional Monographic Milestones</span><ul class="space-y-3 font-body text-xs text-on-surface mb-6"><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Royal Academy of Arts</span><span class="text-outline text-[11px]">Elected Royal Academician (RA)</span></div><span class="font-mono-label text-[11px] text-outline uppercase">London</span></li><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Harvard Graduate School of Design</span><span class="text-outline text-[11px]">Professor in Practice of Architecture</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Cambridge</span></li><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Venice Architecture Biennale</span><span class="text-outline text-[11px]">Curatorial Installation &amp; Architecture Pavilion</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Venice</span></li><li class="flex items-start justify-between gap-4"><div><span class="font-semibold block text-on-surface">Aga Khan Award for Architecture</span><span class="text-outline text-[11px]">Master Jury &amp; Steering Committee Member</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Geneva</span></li></ul><div class="bg-canvas-card-highlight p-4 rounded border border-canvas-border"><div class="flex items-center justify-between mb-1"><span class="font-mono-label text-[10px] uppercase tracking-wider text-outline">Edition Sequenced Runs</span><span class="font-mono-label text-[11px] font-bold text-primary">04 Registered Pieces</span></div><div class="font-mono-label text-[10px] text-outline">Strictly limited to 6 units per fabrication casting worldwide</div></div></div></div></div></section><section class="w-full py-16" id="atelier-index">
+<section data-reveal class="w-full py-16 border-t border-canvas-border"><div class="max-w-[1400px] mx-auto px-6 md:px-margin"><div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-canvas-border"><div><div class="flex items-center gap-2 mb-1.5"><span class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-primary font-bold">03 / Collaborating Monograph &amp; Biography</span><span class="text-outline-variant">/</span><span class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-outline">Architectural Retrospective</span></div><h2 class="font-headline font-normal text-3xl sm:text-4xl text-on-surface tracking-tight">Farshid Moussavi / FMA</h2></div><div class="font-mono-label text-[11px] uppercase tracking-[0.16em] text-outline">Practice: London · Tehran · Harvard GSD</div></div><div class="mb-10 rounded overflow-hidden border border-canvas-border bg-canvas-card relative shadow-sm"><div class="w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden relative"><img alt="Alireza Taghaboni - Architectural Studio &amp; Monograph Retrospective" class="w-full h-full object-cover filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1WlmWVfjFnB59ew-qS7gFf_SobxCTyNcZWibUX3vyXI8IST41-fC6Oa-KfSYziocR2DvnWkd-4TUYu5cbFDzX9dCs26h11Pnuf4QYNP7GAgueCPyqV-SG3Z7xwmKw8eshy3UT5Asp4DPJ8QSgGPnAI4cVtHg_ZaV0ZfLi4iC2VKeEA7immYQy3oJOmL6ckUZ6KX9RKDPR3ktwMopvSRcJFDdRtXItRwLzHnznaMJi5ntL58mcvkw5tkPBTO"><div class="absolute bottom-3 left-3 bg-canvas-base/90 backdrop-blur-md px-3 py-1.5 rounded font-mono-label text-[10px] uppercase font-bold tracking-[0.18em] text-on-surface border border-canvas-border">In-Situ Architectural Retrospective · Gallery Villa Lavasan</div><div class="absolute top-3 right-3 bg-primary text-on-primary px-3 py-1 rounded font-mono-label text-[10px] uppercase tracking-[0.18em] font-semibold">Curatorial Commission 2026</div></div></div><div class="grid grid-cols-12 gap-8 items-start"><div class="col-span-12 lg:col-span-7"><h3 class="font-headline font-semibold text-2xl text-on-surface tracking-tight mb-4">Architectural Envelope Geometries Translated to Monolithic Collectible Scale</h3><div class="font-body text-sm text-on-surface-variant leading-relaxed space-y-4 mb-6"><p class="">Farshid Moussavi OBE RA is an internationally acclaimed architect, educator, and author. Founder of Farshid Moussavi Architecture (FMA) and Professor in Practice of Architecture at Harvard University Graduate School of Design, her seminal trajectory spans pioneering masterworks including the Yokohama International Port Terminal and the Museum of Contemporary Art Cleveland.</p><p class="">In her ongoing collaboration with Xadboom Atelier, Moussavi translates the rigorous micro-tectonics of tessellated ceramic facade systems into heavy monolithic furniture objects. Each limited piece embodies spatial mutability, balancing geometric exactitude with hand-cast bronze and tactile subterranean travertine.</p></div><div class="flex flex-wrap items-center gap-3 pt-4 border-t border-canvas-border"><a class="inline-flex items-center gap-2 bg-primary text-on-primary font-mono-label text-[11px] uppercase tracking-[0.16em] py-3 px-6 rounded hover:bg-neutral-800 transition-colors font-semibold" href="#"><span class="">View Monograph Portfolio</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a><a class="inline-flex items-center gap-2 bg-canvas-card text-on-surface hover:bg-canvas-card-highlight font-mono-label text-[11px] uppercase tracking-[0.16em] py-3 px-6 rounded border border-canvas-border transition-colors font-semibold" href="#"><span class="material-symbols-outlined text-[16px]">description</span><span class="">Download Biography Spec PDF</span></a></div></div><div class="col-span-12 lg:col-span-5 bg-canvas-card p-6 md:p-8 rounded border border-canvas-border shadow-xs"><span class="font-mono-label text-[10px] uppercase tracking-[0.2em] text-primary font-bold block mb-4">Institutional Monographic Milestones</span><ul class="space-y-3 font-body text-xs text-on-surface mb-6"><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Royal Academy of Arts</span><span class="text-outline text-[11px]">Elected Royal Academician (RA)</span></div><span class="font-mono-label text-[11px] text-outline uppercase">London</span></li><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Harvard Graduate School of Design</span><span class="text-outline text-[11px]">Professor in Practice of Architecture</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Cambridge</span></li><li class="flex items-start justify-between gap-4 pb-2 border-b border-canvas-border/50"><div><span class="font-semibold block text-on-surface">Venice Architecture Biennale</span><span class="text-outline text-[11px]">Curatorial Installation &amp; Architecture Pavilion</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Venice</span></li><li class="flex items-start justify-between gap-4"><div><span class="font-semibold block text-on-surface">Aga Khan Award for Architecture</span><span class="text-outline text-[11px]">Master Jury &amp; Steering Committee Member</span></div><span class="font-mono-label text-[11px] text-outline uppercase">Geneva</span></li></ul><div class="bg-canvas-card-highlight p-4 rounded border border-canvas-border"><div class="flex items-center justify-between mb-1"><span class="font-mono-label text-[10px] uppercase tracking-wider text-outline">Edition Sequenced Runs</span><span class="font-mono-label text-[11px] font-bold text-primary">04 Registered Pieces</span></div><div class="font-mono-label text-[10px] text-outline">Strictly limited to 6 units per fabrication casting worldwide</div></div></div></div></div></section><section data-reveal class="w-full py-16" id="atelier-index">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-canvas-border">
 <div>
@@ -507,10 +510,10 @@ An intimate curatorial focus on visionary practitioners bridging spatial discour
 </p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="relative aspect-[4/5] rounded overflow-hidden bg-canvas-subtle mb-5 border border-canvas-border">
-<img alt="Farshid Moussavi portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1UcFV2NC_5BqBgKcg0hng-O_UIl-WZ1dCTYzccoGXFmiKXboLx3kvw9LA1RxTt0k5UnBROik5vo_J18Huwa2FaFfUHBhgFhUTGdeE-a5vbIf956DAlpT8VZ-cBzc3tZknJZGJA1r9Mego5IvQf6ubCBwd6PFOg3eMw3LavZKO1oGIUmsC6mvP3WaoVWhXRp-9_KpiO-s8MWq36pd36DsguruzMODmveBohSLVueUsSZj42XupvN0dzkuRLf">
+<img alt="Farshid Moussavi portrait" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1UcFV2NC_5BqBgKcg0hng-O_UIl-WZ1dCTYzccoGXFmiKXboLx3kvw9LA1RxTt0k5UnBROik5vo_J18Huwa2FaFfUHBhgFhUTGdeE-a5vbIf956DAlpT8VZ-cBzc3tZknJZGJA1r9Mego5IvQf6ubCBwd6PFOg3eMw3LavZKO1oGIUmsC6mvP3WaoVWhXRp-9_KpiO-s8MWq36pd36DsguruzMODmveBohSLVueUsSZj42XupvN0dzkuRLf">
 <div class="absolute top-3 left-3 bg-primary text-on-primary px-3 py-1 rounded font-mono-label text-[10px] uppercase tracking-[0.18em] font-semibold">
 London, UK
 </div>
@@ -536,10 +539,10 @@ Pioneering the convergence of continuous envelope geometry with functional micro
 </a>
 </div>
 </article>
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="relative aspect-[4/5] rounded overflow-hidden bg-canvas-subtle mb-5 border border-canvas-border">
-<img alt="Mehrdad Zavareh portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1Wv_YwNBWZia9aQarXFWDNZh8IaTqaW0YU4HdWRNqqiXiDmAh_IyvsucgCAGvPHpCXnJxNhW8CSlWritS5kCy0DO-vwEm7-h9Fce-YpfYqaYPX_CtSGil1CPURbw92WG6_A9HWSsR0SOhoCJik7KDHgnjMj8pSIbotDl8MGD0vdxkFN5jKh7H_7GUo_d9UN7fs2qj5yPs69dXIHJl4nR8waXtQgTS4WETIp8kMr0bsrqnd8DsB7lOkE608">
+<img alt="Mehrdad Zavareh portrait" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1Wv_YwNBWZia9aQarXFWDNZh8IaTqaW0YU4HdWRNqqiXiDmAh_IyvsucgCAGvPHpCXnJxNhW8CSlWritS5kCy0DO-vwEm7-h9Fce-YpfYqaYPX_CtSGil1CPURbw92WG6_A9HWSsR0SOhoCJik7KDHgnjMj8pSIbotDl8MGD0vdxkFN5jKh7H_7GUo_d9UN7fs2qj5yPs69dXIHJl4nR8waXtQgTS4WETIp8kMr0bsrqnd8DsB7lOkE608">
 <div class="absolute top-3 left-3 bg-primary text-on-primary px-3 py-1 rounded font-mono-label text-[10px] uppercase tracking-[0.18em] font-semibold">
 Milan · Tehran
 </div>
@@ -565,10 +568,10 @@ Investigating ancestral Persian cane weaving frameworks combined with heavy indu
 </a>
 </div>
 </article>
-<article class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
+<article data-reveal class="bg-canvas-card p-6 rounded border border-canvas-border flex flex-col justify-between hover:bg-canvas-card-highlight hover:border-canvas-border-strong transition-all group shadow-xs">
 <div>
 <div class="relative aspect-[4/5] rounded overflow-hidden bg-canvas-subtle mb-5 border border-canvas-border">
-<img alt="Studio Khazeni monolithic spatial design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1XYV4xfMY7fHZ_H8iMfWTbaJbmSxa4D6nU3rVOr1luH5ln0JoSuWnjuhxA68YZSNGpkeB3W8B5L5je5Em5gQw0cLQntxzjKeBY_wqwkajGZVyIYoLYcfyGZ5qnZ-erj6AP36ITUaYbFun2onBihOmahCzOTRun4qlclhUFl7_Q_zM0SwBwh8xw0utKPEpu0BmgyK8QCATHB2NseefCNPJperz6iRZYj8HmviGXVivnRxQ">
+<img alt="Studio Khazeni monolithic spatial design" class="w-full h-full object-cover group-hover:scale-[1.035] transition-transform duration-500 filter contrast-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1XYV4xfMY7fHZ_H8iMfWTbaJbmSxa4D6nU3rVOr1luH5ln0JoSuWnjuhxA68YZSNGpkeB3W8B5L5je5Em5gQw0cLQntxzjKeBY_wqwkajGZVyIYoLYcfyGZ5qnZ-erj6AP36ITUaYbFun2onBihOmahCzOTRun4qlclhUFl7_Q_zM0SwBwh8xw0utKPEpu0BmgyK8QCATHB2NseefCNPJperz6iRZYj8HmviGXVivnRxQ">
 <div class="absolute top-3 left-3 bg-primary text-on-primary px-3 py-1 rounded font-mono-label text-[10px] uppercase tracking-[0.18em] font-semibold">
 Tehran · Zurich
 </div>
@@ -598,7 +601,7 @@ Material studies dedicated to heavy timber relief, monolithic subterranean volum
 </div>
 </section>
 <!-- Curatorial Invitation & Atelier Commission CTA Section -->
-<section class="w-full py-16">
+<section data-reveal class="w-full py-16">
 <div class="max-w-[1400px] mx-auto px-6 md:px-margin">
 <div class="bg-primary text-on-primary rounded p-8 md:p-12 border border-black/40 shadow-lg">
 <div class="grid grid-cols-12 gap-8 items-center">
@@ -634,76 +637,118 @@ Material studies dedicated to heavy timber relief, monolithic subterranean volum
 </div>
 </main>
 <!-- Architectural Dispatch Footer (Continuous Tone-on-Tone Base) -->
-<footer class="w-full bg-canvas-base border-t border-canvas-border text-on-surface pt-16 pb-12">
-<div class="max-w-[1400px] mx-auto px-6 md:px-margin">
-<div class="grid grid-cols-12 gap-8 pb-14 border-b border-canvas-border">
-<!-- Newsletter / Dispatch -->
-<div class="col-span-12 lg:col-span-5 pr-0 lg:pr-12">
-<span class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-outline block mb-2">Architectural Dispatch</span>
-<h3 class="font-headline font-semibold text-2xl text-on-surface mb-2 tracking-tight">Curated releases, material studies, and physical editions.</h3>
-<p class="font-body text-xs text-on-surface-variant mb-6 max-w-md leading-relaxed">
-            Bi-weekly technical dossier detailing tactile objects, architectural millwork specs, and spatial materials from independent masters.
+<footer class="border-t border-[#D8C3BC] bg-#ECDAD4 px-6 md:px-12 pt-16 pb-12" data-purpose="master-footer">
+<div class="max-w-[1360px] mx-auto space-y-16">
+<!-- Top Newsletter & Spec Dispatch Row -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end border-b border-[#D8C3BC] pb-14">
+<!-- Left: Newsletter Subscription -->
+<div class="lg:col-span-7 space-y-4">
+<img alt="xadboom" class="h-10 sm:h-12 w-auto object-contain -ml-1" src="../src/assets/images/xadboom-wordmark.png"/>
+<p class="text-xs sm:text-sm text-#0A0A0A/80 max-w-md font-normal leading-relaxed">
+            Subscribe for upcoming designer editions, catalogue drops, and private architectural viewings.
           </p>
-<form class="flex flex-col sm:flex-row gap-2 max-w-md" onsubmit="return false;">
-<input aria-label="Email Address" class="flex-1 bg-canvas-card text-on-surface placeholder:text-outline font-body text-xs px-4 py-2.5 rounded border border-canvas-border outline-none focus:border-primary transition-colors" placeholder="architect@studio.com" type="email">
-<button class="bg-primary text-on-primary font-mono-label text-[11px] uppercase tracking-[0.16em] px-6 py-2.5 rounded hover:bg-neutral-800 transition-colors" type="button">
-              Subscribe
+<form class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 max-w-md" onsubmit="event.preventDefault()">
+<label class="sr-only" for="newsletter-email">Your email address</label>
+<input class="w-full bg-#FFF1EC/80 border border-#E2CECB rounded-full px-5 py-2.5 text-xs text-#0A0A0A focus:outline-none focus:border-#0A0A0A focus:ring-0 placeholder:text-#0A0A0A/40 font-mono" id="newsletter-email" placeholder="Your architecture practice email" type="email"/>
+<button class="px-6 py-2.5 rounded-full bg-#0A0A0A text-white text-xs font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-all shrink-0" type="submit">
+              Submit →
             </button>
 </form>
 </div>
-<!-- Col 1: Discover -->
-<div class="col-span-6 sm:col-span-3 lg:col-span-2 pt-4 lg:pt-0">
-<h4 class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-on-surface font-bold mb-4">Discover</h4>
-<ul class="flex flex-col gap-2.5 font-body text-xs text-on-surface-variant">
-<li class=""><a class="hover:text-primary transition-colors" data-path="shop" href="#">Material Catalog</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="designers" href="#">Design Studios</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="spatial-collections" href="#">Curated Sets</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="physical-samples" href="#">Sample Swatches</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="journal" href="#">Editorial Monograph</a></li>
+<!-- Right: Mini Spec Sheet Links -->
+<div class="lg:col-span-5 space-y-3 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Lumen Void icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKjkrRTHpB-nAlIN0hPyv9GycHF-_Flci7FjasFohXzRnqQ2pTwsMEljgFzSeQDK-JR9dez7HGscBSCsyCWcG1GMfdr6MkBHxTYYX9KnqbOOY6k1eZUVpThY2-lmeUjEFrcGDtog1jb67_ub5gPHthnFpMF7c9por8QPIlq8S518YQ_L18kcPQDrexmMnOqluIGqLBY-mGx9HjpzLD05Os2dnUAOhZnRdOOgh6rFWC"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Lumen Void Lounge Chair</span>
+<span class="text-[9px] text-#0A0A0A/50">Alireza Taghaboni · Seating</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Primary Form Table icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXVuIfmhxPWAV7zGZmjv0h9GUYBfb-Gxbln1naJR3L34oCbXG_gwUuTDJ0S5HdqBH-JMPx3n7f91ROw4UWgI52rdZFTo_fSSbN1D0VmLUjxgaBT4Yf2qkdqHMbJGbhdNNVpkqVxXjVyoHzkY1HMjeIbJz2WclzyhXJkl5obsPj1IJ0zZvROSuvGbroqqoH3_gkjXUAUPqsZt6KTfJzjfFlMvLz1NCp8cqgcuk55bM"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Primary Form Low Table</span>
+<span class="text-[9px] text-#0A0A0A/50">Studio Khazeni · Tables</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-#FFF1EC/60 border border-#E2CECB">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-stone-300 overflow-hidden shrink-0">
+<img alt="Luma Arc Lamp icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1R1rSGIdnrFIGw0qKUE3npiZkdVu1caJcA_2U0Ka4i_g6qjSOpOFJryvZ5XdegOXN7Vl7eoHzM5RJUHRobeoTM2kc1_JkeDzb_NiuJqaNqGdmOSAhCcGdrsDDoFZ6UuFe0HXxfX2vylJDvNJLbBIlh-EYOPdoY1Q398Czuj1t0TontnKMe0sK0-grX1rF4o-_hAOKh6m1nA3_WDu3kxWGa388UiqiSqHE9chHleWT"/>
+</span>
+<div>
+<span class="font-bold uppercase text-[11px] block text-#0A0A0A">Luma Wood Arc Lamp</span>
+<span class="text-[9px] text-#0A0A0A/50">Atelier Arpa · Lighting</span>
+</div>
+</div>
+<a class="text-[10px] uppercase font-bold text-#0A0A0A/70 hover:text-#0A0A0A" href="#">View Spec Sheet →</a>
+</div>
+</div>
+</div>
+<!-- Navigation Matrix Columns -->
+<div class="xdm-footer-nav grid grid-cols-2 md:grid-cols-4 gap-8 font-mono text-xs">
+<!-- Column 1: Editions -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Editions</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">All Assets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/designers">Designers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Explicit Library</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="/catalog">Catalogues</a></li>
 </ul>
 </div>
-<!-- Col 2: Spec Tools -->
-<div class="col-span-6 sm:col-span-3 lg:col-span-2 pt-4 lg:pt-0">
-<h4 class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-on-surface font-bold mb-4">Spec Tools</h4>
-<ul class="flex flex-col gap-2.5 font-body text-xs text-on-surface-variant">
-<li class=""><a class="hover:text-primary transition-colors" data-path="bim-cad-library" href="#">BIM &amp; CAD Library</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="material-finishes" href="#">Finish Schedules</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="specification-builder" href="#">Spec Sheet Generator</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="trade-application" href="#">Trade Program (A&amp;D)</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="project-boards" href="#">Studio Project Boards</a></li>
+<!-- Column 2: Spec Tools -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Spec Tools</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">3D &amp; BIM Files</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Tear Sheets</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Material Samples</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#spectools">Trade Quotations</a></li>
 </ul>
 </div>
-<!-- Col 3: The Company -->
-<div class="col-span-6 sm:col-span-3 lg:col-span-2 pt-4 lg:pt-0">
-<h4 class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-on-surface font-bold mb-4">The Company</h4>
-<ul class="flex flex-col gap-2.5 font-body text-xs text-on-surface-variant">
-<li class=""><a class="hover:text-primary transition-colors" data-path="about" href="#">Our Manifesto</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="studios" href="#">Studio Locations</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="fabrication-partners" href="#">Artisans &amp; Mills</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="sustainability" href="#">Material Traceability</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="careers" href="#">Opportunities</a></li>
+<!-- Column 3: The Company -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">The Company</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">About Xadboom</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#about">Design Philosophy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#dispatch">Press &amp; Journal</a></li>
 </ul>
 </div>
-<!-- Col 4: Legal -->
-<div class="col-span-6 sm:col-span-3 lg:col-span-1 pt-4 lg:pt-0">
-<h4 class="font-mono-label text-[11px] uppercase tracking-[0.2em] text-on-surface font-bold mb-4">Legal</h4>
-<ul class="flex flex-col gap-2.5 font-body text-xs text-on-surface-variant">
-<li class=""><a class="hover:text-primary transition-colors" data-path="terms-of-trade" href="#">Terms of Trade</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="privacy-notice" href="#">Privacy Policy</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="spec-licensing" href="#">CAD Licensing</a></li>
-<li class=""><a class="hover:text-primary transition-colors" data-path="contact" href="#">Inquiries</a></li>
+<!-- Column 4: Legal -->
+<div class="space-y-3">
+<span class="text-[10px] text-#0A0A0A/50 uppercase tracking-widest block">Legal</span>
+<ul class="space-y-2 text-#0A0A0A/80">
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Terms of Acquisition</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-#0A0A0A transition-colors" href="#">Authenticity Guarantee</a></li>
+<li class="pt-2 text-[10px] text-#0A0A0A/50">
+              © 2026 XADBOOM. Curated Interior Architecture Assets.
+            </li>
 </ul>
 </div>
 </div>
-<!-- Copyright Sub-line -->
-<div class="pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-on-surface-variant">
-<div class="font-mono-label text-[11px] uppercase tracking-[0.18em] text-outline">
-          © 2026 XADBOOM ARCHITECTURE &amp; DESIGN. ALL RIGHTS RESERVED. ZURICH · TEHRAN · NEW YORK
+<!-- Bottom Credits & Registry Bar -->
+<div class="border-t border-[#D8C3BC] pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-#0A0A0A/60 uppercase gap-3">
+<div class="flex items-center gap-2">
+<img alt="Xadboom Sign" class="w-4 h-4 object-contain" src="../src/assets/images/xadboom-sign.png"/>
+<span>Xadboom · Limited Physical Architecture Editions</span>
+</div>
+<div>
+          Zurich · Tehran · New York
         </div>
-<div class="flex items-center gap-6 font-mono-label text-[11px] uppercase tracking-[0.18em] text-outline">
-<span class="">ISO 14001 CERTIFIED SPEC</span>
-<span class="">PRECISION PLASTER &amp; STONE</span>
-</div>
 </div>
 </div>
 </footer>
@@ -718,4 +763,6 @@ Material studies dedicated to heavy timber relief, monolithic subterranean volum
 
 
 <script src="../src/prototype-navigation.js" defer></script>
+<!-- Xadboom Motion loader -->
+<script src="../src/xadboom-motion.js" defer></script>
 </body></html>

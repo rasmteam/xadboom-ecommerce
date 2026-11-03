@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Xadboom Motion System
+   Central, opt-in micro-animation layer. Works with the vendored Motion build
+   (src/vendor/motion.js) and degrades gracefully without JavaScript.
+
+   Design intent: architectural, minimal, restrained. Transform/opacity only,
+   150-420ms, no layout shift. All motion is disabled under
+   prefers-reduced-motion: reduce.
+   ========================================================================== */
+
+:root {
+  --xdm-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --xdm-ease-ui: cubic-bezier(0.4, 0, 0.2, 1);
+  --xdm-dur-fast: 160ms;
+  --xdm-dur: 260ms;
+  --xdm-dur-slow: 420ms;
+  --xdm-dur-reveal: 560ms;
+  --xdm-reveal-y: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   1. Scroll reveal
+   Gated behind .motion-enabled (added synchronously in <head>) so content is
+   never hidden when JS is unavailable or when reduced motion is requested.
+   -------------------------------------------------------------------------- */
+.motion-enabled [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--xdm-reveal-y), 0);
+  transition: opacity var(--xdm-dur-reveal) var(--xdm-ease-out),
+    transform var(--xdm-dur-reveal) var(--xdm-ease-out);
+  will-change: opacity, transform;
+}
+
+.motion-enabled [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.motion-enabled [data-reveal-group] [data-reveal-item] {
+  opacity: 0;
+  transform: translate3d(0, var(--xdm-reveal-y), 0);
+  transition: opacity var(--xdm-dur-reveal) var(--xdm-ease-out),
+    transform var(--xdm-dur-reveal) var(--xdm-ease-out);
+  will-change: opacity, transform;
+}
+
+.motion-enabled [data-reveal-group] [data-reveal-item].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   2. Header scroll state
+   Only background/shadow/border change on scroll, so no layout shift occurs.
+   -------------------------------------------------------------------------- */
+[data-motion-header] {
+  transition: box-shadow var(--xdm-dur) var(--xdm-ease-ui),
+    background-color var(--xdm-dur) var(--xdm-ease-ui),
+    border-color var(--xdm-dur) var(--xdm-ease-ui);
+}
+
+[data-motion-header].is-scrolled {
+  box-shadow: 0 8px 28px -18px rgba(35, 26, 22, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   2b. Shared storefront header navigation
+   Identical header markup on every store page; this marks the current page.
+   -------------------------------------------------------------------------- */
+.xdm-nav-active,
+.xdm-nav-active:hover {
+  color: #0a0a0a !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+  text-decoration-color: #0a0a0a;
+}
+
+/* --------------------------------------------------------------------------
+   2c. Master footer navigation links
+   The clickable footer options render in DM Sans light, matching body copy,
+   while the mono column labels above them stay in Space Grotesk.
+   -------------------------------------------------------------------------- */
+.xdm-footer-nav a {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 300;
+}
+
+/* --------------------------------------------------------------------------
+   3. Buttons & links micro-interactions (opt-in classes)
+   -------------------------------------------------------------------------- */
+.xdm-press {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.xdm-press:active {
+  transform: scale(0.975);
+}
+
+/* Rolling button label: the original line slides up and a clone slides in. */
+.xdm-roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.xdm-roll__track {
+  display: inline-block;
+  transition: transform 340ms var(--xdm-ease-out);
+  will-change: transform;
+}
+
+.xdm-roll__label {
+  display: block;
+  white-space: nowrap;
+}
+
+.xdm-roll__label--clone {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.xdm-roll-control:hover .xdm-roll__track,
+.xdm-roll-control:focus-visible .xdm-roll__track {
+  transform: translateY(-100%);
+}
+
+.xdm-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.xdm-arrow .xdm-arrow-icon,
+.xdm-arrow > .material-symbols-outlined,
+.xdm-arrow > span:last-child {
+  transition: transform var(--xdm-dur) var(--xdm-ease-out);
+}
+
+/* A restrained horizontal nudge; arrows never travel diagonally. */
+.xdm-arrow:hover .xdm-arrow-icon,
+.xdm-arrow:hover > .material-symbols-outlined,
+.xdm-arrow:hover > span:last-child {
+  transform: translate3d(3px, 0, 0);
+}
+
+.xdm-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.xdm-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--xdm-dur) var(--xdm-ease-out);
+}
+
+.xdm-underline:hover::after,
+.xdm-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   4. Image & card hover polish
+   Slightly longer, softer easing than Tailwind's default for a calmer feel.
+   -------------------------------------------------------------------------- */
+[data-motion-hover] img {
+  transition: transform var(--xdm-dur-slow) var(--xdm-ease-out),
+    filter var(--xdm-dur-slow) var(--xdm-ease-out);
+}
+
+/* --------------------------------------------------------------------------
+   5. Modal & drawer helpers (Motion drives the JS timeline; these are the
+   baseline/fallback states).
+   -------------------------------------------------------------------------- */
+[data-modal] {
+  will-change: opacity;
+}
+
+[data-modal-card] {
+  will-change: opacity, transform;
+}
+
+/* --------------------------------------------------------------------------
+   6. Reduced motion: disable all motion, snap to final state.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .motion-enabled [data-reveal],
+  .motion-enabled [data-reveal-group] [data-reveal-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .xdm-press:active {
+    transform: none !important;
+  }
+
+  .xdm-roll-control:hover .xdm-roll__track,
+  .xdm-roll-control:focus-visible .xdm-roll__track {
+    transform: none !important;
+  }
+
+  .xdm-arrow:hover .xdm-arrow-icon,
+  .xdm-arrow:hover > .material-symbols-outlined,
+  .xdm-arrow:hover > span:last-child {
+    transform: none !important;
+  }
+
+  [data-motion-header],
+  .xdm-underline::after {
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
