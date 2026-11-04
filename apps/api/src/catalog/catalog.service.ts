@@ -115,7 +115,7 @@ export class CatalogService {
   async featured(take = 4) {
     const settings = await this.settings.getPriceSettings();
     const [rows, total] = await Promise.all([
-      this.loadPieces({}, { take }),
+      this.loadPieces({ featured: true }, { take }),
       this.prisma.db.piece.count({ where: publishedWhere }),
     ]);
     return { cards: rows.map((r) => this.toCard(r, settings)), total };
@@ -144,11 +144,15 @@ export class CatalogService {
     const rows = await this.prisma.db.designer.findMany({
       where: { published: true },
       orderBy: { sortOrder: "asc" },
-      include: { _count: { select: { pieces: { where: publishedWhere } } } },
+      include: {
+        _count: { select: { pieces: { where: publishedWhere } } },
+        pieces: { where: publishedWhere, orderBy: { createdAt: "asc" }, take: 1, select: { title: true, slug: true } },
+      },
     });
-    return rows.map(({ _count, ...d }) => ({
+    return rows.map(({ _count, pieces, ...d }) => ({
       ...d,
       pieceCount: _count.pieces,
+      featuredPiece: pieces[0] ?? null,
       // grouping used by the page's discipline filter pills
       filterKey: disciplineFilterKey(d.discipline),
     }));

@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated"
+  provider     = "prisma-client"
+  output       = "../src/generated"
   moduleFormat = "cjs"
 }
 
@@ -137,21 +137,22 @@ model User {
 // ───────────────────────── Catalog ─────────────────────────
 
 model Designer {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  name        String
-  studio      String?
-  city        String? // base, e.g. "Milan / Tehran"
-  title       String? // e.g. "Principal Architect"
-  discipline  String? // e.g. "Structural Tectonics"
-  materiality String? // e.g. "Cast Bronze & Volcanic Basalt"
-  sortName    String? // directory sort/label, e.g. "Taghaboni, Alireza"
-  bio         String?
-  portrait    String?
-  published   Boolean  @default(true)
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  studio       String?
+  city         String? // base, e.g. "Milan / Tehran"
+  title        String? // e.g. "Principal Architect"
+  discipline   String? // e.g. "Structural Tectonics"
+  materiality  String? // e.g. "Cast Bronze & Volcanic Basalt"
+  sortName     String? // directory sort/label, e.g. "Taghaboni, Alireza"
+  bio          String?
+  portrait     String?
+  profileImage String? // 3:4 portrait used on the home page profile cards
+  published    Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   pieces Piece[]
 }
@@ -184,6 +185,7 @@ model Piece {
   leadTime    String? // e.g. "6-8 Weeks"
   martindale  String? // textile / finish rating text
   status      PieceStatus @default(DRAFT)
+  featured    Boolean     @default(false) // shown on the storefront home page
 
   // pricing: USD cents is the source of truth
   priceUsdCents      Int

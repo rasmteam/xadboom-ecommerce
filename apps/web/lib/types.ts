@@ -62,7 +62,9 @@ export type DesignerRow = {
   materiality: string | null;
   bio: string | null;
   portrait: string | null;
+  profileImage: string | null;
   pieceCount: number;
+  featuredPiece: { title: string; slug: string } | null;
   filterKey: "tectonics" | "avantgarde" | "materials";
 };
 
