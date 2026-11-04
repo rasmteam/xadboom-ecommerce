@@ -1,15 +1,45 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@import "./fonts.css";
+@import "./theme.generated.css";
+@import "./motion.css";
 
-/* Design tokens from legacy/warm_architectural_minimalism/DESIGN.md are ported in Phase 3. */
-@theme {
-  --color-brand-canvas: #ecdad4;
-  --color-brand-surface: #fff8f6;
-  --color-brand-dark: #0a0a0a;
-  --color-brand-text: #1c1917;
-  --color-brand-muted: #7a6e69;
+/* ---- Tailwind v3 -> v4 compatibility: the legacy pages were authored against v3 ---- */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-gray-200, currentcolor); }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+  input::placeholder, textarea::placeholder { color: var(--color-gray-400); }
+
+  html, body { margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
 }
+::-webkit-scrollbar { display: none; }
 
-body {
-  background: var(--color-brand-surface);
-  color: var(--color-brand-text);
+/* Custom classes sit below Tailwind utilities, as they did when the CDN appended its <style> last. */
+@layer components {
+/* ---- shared page chrome ---- */
+.page-home, .page-product { background-color: #ecdad4; -webkit-font-smoothing: antialiased; }
+.page-home { color: #1a1817; font-family: "DM Sans", sans-serif; -moz-osx-font-smoothing: grayscale; }
+.page-product { color: #1c1917; font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.page-designers2 { background-color: #ecdad4; }
+.page-product ::selection { background: #0a0a0a; color: #faf3f0; }
+
+/* ---- page-specific legacy micro-styles ---- */
+.font-label { font-family: "Space Grotesk", monospace; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; }
+.font-headline { font-weight: 500; letter-spacing: -0.035em; line-height: 1.1; }
+.hairline-border { border-color: #d8c3bc; }
+.hairline-bottom { border-bottom: 1px solid #d8c3bc; }
+.hairline-top { border-top: 1px solid #d8c3bc; }
+.hairline-all { border: 1px solid #d8c3bc; }
+.spec-row:hover .spec-arrow { transform: translateX(3px); }
+.spec-arrow { transition: transform 0.2s ease-in-out; }
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+.font-label-caps { font-family: "Space Grotesk", sans-serif; letter-spacing: 0.12em; }
+.font-quote { font-family: "Newsreader", Georgia, serif; }
+.border-hairline { border-color: #d8c2ba; }
 }

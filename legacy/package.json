@@ -9,6 +9,6 @@
     "build": "node -e \"console.log('Build verified')\""
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.22.3"
   }
 }
