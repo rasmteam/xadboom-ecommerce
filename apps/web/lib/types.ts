@@ -70,3 +70,40 @@ export type DesignerRow = {
 };
 
 export type SessionUser = { id: string; email: string; name: string; role: "ADMIN" | "EDITOR" | "COLLECTOR" };
+
+export type PriceSettings = { currencyMode: "USD" | "TOMAN" | "BOTH"; usdToToman: number | null };
+
+export type AdminPieceRow = {
+  id: string;
+  slug: string;
+  sku: string;
+  title: string;
+  categoryName: string;
+  image: string;
+  designerName: string;
+  designerMeta: string;
+  edition: string;
+  availableCount: number;
+  price: string;
+  state: "available" | "low" | "soldout" | "draft" | "archived";
+  has3d: boolean;
+};
+
+export type AdminPieces = {
+  rows: AdminPieceRow[];
+  total: number;
+  page: number;
+  pages: number;
+  from: number;
+  to: number;
+  stats: {
+    totalPieces: number;
+    typologies: number;
+    availableUnits: number;
+    allocationPercent: number;
+    lowStock: number;
+    cadReadyPercent: number;
+  };
+  categories: { slug: string; name: string; count: number }[];
+  designers: { slug: string; name: string; studio: string | null }[];
+};
