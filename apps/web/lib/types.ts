@@ -41,6 +41,7 @@ export type FeaturedData = { cards: PieceCard[]; total: number };
 
 export type PieceDetail = {
   card: PieceCard;
+  designer: { slug: string; name: string; title: string | null; studio: string | null; portrait: string | null };
   description: string | null;
   leadTime: string | null;
   provenance: string | null;

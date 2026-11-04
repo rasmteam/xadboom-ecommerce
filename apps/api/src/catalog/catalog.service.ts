@@ -130,6 +130,13 @@ export class CatalogService {
     const settings = await this.settings.getPriceSettings();
     return {
       card: this.toCard(piece, settings),
+      designer: {
+        slug: piece.designer.slug,
+        name: piece.designer.name,
+        title: piece.designer.title,
+        studio: piece.designer.studio,
+        portrait: piece.designer.portrait,
+      },
       description: piece.description,
       leadTime: piece.leadTime,
       provenance: piece.provenance,

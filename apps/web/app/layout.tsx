@@ -3,6 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  // absolute URLs for canonical / Open Graph tags
+  metadataBase: new URL(process.env.APP_URL ?? "http://localhost:3000"),
   title: "Xadboom Design System & Atelier",
   description:
     "Curated interior architecture assets, collectible furniture catalog, and curatorial atelier administration portal.",
