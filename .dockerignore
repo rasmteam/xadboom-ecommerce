@@ -1,6 +1,7 @@
 **/node_modules
 **/.next
 **/.turbo
+**/dist
 .git
 legacy
 docs
@@ -8,4 +9,3 @@ uploads
 .env
 .env.*
 !.env.example
-*.md

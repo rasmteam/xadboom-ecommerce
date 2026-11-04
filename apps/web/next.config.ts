@@ -1,12 +1,14 @@
-import path from "node:path";
 import type { NextConfig } from "next";
+
+const API_URL = process.env.API_URL ?? "http://localhost:4000";
 
 const config: NextConfig = {
   output: "standalone",
-  // monorepo: trace files from the workspace root so standalone output includes workspace packages
-  outputFileTracingRoot: path.join(import.meta.dirname, "../../"),
-  transpilePackages: ["@xadboom/db"],
   poweredByHeader: false,
+  // The browser talks to one origin: /api/* is proxied to the Nest API, so session cookies need no CORS.
+  async rewrites() {
+    return [{ source: "/api/:path*", destination: `${API_URL}/api/:path*` }];
+  },
 };
 
 export default config;

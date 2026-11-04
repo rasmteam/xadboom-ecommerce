@@ -1,18 +1,41 @@
 "use client";
 
-import { useActionState } from "react";
-import { login, type LoginState } from "./actions";
+import { useState } from "react";
 
 const field =
   "w-full rounded-lg border border-[#d8c3bc] bg-white px-4 py-3 text-sm outline-none focus:border-[#0a0a0a]";
 
+// only same-site relative paths, never //host or absolute URLs
+const safeNext = (next: string) => (next.startsWith("/") && !next.startsWith("//") ? next : "/admin");
+
 export function LoginForm({ next, notice }: { next: string; notice?: string }) {
-  const [state, action, pending] = useActionState<LoginState, FormData>(login, {});
-  const error = state.error ?? notice;
+  const [error, setError] = useState<string | undefined>(notice);
+  const [pending, setPending] = useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPending(true);
+    setError(undefined);
+    const form = new FormData(e.currentTarget);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.get("email"), password: form.get("password") }),
+      });
+      if (res.status === 429) return setError("Too many attempts. Try again in 15 minutes.");
+      if (!res.ok) return setError("Incorrect email or password.");
+      const { user } = await res.json();
+      window.location.assign(user.role === "COLLECTOR" ? "/" : safeNext(next));
+    } catch {
+      setError("Could not reach the server. Try again.");
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
-    <form action={action} className="space-y-4">
-      <input type="hidden" name="next" value={next} />
+    <form onSubmit={onSubmit} className="space-y-4">
       <label className="block">
         <span className="mb-1 block font-mono text-[10px] uppercase tracking-widest text-[#7a6e69]">Email</span>
         <input name="email" type="email" autoComplete="username" required className={field} />

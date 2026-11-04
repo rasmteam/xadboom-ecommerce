@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client"
   output   = "../src/generated"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -136,17 +137,21 @@ model User {
 // ───────────────────────── Catalog ─────────────────────────
 
 model Designer {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  name      String
-  studio    String?
-  city      String?
-  bio       String?
-  portrait  String?
-  published Boolean  @default(true)
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  studio      String?
+  city        String? // base, e.g. "Milan / Tehran"
+  title       String? // e.g. "Principal Architect"
+  discipline  String? // e.g. "Structural Tectonics"
+  materiality String? // e.g. "Cast Bronze & Volcanic Basalt"
+  sortName    String? // directory sort/label, e.g. "Taghaboni, Alireza"
+  bio         String?
+  portrait    String?
+  published   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   pieces Piece[]
 }

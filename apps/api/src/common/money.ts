@@ -1,4 +1,4 @@
-import type { CurrencyMode } from "./generated/client";
+import type { CurrencyMode } from "@xadboom/db";
 
 export type PriceSettings = { currencyMode: CurrencyMode; usdToToman: number | null };
 export type PriceInput = { priceUsdCents: number; priceTomanOverride?: number | null };

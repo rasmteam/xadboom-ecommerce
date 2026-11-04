@@ -10,8 +10,9 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
+    "dev:api": "pnpm --filter @xadboom/api dev",
+    "dev:web": "pnpm --filter @xadboom/web dev",
     "db:generate": "pnpm --filter @xadboom/db generate",
     "db:migrate": "pnpm --filter @xadboom/db migrate:dev",
     "db:seed": "pnpm --filter @xadboom/db seed",
