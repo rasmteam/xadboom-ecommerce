@@ -7,19 +7,407 @@ datasource db {
   provider = "postgresql"
 }
 
-// How prices are shown on the storefront. Prices are stored in USD cents (source of truth);
-// Toman is derived with `usdToToman`. Admin switches this in Settings.
+// ───────────────────────── Enums ─────────────────────────
+
 enum CurrencyMode {
   USD
   TOMAN
   BOTH
 }
 
-// Singleton row (id = 1)
+enum Currency {
+  USD
+  TOMAN
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  COLLECTOR
+}
+
+enum KycStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
+}
+
+enum PieceStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EditionStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+enum ReservationStatus {
+  ACTIVE
+  EXPIRED
+  RELEASED
+  CONVERTED
+}
+
+enum AssetKind {
+  GLB
+  OBJ
+  FBX
+  RHINO_3DM
+  IFC
+  RVT
+  SPEC_XLSX
+  TEARSHEET_PDF
+  OTHER
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  IN_CRATING
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  INITIATED
+  SUCCEEDED
+  FAILED
+}
+
+enum InquiryStatus {
+  NEW
+  ACTIVE_REVIEW
+  TRIAGE_PASSED
+  CONFIRMED
+  CLOSED
+}
+
+enum ImportStatus {
+  PENDING
+  DRY_RUN_OK
+  APPLIED
+  FAILED
+}
+
+// ───────────────────────── Settings ─────────────────────────
+
+// Singleton row (id = 1). Prices are stored in USD cents (source of truth);
+// Toman is derived with `usdToToman`. The admin switches display mode here.
 model Settings {
   id           Int          @id @default(1)
   currencyMode CurrencyMode @default(USD)
-  // Toman per 1 USD, set by admin. Required when currencyMode is TOMAN or BOTH.
+  // Toman per 1 USD. Required when currencyMode is TOMAN or BOTH.
   usdToToman   Int?
+  // how long a reservation lock lasts
+  lockMinutes  Int          @default(15)
   updatedAt    DateTime     @updatedAt
+}
+
+// ───────────────────────── Users ─────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  studio       String? // "User & Studio Entity" column in admin
+  passwordHash String
+  role         Role      @default(COLLECTOR)
+  tier         String? // account tier label
+  kycStatus    KycStatus @default(UNVERIFIED)
+  regionHub    String?
+  phone        String?
+  lastActiveAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  reservations Reservation[]
+  orders       Order[]
+  inquiries    Inquiry[]     @relation("InquiryAuthor")
+  assigned     Inquiry[]     @relation("InquiryAssignee")
+  auditLogs    AuditLog[]
+  importJobs   ImportJob[]
+}
+
+// ───────────────────────── Catalog ─────────────────────────
+
+model Designer {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  studio    String?
+  city      String?
+  bio       String?
+  portrait  String?
+  published Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pieces Piece[]
+}
+
+model Category {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String // typology, e.g. "Seating & Lounges"
+  description      String?
+  schematicImage   String?
+  // column headers expected in the dimension Excel template for this typology
+  dimensionColumns Json?
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  pieces Piece[]
+}
+
+model Piece {
+  id          String      @id @default(cuid())
+  sku         String      @unique // e.g. LV-0312
+  slug        String      @unique
+  title       String
+  description String?
+  designerId  String
+  categoryId  String
+  materials   String?
+  provenance  String? // e.g. "Tehran Atelier / Zurich Vault"
+  leadTime    String? // e.g. "6-8 Weeks"
+  martindale  String? // textile / finish rating text
+  status      PieceStatus @default(DRAFT)
+
+  // pricing: USD cents is the source of truth
+  priceUsdCents      Int
+  // optional fixed Toman price overriding the rate-derived one
+  priceTomanOverride Int?
+
+  // dimensions in mm / kg (parsed from Excel or typed in)
+  lengthMm Int?
+  widthMm  Int?
+  heightMm Int?
+  weightKg Decimal? @db.Decimal(8, 2)
+  specs    Json? // any extra Excel-parsed fields
+
+  totalEditions Int
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  designer Designer @relation(fields: [designerId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  images    PieceImage[]
+  assets    PieceAsset[]
+  editions  Edition[]
+  inquiries Inquiry[]
+
+  @@index([status, deletedAt])
+  @@index([categoryId])
+  @@index([designerId])
+}
+
+model PieceImage {
+  id        String  @id @default(cuid())
+  pieceId   String
+  url       String
+  alt       String?
+  sortOrder Int     @default(0)
+
+  piece Piece @relation(fields: [pieceId], references: [id], onDelete: Cascade)
+
+  @@index([pieceId, sortOrder])
+}
+
+model PieceAsset {
+  id            String    @id @default(cuid())
+  pieceId       String
+  kind          AssetKind
+  filename      String
+  url           String
+  sizeBytes     Int
+  checksum      String?
+  // the GLB/GLTF shown in the web 3D viewer
+  isViewerModel Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+
+  piece Piece @relation(fields: [pieceId], references: [id], onDelete: Cascade)
+
+  @@index([pieceId, kind])
+}
+
+// One row per physical numbered unit ("edition 03 / 12").
+model Edition {
+  id            String        @id @default(cuid())
+  pieceId       String
+  number        Int
+  status        EditionStatus @default(AVAILABLE)
+  // denormalised from the active Reservation so availability checks are one query
+  reservedUntil DateTime?
+
+  piece        Piece         @relation(fields: [pieceId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+  orderItem    OrderItem?
+
+  @@unique([pieceId, number])
+  @@index([pieceId, status])
+  @@index([status, reservedUntil])
+}
+
+// ───────────────────────── Commerce ─────────────────────────
+
+model Reservation {
+  id        String            @id @default(cuid())
+  editionId String
+  userId    String?
+  // guests are identified by a cookie session until they sign in
+  sessionId String?
+  status    ReservationStatus @default(ACTIVE)
+  expiresAt DateTime
+  createdAt DateTime          @default(now())
+
+  edition Edition @relation(fields: [editionId], references: [id])
+  user    User?   @relation(fields: [userId], references: [id])
+
+  @@index([status, expiresAt])
+  @@index([sessionId])
+  @@index([userId])
+}
+
+model Order {
+  id     String      @id @default(cuid())
+  number String      @unique // XB-DISPATCH-000123
+  userId String?
+  status OrderStatus @default(PENDING_PAYMENT)
+
+  // snapshot of the currency and rate used at checkout
+  currency       Currency
+  usdToTomanRate Int?
+  // totals: USD cents if currency = USD, Toman if currency = TOMAN
+  totalAmount    Int
+
+  collectorName    String
+  collectorEmail   String
+  collectorPhone   String?
+  shipCountry      String
+  shipCity         String
+  shipAddress      String
+  provenanceCertId String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User?       @relation(fields: [userId], references: [id])
+  items     OrderItem[]
+  payments  Payment[]
+  shipments Shipment[]
+
+  @@index([status, createdAt])
+  @@index([userId])
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  editionId String @unique
+  titleSnap String
+  skuSnap   String
+  priceSnap Int // in the order's currency unit
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  edition Edition @relation(fields: [editionId], references: [id])
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  orderId    String
+  provider   String // "zarinpal" | "manual" | ...
+  authority  String? // gateway token created before redirect
+  refId      String? // gateway reference after verification
+  amount     Int
+  currency   Currency
+  status     PaymentStatus @default(INITIATED)
+  raw        Json?
+  createdAt  DateTime      @default(now())
+  verifiedAt DateTime?
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, authority])
+  @@index([orderId])
+}
+
+model Shipment {
+  id          String   @id @default(cuid())
+  orderId     String
+  carrier     String? // e.g. "Swiss Post Priority Fine Art Logistics"
+  crateStatus String? // crating / logistics status label
+  trackingRef String?
+  events      Json? // [{at, label}]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+// ───────────────────────── Inquiries ─────────────────────────
+
+model Inquiry {
+  id         String        @id @default(cuid())
+  number     String        @unique // INQ-2026-089
+  type       String // Curatorial Consultation | Bespoke Commission | Private Viewing ...
+  client     String
+  email      String
+  project    String?
+  message    String
+  pieceId    String?
+  userId     String?
+  assigneeId String?
+  status     InquiryStatus @default(NEW)
+  slaDueAt   DateTime?
+  notes      String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  piece    Piece? @relation(fields: [pieceId], references: [id])
+  user     User?  @relation("InquiryAuthor", fields: [userId], references: [id])
+  assignee User?  @relation("InquiryAssignee", fields: [assigneeId], references: [id])
+
+  @@index([status, createdAt])
+}
+
+// ───────────────────────── Ops ─────────────────────────
+
+model ImportJob {
+  id        String       @id @default(cuid())
+  kind      String // "pieces" | "dimensions"
+  filename  String
+  fileUrl   String
+  status    ImportStatus @default(PENDING)
+  report    Json? // per-row results
+  userId    String?
+  createdAt DateTime     @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String // "piece.create" ...
+  entity    String
+  entityId  String?
+  diff      Json?
+  createdAt DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@index([entity, entityId])
+  @@index([createdAt])
 }
