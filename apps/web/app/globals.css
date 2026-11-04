@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Design tokens from legacy/warm_architectural_minimalism/DESIGN.md are ported in Phase 3. */
+@theme {
+  --color-brand-canvas: #ecdad4;
+  --color-brand-surface: #fff8f6;
+  --color-brand-dark: #0a0a0a;
+  --color-brand-text: #1c1917;
+  --color-brand-muted: #7a6e69;
+}
+
+body {
+  background: var(--color-brand-surface);
+  color: var(--color-brand-text);
+}

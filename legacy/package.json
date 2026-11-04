@@ -1,0 +1,14 @@
+{
+  "name": "xadboom-design-system",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Curated interior architecture assets, collectible furniture catalog, and curatorial atelier administration portal.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build verified')\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

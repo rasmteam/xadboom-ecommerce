@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// How prices are shown on the storefront. Prices are stored in USD cents (source of truth);
+// Toman is derived with `usdToToman`. Admin switches this in Settings.
+enum CurrencyMode {
+  USD
+  TOMAN
+  BOTH
+}
+
+// Singleton row (id = 1)
+model Settings {
+  id           Int          @id @default(1)
+  currencyMode CurrencyMode @default(USD)
+  // Toman per 1 USD, set by admin. Required when currencyMode is TOMAN or BOTH.
+  usdToToman   Int?
+  updatedAt    DateTime     @updatedAt
+}
