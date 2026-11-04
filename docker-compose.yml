@@ -30,6 +30,21 @@ services:
         condition: service_healthy
     restart: "no"
 
+  # one-off: docker compose run --rm seed   (sample catalogue + admin user)
+  seed:
+    profiles: ["seed"]
+    build:
+      context: .
+      target: migrate
+    command: ["pnpm", "seed"]
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-xadboom}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-xadboom}?schema=public
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@xadboom.local}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-change-me-now}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
   api:
     build:
       context: .
@@ -57,6 +72,7 @@ services:
     restart: unless-stopped
     environment:
       API_URL: http://api:4000
+      APP_URL: ${APP_URL:-http://localhost:3000}
     ports:
       - "3000:3000"
     depends_on:
