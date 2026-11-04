@@ -16,6 +16,12 @@ const CATEGORY_TAG: Record<string, string> = {
   "spatial-accents-storage": "ACCENT",
 };
 
+function disciplineFilterKey(discipline: string | null) {
+  if (discipline === "Structural Tectonics") return "tectonics";
+  if (discipline === "Avant-Garde Spatial") return "avantgarde";
+  return "materials";
+}
+
 const publishedWhere = { status: "PUBLISHED" as const, deletedAt: null };
 
 const pieceInclude = {
@@ -140,6 +146,11 @@ export class CatalogService {
       orderBy: { sortOrder: "asc" },
       include: { _count: { select: { pieces: { where: publishedWhere } } } },
     });
-    return rows.map(({ _count, ...d }) => ({ ...d, pieceCount: _count.pieces }));
+    return rows.map(({ _count, ...d }) => ({
+      ...d,
+      pieceCount: _count.pieces,
+      // grouping used by the page's discipline filter pills
+      filterKey: disciplineFilterKey(d.discipline),
+    }));
   }
 }

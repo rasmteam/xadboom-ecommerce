@@ -63,6 +63,7 @@ export type DesignerRow = {
   bio: string | null;
   portrait: string | null;
   pieceCount: number;
+  filterKey: "tectonics" | "avantgarde" | "materials";
 };
 
 export type SessionUser = { id: string; email: string; name: string; role: "ADMIN" | "EDITOR" | "COLLECTOR" };
