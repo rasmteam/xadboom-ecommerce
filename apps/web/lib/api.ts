@@ -63,5 +63,11 @@ export const api = {
     if (!data) notFound();
     return data;
   },
+  /** Authenticated admin GET; sends the visitor to the login page when the session is missing. */
+  adminGet: async <T,>(path: string) => {
+    const data = await get<T>(path, { auth: true });
+    if (!data) redirect("/login");
+    return data;
+  },
   me: async () => (await get<{ user: SessionUser }>("/auth/me", { auth: true }))?.user ?? null,
 };

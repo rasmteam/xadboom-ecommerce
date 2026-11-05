@@ -518,9 +518,50 @@ export class OverviewController {
   }
 }
 
+@Controller("admin/holds")
+@ApiTags("admin")
+export class HoldsAdminController {
+  constructor(private readonly prisma: PrismaService) {}
+
+  /** Live cart reservations (15-minute locks) with the time left. */
+  @Get()
+  @Auth("ADMIN", "EDITOR")
+  async list() {
+    const rows = await this.prisma.db.reservation.findMany({
+      where: { status: "ACTIVE", expiresAt: { gt: new Date() } },
+      orderBy: { expiresAt: "asc" },
+      include: { edition: { select: { number: true, piece: { select: { title: true, sku: true, totalEditions: true } } } } },
+    });
+    const now = Date.now();
+    return rows.map((r) => ({
+      id: r.id,
+      title: r.edition.piece.title,
+      sku: r.edition.piece.sku,
+      edition: `${String(r.edition.number).padStart(2, "0")}/${String(r.edition.piece.totalEditions).padStart(2, "0")}`,
+      remainingSeconds: Math.max(0, Math.floor((r.expiresAt.getTime() - now) / 1000)),
+      session: (r.sessionId ?? "").slice(0, 6),
+    }));
+  }
+
+  @Post(":id/release")
+  @HttpCode(200)
+  @Auth("ADMIN", "EDITOR")
+  async release(@Param("id") id: string, @CurrentUser() u: AuthUser) {
+    const db = this.prisma.db;
+    const r = await db.reservation.findFirst({ where: { id, status: "ACTIVE" } });
+    if (!r) throw new NotFoundException("Hold not found");
+    await db.$transaction([
+      db.reservation.update({ where: { id }, data: { status: "RELEASED" } }),
+      db.edition.updateMany({ where: { id: r.editionId, status: "RESERVED" }, data: { status: "AVAILABLE", reservedUntil: null } }),
+      db.auditLog.create({ data: { actorId: u.id, action: "hold.release", entity: "Reservation", entityId: id } }),
+    ]);
+    return { released: true };
+  }
+}
+
 @Module({
   imports: [AuthModule, CommerceModule],
-  controllers: [OrdersAdminController, InquiriesAdminController, CatalogAdminController, UsersAdminController, OverviewController],
+  controllers: [OrdersAdminController, InquiriesAdminController, CatalogAdminController, UsersAdminController, OverviewController, HoldsAdminController],
   providers: [OrdersAdminService],
 })
 export class AdminOpsModule {}

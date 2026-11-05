@@ -7,9 +7,11 @@ import { SignOutButton } from "./sign-out-button";
 const NAV = [
   { href: "/admin", icon: "space_dashboard", title: "Atelier Overview" },
   { href: "/admin/pieces", icon: "category", title: "Pieces Catalog" },
-  { href: "/admin/categories", icon: "auto_stories", title: "Curatorial Archives" },
+  { href: "/admin/categories", icon: "auto_stories", title: "Categories & Typologies" },
+  { href: "/admin/designers", icon: "architecture", title: "Designers & Collaborators" },
   { href: "/admin/orders", icon: "receipt_long", title: "Acquisitions & Orders" },
-  { href: "/admin/inquiries", icon: "history_edu", title: "Inquiries & Provenance" },
+  { href: "/admin/inquiries", icon: "history_edu", title: "Inquiries & Forms" },
+  { href: "/admin/users", icon: "manage_accounts", title: "Users & Accounts" },
 ];
 
 export function AdminShell({ user, children }: { user: SessionUser; children: React.ReactNode }) {
