@@ -306,6 +306,12 @@ model Order {
   shipAddress      String
   provenanceCertId String? @unique
 
+  // unguessable token that lets a guest open their own confirmation page
+  publicToken  String    @unique @default(cuid())
+  paymentDueAt DateTime? // unpaid orders release their units after this moment
+  paidAt       DateTime?
+  notes        String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
