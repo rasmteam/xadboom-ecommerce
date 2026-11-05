@@ -17,7 +17,10 @@
     "db:migrate": "pnpm --filter @xadboom/db migrate:dev",
     "db:seed": "pnpm --filter @xadboom/db seed",
     "legacy": "node legacy/server.js",
-    "dev:db": "node scripts/dev-db.mjs"
+    "dev:db": "node scripts/dev-db.mjs",
+    "start:api": "node scripts/with-env.mjs node apps/api/dist/main.js",
+    "start:web": "node scripts/with-env.mjs pnpm --filter @xadboom/web start",
+    "setup:local": "pnpm --filter @xadboom/db build && node scripts/with-env.mjs pnpm --filter @xadboom/db migrate:deploy && node scripts/with-env.mjs pnpm --filter @xadboom/db seed && pnpm --filter @xadboom/api build && pnpm --filter @xadboom/web build"
   },
   "devDependencies": {
     "embedded-postgres": "16.15.0-beta.19",

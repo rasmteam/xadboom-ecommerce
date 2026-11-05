@@ -5,6 +5,7 @@ import type { NestExpressApplication } from "@nestjs/platform-express";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import { AppModule } from "./app.module";
+import { uploadRoot } from "./admin/pieces.module";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -14,6 +15,13 @@ async function bootstrap() {
   app.use(helmet());
   app.use(cookieParser());
   app.setGlobalPrefix("api");
+  // uploaded photographs (public, immutable names)
+  app.useStaticAssets(uploadRoot(), {
+    prefix: "/api/uploads/",
+    index: false,
+    maxAge: "30d",
+    setHeaders: (res) => res.setHeader("X-Content-Type-Options", "nosniff"),
+  });
   app.enableShutdownHooks();
 
   const docs = SwaggerModule.createDocument(

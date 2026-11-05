@@ -41,6 +41,7 @@ enum PieceStatus {
 
 enum EditionStatus {
   AVAILABLE
+  WITHHELD // part of the run but not released to collectors yet
   RESERVED
   SOLD
 }

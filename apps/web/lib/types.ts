@@ -107,3 +107,32 @@ export type AdminPieces = {
   categories: { slug: string; name: string; count: number }[];
   designers: { slug: string; name: string; studio: string | null }[];
 };
+
+export type PieceFormOptions = {
+  designers: { id: string; name: string; studio: string | null }[];
+  categories: { id: string; name: string }[];
+};
+
+export type PieceFormData = {
+  id: string;
+  slug: string;
+  sku: string;
+  title: string;
+  designerId: string;
+  categoryId: string;
+  provenance: string | null;
+  description: string | null;
+  leadTime: string | null;
+  materials: string[];
+  images: { url: string; alt: string | null }[];
+  totalEditions: number;
+  releasedEditions: number;
+  placedEditions: number;
+  priceUsd: number;
+  lengthMm: number | null;
+  widthMm: number | null;
+  heightMm: number | null;
+  weightKg: number | null;
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
+  featured: boolean;
+};

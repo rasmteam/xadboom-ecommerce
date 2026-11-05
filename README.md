@@ -12,14 +12,18 @@ Monorepo with a separate backend and frontend:
 The browser talks to one origin (`web`); Next proxies `/api/*` to the API, so session cookies need no CORS.
 API docs (Swagger): `/api/docs`.
 
-## Develop
+## Develop (no Docker needed)
+Requires Node 22+ and pnpm. A real PostgreSQL 16 runs as a normal process via `pnpm dev:db`.
 ```
-cp .env.example .env
 pnpm install
-pnpm db:generate && pnpm db:migrate && pnpm db:seed     # needs a local Postgres (see DATABASE_URL)
-pnpm dev:api     # http://localhost:4000/api
-pnpm dev:web     # http://localhost:3000
+cp .env.example .env            # defaults work for local development
+pnpm dev:db                     # terminal 1: database (data in .local/pgdata)
+pnpm setup:local                # terminal 2, once: migrate + seed + build everything
+pnpm start:api                  # terminal 2: http://localhost:4000/api  (docs: /api/docs)
+pnpm start:web                  # terminal 3: http://localhost:3000
 ```
+Admin: http://localhost:3000/login with `admin@xadboom.local` / `change-me-now` (from `.env`).
+For hot reload use `pnpm dev:api` and `pnpm dev:web` instead of the `start:*` commands.
 
 ## Docker
 ```

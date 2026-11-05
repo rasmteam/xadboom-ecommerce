@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { AdminModule } from "./admin/admin.module";
+import { AdminPiecesModule } from "./admin/pieces.module";
 import { AuthModule } from "./auth/auth.module";
 import { CatalogModule } from "./catalog/catalog.module";
 import { HealthController } from "./health/health.controller";
@@ -19,6 +20,7 @@ import { SettingsModule } from "./settings/settings.module";
     CatalogModule,
     InquiriesModule,
     AdminModule,
+    AdminPiecesModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

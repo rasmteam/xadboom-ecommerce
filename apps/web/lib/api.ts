@@ -1,12 +1,12 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import type { AdminPieces, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
+import type { AdminPieces, PieceFormData, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
 
 // Server-side (SSR) calls go straight to the API service; the browser uses the same-origin /api rewrite.
 const API_URL = process.env.API_URL ?? "http://localhost:4000";
 
-async function get<T>(path: string, opts: { auth?: boolean; revalidate?: number } = {}): Promise<T | null> {
+async function get<T>(path: string, opts: { auth?: boolean } = {}): Promise<T | null> {
   const headers: Record<string, string> = {};
   if (opts.auth) {
     const jar = await cookies();
@@ -14,8 +14,8 @@ async function get<T>(path: string, opts: { auth?: boolean; revalidate?: number 
   }
   const res = await fetch(`${API_URL}/api${path}`, {
     headers,
-    // storefront data is cheap and changes from the admin: short cache, never cache authenticated calls
-    ...(opts.auth ? { cache: "no-store" as const } : { next: { revalidate: opts.revalidate ?? 30 } }),
+    // always fresh: pages render per request and the admin's changes must show immediately
+    cache: "no-store",
   });
   if (res.status === 404) return null;
   if (res.status === 401) return null;
@@ -46,6 +46,16 @@ export const api = {
   adminSettings: async () => {
     const data = await get<PriceSettings>("/admin/settings", { auth: true });
     if (!data) redirect("/login");
+    return data;
+  },
+  adminOptions: async () => {
+    const data = await get<PieceFormOptions>("/admin/options", { auth: true });
+    if (!data) redirect("/login");
+    return data;
+  },
+  adminPiece: async (id: string) => {
+    const data = await get<PieceFormData>(`/admin/pieces/${encodeURIComponent(id)}`, { auth: true });
+    if (!data) notFound();
     return data;
   },
   me: async () => (await get<{ user: SessionUser }>("/auth/me", { auth: true }))?.user ?? null,
