@@ -16,9 +16,11 @@
     "db:generate": "pnpm --filter @xadboom/db generate",
     "db:migrate": "pnpm --filter @xadboom/db migrate:dev",
     "db:seed": "pnpm --filter @xadboom/db seed",
-    "legacy": "node legacy/server.js"
+    "legacy": "node legacy/server.js",
+    "dev:db": "node scripts/dev-db.mjs"
   },
   "devDependencies": {
+    "embedded-postgres": "16.15.0-beta.19",
     "turbo": "^2.11.10"
   }
 }

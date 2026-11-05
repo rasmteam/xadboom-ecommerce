@@ -13,3 +13,6 @@ coverage/
 # local-only planning notes, never committed
 docs/PLAN.md
 /uploads/
+
+# local dev database files
+/.local/
