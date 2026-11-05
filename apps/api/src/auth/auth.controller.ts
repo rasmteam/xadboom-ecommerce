@@ -12,6 +12,13 @@ const loginSchema = z.object({
 });
 type LoginBody = z.infer<typeof loginSchema>;
 
+const registerSchema = z.object({
+  name: z.string().trim().min(1).max(160),
+  email: z.string().trim().toLowerCase().pipe(z.email()),
+  password: z.string().min(8, "Use at least 8 characters").max(200),
+});
+type RegisterBody = z.infer<typeof registerSchema>;
+
 const cookieOptions = () => ({
   httpOnly: true,
   sameSite: "lax" as const,
@@ -29,6 +36,16 @@ export class AuthController {
   @Throttle({ default: { limit: 5, ttl: 15 * 60 * 1000 } })
   async login(@Body(new ZodPipe(loginSchema)) body: LoginBody, @Res({ passthrough: true }) res: Response) {
     const { token, user } = await this.auth.login(body.email, body.password);
+    res.cookie(SESSION_COOKIE, token, { ...cookieOptions(), maxAge: SESSION_MAX_AGE_MS });
+    return { user };
+  }
+
+  // 5 sign-ups / hour per client IP
+  @Post("register")
+  @HttpCode(201)
+  @Throttle({ default: { limit: 5, ttl: 60 * 60 * 1000 } })
+  async register(@Body(new ZodPipe(registerSchema)) body: RegisterBody, @Res({ passthrough: true }) res: Response) {
+    const { token, user } = await this.auth.register(body.name, body.email, body.password);
     res.cookie(SESSION_COOKIE, token, { ...cookieOptions(), maxAge: SESSION_MAX_AGE_MS });
     return { user };
   }

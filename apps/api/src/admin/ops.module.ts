@@ -35,7 +35,9 @@ const fmtMoney = (currency: "USD" | "TOMAN", n: number) => (currency === "USD" ?
 // ───────────────────────── orders ─────────────────────────
 
 const ordersQuery = z.object({
-  status: z.enum(["PENDING_PAYMENT", "PAID", "IN_CRATING", "DISPATCHED", "DELIVERED", "CANCELLED", "REFUNDED"]).optional(),
+  // CRATING is a tab alias for "paid, waiting for or in crating"
+  status: z.enum(["PENDING_PAYMENT", "PAID", "IN_CRATING", "CRATING", "DISPATCHED", "DELIVERED", "CANCELLED", "REFUNDED"]).optional(),
+  carrier: z.string().trim().max(160).optional(),
   search: z.string().trim().max(120).optional(),
   page,
 });
@@ -57,7 +59,9 @@ export class OrdersAdminService {
   async list(q: z.infer<typeof ordersQuery>) {
     const db = this.prisma.db;
     const where: Record<string, unknown> = {};
-    if (q.status) where.status = q.status;
+    if (q.status === "CRATING") where.status = { in: ["PAID", "IN_CRATING"] };
+    else if (q.status) where.status = q.status;
+    if (q.carrier) where.shipments = { some: { carrier: q.carrier } };
     if (q.search) {
       where.OR = [
         { number: { contains: q.search, mode: "insensitive" } },
@@ -66,30 +70,41 @@ export class OrdersAdminService {
         { shipCity: { contains: q.search, mode: "insensitive" } },
       ];
     }
-    const [rows, total, grouped, paidUsd, paidToman] = await Promise.all([
+    const [rows, total, grouped, paidUsd, paidToman, carriers] = await Promise.all([
       db.order.findMany({
         where,
         orderBy: { createdAt: "desc" },
         skip: (q.page - 1) * PAGE,
         take: PAGE,
-        include: { items: { select: { titleSnap: true, skuSnap: true, edition: { select: { number: true, piece: { select: { totalEditions: true } } } } } }, shipments: { take: 1, orderBy: { createdAt: "desc" } }, payments: { take: 1, orderBy: { createdAt: "desc" }, select: { provider: true, status: true } } },
+        include: { items: { select: { titleSnap: true, skuSnap: true, edition: { select: { number: true, piece: { select: { totalEditions: true, materials: true, designer: { select: { name: true } }, images: { orderBy: { sortOrder: "asc" }, take: 1, select: { url: true } } } } } } } }, shipments: { take: 1, orderBy: { createdAt: "desc" } }, payments: { take: 1, orderBy: { createdAt: "desc" }, select: { provider: true, status: true } } },
       }),
       db.order.count({ where }),
       db.order.groupBy({ by: ["status"], _count: true }),
       db.order.aggregate({ where: { status: { in: ["PAID", "IN_CRATING", "DISPATCHED", "DELIVERED"] }, currency: "USD" }, _sum: { totalAmount: true } }),
       db.order.aggregate({ where: { status: { in: ["PAID", "IN_CRATING", "DISPATCHED", "DELIVERED"] }, currency: "TOMAN" }, _sum: { totalAmount: true } }),
+      db.shipment.findMany({ where: { carrier: { not: null } }, distinct: ["carrier"], select: { carrier: true } }),
     ]);
     const n = (s: string) => grouped.find((g) => g.status === s)?._count ?? 0;
     return {
       rows: rows.map((o) => ({
         id: o.id,
         number: o.number,
+        token: o.publicToken,
         createdAt: o.createdAt.toISOString(),
         status: o.status,
         collectorName: o.collectorName,
         collectorEmail: o.collectorEmail,
         destination: `${o.shipCity}, ${o.shipCountry}`,
-        items: o.items.map((i) => ({ title: i.titleSnap, sku: i.skuSnap, edition: `${String(i.edition.number).padStart(2, "0")}/${String(i.edition.piece.totalEditions).padStart(2, "0")}` })),
+        guest: !o.userId,
+        events: ((o.shipments[0]?.events as { at: string; label: string }[] | null) ?? []),
+        items: o.items.map((i) => ({
+          title: i.titleSnap,
+          sku: i.skuSnap,
+          edition: `${String(i.edition.number).padStart(2, "0")}/${String(i.edition.piece.totalEditions).padStart(2, "0")}`,
+          image: i.edition.piece.images[0]?.url ?? "/images/placeholder.svg",
+          designer: i.edition.piece.designer.name,
+          materials: i.edition.piece.materials,
+        })),
         total: fmtMoney(o.currency, o.totalAmount),
         carrier: o.shipments[0]?.carrier ?? null,
         crateStatus: o.shipments[0]?.crateStatus ?? null,
@@ -108,6 +123,7 @@ export class OrdersAdminService {
         delivered: n("DELIVERED"),
         cancelled: n("CANCELLED"),
       },
+      carriers: carriers.map((c) => c.carrier as string),
       volume: { usd: fmtMoney("USD", paidUsd._sum.totalAmount ?? 0), toman: fmtMoney("TOMAN", paidToman._sum.totalAmount ?? 0) },
     };
   }
@@ -518,6 +534,27 @@ export class OverviewController {
   }
 }
 
+@Controller("admin/shell")
+@ApiTags("admin")
+export class ShellController {
+  constructor(private readonly prisma: PrismaService) {}
+
+  /** Numbers shown on sidebar badges. */
+  @Get("counts")
+  @Auth("ADMIN", "EDITOR")
+  async counts() {
+    const db = this.prisma.db;
+    const [pieces, designers, ordersOpen, users, inquiriesOpen] = await Promise.all([
+      db.piece.count({ where: { deletedAt: null } }),
+      db.designer.count(),
+      db.order.count({ where: { status: { in: ["PENDING_PAYMENT", "PAID", "IN_CRATING"] } } }),
+      db.user.count(),
+      db.inquiry.count({ where: { status: { notIn: ["CONFIRMED", "CLOSED"] } } }),
+    ]);
+    return { pieces, designers, ordersOpen, users, inquiriesOpen };
+  }
+}
+
 @Controller("admin/holds")
 @ApiTags("admin")
 export class HoldsAdminController {
@@ -561,7 +598,7 @@ export class HoldsAdminController {
 
 @Module({
   imports: [AuthModule, CommerceModule],
-  controllers: [OrdersAdminController, InquiriesAdminController, CatalogAdminController, UsersAdminController, OverviewController, HoldsAdminController],
+  controllers: [OrdersAdminController, InquiriesAdminController, CatalogAdminController, UsersAdminController, OverviewController, HoldsAdminController, ShellController],
   providers: [OrdersAdminService],
 })
 export class AdminOpsModule {}

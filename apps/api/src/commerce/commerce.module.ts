@@ -24,6 +24,9 @@ import type { Request, Response } from "express";
 import { z } from "zod";
 import { displayPrice, tomanFor } from "../common/money";
 import { ZodPipe } from "../common/zod.pipe";
+import { Auth, CurrentUser } from "../auth/auth.guard";
+import { AuthModule } from "../auth/auth.module";
+import { AuthService, SESSION_COOKIE, type AuthUser } from "../auth/auth.service";
 import { PrismaService } from "../prisma/prisma.module";
 import { SettingsModule, SettingsService } from "../settings/settings.module";
 import { getPaymentProvider, type PayableOrder } from "./payment";
@@ -193,7 +196,7 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  async checkout(sessionId: string, body: CheckoutBody) {
+  async checkout(sessionId: string, body: CheckoutBody, userId?: string) {
     const db = this.prisma.db;
     await this.sweep();
     const reservations = await db.reservation.findMany({
@@ -224,6 +227,7 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
         data: {
           number,
           status: "PENDING_PAYMENT",
+          userId: userId ?? null,
           currency,
           usdToTomanRate: settings.usdToToman,
           totalAmount: total,
@@ -298,6 +302,24 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
     return this.markPaid(order.id, providerName, result.refId, result.raw);
   }
 
+  /** Orders of a signed-in collector, newest first. */
+  async ordersOf(userId: string) {
+    const rows = await this.prisma.db.order.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      include: { items: { select: { titleSnap: true, skuSnap: true, edition: { select: { number: true, piece: { select: { slug: true, totalEditions: true, images: { orderBy: { sortOrder: "asc" }, take: 1, select: { url: true } } } } } } } } },
+    });
+    const fmt = (c: "USD" | "TOMAN", n: number) => (c === "USD" ? `$${(n / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}` : `${n.toLocaleString("en-US")} Toman`);
+    return rows.map((o) => ({
+      number: o.number,
+      token: o.publicToken,
+      status: o.status,
+      total: fmt(o.currency, o.totalAmount),
+      createdAt: o.createdAt.toISOString(),
+      items: o.items.map((i) => ({ title: i.titleSnap, sku: i.skuSnap, slug: i.edition.piece.slug, image: i.edition.piece.images[0]?.url ?? "/images/placeholder.svg", edition: `${String(i.edition.number).padStart(2, "0")} of ${String(i.edition.piece.totalEditions).padStart(2, "0")}` })),
+    }));
+  }
+
   async publicOrder(number: string, token: string) {
     const o = await this.prisma.db.order.findFirst({
       where: { number, publicToken: token },
@@ -331,7 +353,10 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
 
 @Controller()
 export class CommerceController {
-  constructor(private readonly commerce: CommerceService) {}
+  constructor(
+    private readonly commerce: CommerceService,
+    private readonly auth: AuthService,
+  ) {}
 
   private session(req: Request) {
     return req.cookies?.[CART_COOKIE] as string | undefined;
@@ -367,10 +392,19 @@ export class CommerceController {
   @Post("checkout")
   @HttpCode(201)
   @Throttle({ default: { limit: 10, ttl: 10 * 60_000 } })
-  checkout(@Body(new ZodPipe(checkoutSchema)) body: CheckoutBody, @Req() req: Request) {
+  async checkout(@Body(new ZodPipe(checkoutSchema)) body: CheckoutBody, @Req() req: Request) {
     const sid = this.session(req);
     if (!sid) throw new BadRequestException("Your bag is empty");
-    return this.commerce.checkout(sid, body);
+    // guests can check out; a signed-in collector gets the order attached to their account
+    const user = await this.auth.userFromToken(req.cookies?.[SESSION_COOKIE]);
+    return this.commerce.checkout(sid, body, user?.id);
+  }
+
+  // declared before orders/:number so "mine" is not read as an order number
+  @Get("orders/mine")
+  @Auth()
+  mine(@CurrentUser() user: AuthUser) {
+    return this.commerce.ordersOf(user.id);
   }
 
   @Get("orders/:number")
@@ -393,5 +427,5 @@ export class CommerceController {
   }
 }
 
-@Module({ imports: [SettingsModule], controllers: [CommerceController], providers: [CommerceService], exports: [CommerceService] })
+@Module({ imports: [SettingsModule, AuthModule], controllers: [CommerceController], providers: [CommerceService], exports: [CommerceService] })
 export class CommerceModule {}

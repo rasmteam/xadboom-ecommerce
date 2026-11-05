@@ -26,7 +26,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string }) {
       if (res.status === 429) return setError("Too many attempts. Try again in 15 minutes.");
       if (!res.ok) return setError("Incorrect email or password.");
       const { user } = await res.json();
-      window.location.assign(user.role === "COLLECTOR" ? "/" : safeNext(next));
+      window.location.assign(user.role === "COLLECTOR" && next === "/admin" ? "/account" : safeNext(next));
     } catch {
       setError("Could not reach the server. Try again.");
     } finally {
@@ -56,6 +56,12 @@ export function LoginForm({ next, notice }: { next: string; notice?: string }) {
       >
         {pending ? "Signing in…" : "Sign in"}
       </button>
+      <p className="text-center text-sm text-[#7a6e69]">
+        New collector?{" "}
+        <a href="/register" className="underline">
+          Create an account
+        </a>
+      </p>
     </form>
   );
 }

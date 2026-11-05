@@ -10,7 +10,10 @@ export type AdminOrders = {
     collectorName: string;
     collectorEmail: string;
     destination: string;
-    items: { title: string; sku: string; edition: string }[];
+    token: string;
+    guest: boolean;
+    events: { at: string; label: string }[];
+    items: { title: string; sku: string; edition: string; image: string; designer: string; materials: string | null }[];
     total: string;
     carrier: string | null;
     crateStatus: string | null;
@@ -22,6 +25,7 @@ export type AdminOrders = {
   pages: number;
   counts: { all: number; pending: number; paid: number; crating: number; dispatched: number; delivered: number; cancelled: number };
   volume: { usd: string; toman: string };
+  carriers: string[];
 };
 
 export type InquiryStatus = "NEW" | "ACTIVE_REVIEW" | "TRIAGE_PASSED" | "CONFIRMED" | "CLOSED";
@@ -100,3 +104,5 @@ export type AdminOverview = {
   recentOrders: { id: string; number: string; status: OrderStatus; collectorName: string; total: string; createdAt: string }[];
   recentInquiries: { id: string; number: string; client: string; type: string; status: InquiryStatus; createdAt: string }[];
 };
+
+export type ShellCounts = { pieces: number; designers: number; ordersOpen: number; users: number; inquiriesOpen: number };

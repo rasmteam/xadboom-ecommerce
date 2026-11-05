@@ -1,6 +1,8 @@
 import "server-only";
+import { cache } from "react";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
+import type { ShellCounts } from "./admin-types";
 import type { AdminPieces, PieceFormData, PublicOrder, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
 
 // Server-side (SSR) calls go straight to the API service; the browser uses the same-origin /api rewrite.
@@ -22,6 +24,15 @@ async function get<T>(path: string, opts: { auth?: boolean } = {}): Promise<T | 
   if (!res.ok) throw new Error(`API ${path} failed with ${res.status}`);
   return (await res.json()) as T;
 }
+
+/** Signed-in staff user plus the sidebar badge numbers, fetched once per request. */
+export const adminShell = cache(async () => {
+  const user = (await get<{ user: SessionUser }>("/auth/me", { auth: true }))?.user ?? null;
+  if (!user || (user.role !== "ADMIN" && user.role !== "EDITOR")) redirect("/login");
+  const counts = await get<ShellCounts>("/admin/shell/counts", { auth: true });
+  if (!counts) redirect("/login");
+  return { user, counts };
+});
 
 export const api = {
   catalog: async (category?: string, page = 1) => {

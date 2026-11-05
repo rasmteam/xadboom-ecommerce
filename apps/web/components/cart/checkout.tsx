@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { fmtClock, useCart } from "./cart-provider";
@@ -14,6 +14,14 @@ export function CheckoutPage() {
   const [currency, setCurrency] = useState<"USD" | "TOMAN">("USD");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [me, setMe] = useState<{ name: string; email: string } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => j?.user && setMe({ name: j.user.name, email: j.user.email }))
+      .catch(() => {});
+  }, []);
 
   const chooseCurrency = cart.currencyMode === "BOTH" && cart.provider !== "zarinpal";
 
@@ -72,11 +80,11 @@ export function CheckoutPage() {
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
                   <label className={label} htmlFor="name">Full name / practice *</label>
-                  <input id="name" name="name" required autoComplete="name" className={field} />
+                  <input id="name" name="name" key={`n-${me?.name ?? ""}`} defaultValue={me?.name ?? ""} required autoComplete="name" className={field} />
                 </div>
                 <div>
                   <label className={label} htmlFor="email">Email *</label>
-                  <input id="email" name="email" type="email" required autoComplete="email" className={field} />
+                  <input id="email" name="email" key={`e-${me?.email ?? ""}`} defaultValue={me?.email ?? ""} type="email" required autoComplete="email" className={field} />
                 </div>
                 <div>
                   <label className={label} htmlFor="phone">Telephone</label>

@@ -1,6 +1,6 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { verifyPassword, type Role } from "@xadboom/db";
+import { hashPassword, verifyPassword, type Role } from "@xadboom/db";
 import { PrismaService } from "../prisma/prisma.module";
 
 export const SESSION_COOKIE = "xb_session";
@@ -22,6 +22,18 @@ export class AuthService {
     await this.prisma.db.user.update({ where: { id: user.id }, data: { lastActiveAt: new Date() } });
     const token = await this.jwt.signAsync({ sub: user.id });
     return { token, user: { id: user.id, email: user.email, name: user.name, role: user.role } };
+  }
+
+  /** Self-service collector sign-up. Staff accounts are only created by an administrator. */
+  async register(name: string, email: string, password: string) {
+    if (await this.prisma.db.user.findUnique({ where: { email }, select: { id: true } })) {
+      throw new ConflictException("An account with this email already exists. Please sign in.");
+    }
+    const user = await this.prisma.db.user.create({
+      data: { name, email, passwordHash: await hashPassword(password), role: "COLLECTOR", lastActiveAt: new Date() },
+      select: { id: true, email: true, name: true, role: true },
+    });
+    return { token: await this.jwt.signAsync({ sub: user.id }), user };
   }
 
   /**
