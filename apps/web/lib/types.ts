@@ -136,3 +136,41 @@ export type PieceFormData = {
   status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
   featured: boolean;
 };
+
+export type CartItem = {
+  reservationId: string;
+  slug: string;
+  title: string;
+  sku: string;
+  designerLine: string;
+  image: string;
+  edition: string;
+  price: DisplayPrice;
+  priceUsdCents: number;
+  expiresAt: string;
+  remainingSeconds: number;
+};
+
+export type CartData = {
+  items: CartItem[];
+  count: number;
+  lockMinutes: number;
+  currencyMode?: "USD" | "TOMAN" | "BOTH";
+  provider?: string;
+  totals: DisplayPrice | null;
+};
+
+export type PublicOrder = {
+  number: string;
+  status: "PENDING_PAYMENT" | "PAID" | "IN_CRATING" | "DISPATCHED" | "DELIVERED" | "CANCELLED" | "REFUNDED";
+  provider: string;
+  currency: "USD" | "TOMAN";
+  total: string;
+  certId: string | null;
+  paymentDueAt: string | null;
+  collector: { name: string; email: string };
+  shipTo: string;
+  createdAt: string;
+  items: { title: string; sku: string; slug: string; edition: string; image: string; price: string }[];
+  crateStatus: string | null;
+};

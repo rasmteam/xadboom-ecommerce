@@ -140,6 +140,7 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
       count: items.length,
       lockMinutes,
       currencyMode: settings.currencyMode,
+      provider: getPaymentProvider().name,
       totals: items.length ? displayPrice({ priceUsdCents: usd, priceTomanOverride: tomanTotal && settings.currencyMode !== "USD" ? tomanTotal : null }, settings) : null,
     };
   }

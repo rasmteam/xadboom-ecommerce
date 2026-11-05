@@ -1,7 +1,7 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import type { AdminPieces, PieceFormData, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
+import type { AdminPieces, PieceFormData, PublicOrder, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
 
 // Server-side (SSR) calls go straight to the API service; the browser uses the same-origin /api rewrite.
 const API_URL = process.env.API_URL ?? "http://localhost:4000";
@@ -55,6 +55,11 @@ export const api = {
   },
   adminPiece: async (id: string) => {
     const data = await get<PieceFormData>(`/admin/pieces/${encodeURIComponent(id)}`, { auth: true });
+    if (!data) notFound();
+    return data;
+  },
+  order: async (number: string, token: string) => {
+    const data = await get<PublicOrder>(`/orders/${encodeURIComponent(number)}?t=${encodeURIComponent(token)}`);
     if (!data) notFound();
     return data;
   },
