@@ -23,7 +23,7 @@ export function LoginForm({ next, notice }: { next: string; notice?: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.get("email"), password: form.get("password") }),
       });
-      if (res.status === 429) return setError("Too many attempts. Try again in 15 minutes.");
+      if (res.status === 429) return setError("Too many attempts. Try again in 5 minutes.");
       if (!res.ok) return setError("Incorrect email or password.");
       const { user } = await res.json();
       window.location.assign(user.role === "COLLECTOR" && next === "/admin" ? "/account" : safeNext(next));

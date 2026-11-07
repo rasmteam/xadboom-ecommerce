@@ -30,10 +30,10 @@ const cookieOptions = () => ({
 export class AuthController {
   constructor(private readonly auth: AuthService) {}
 
-  // 5 attempts / 15 min per client IP
+  // 5 attempts / 5 min per client IP
   @Post("login")
   @HttpCode(200)
-  @Throttle({ default: { limit: 5, ttl: 15 * 60 * 1000 } })
+  @Throttle({ default: { limit: 5, ttl: 5 * 60 * 1000 } })
   async login(@Body(new ZodPipe(loginSchema)) body: LoginBody, @Res({ passthrough: true }) res: Response) {
     const { token, user } = await this.auth.login(body.email, body.password);
     res.cookie(SESSION_COOKIE, token, { ...cookieOptions(), maxAge: SESSION_MAX_AGE_MS });
