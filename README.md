@@ -19,10 +19,10 @@ pnpm install
 cp .env.example .env            # defaults work for local development
 pnpm dev:db                     # terminal 1: database (data in .local/pgdata)
 pnpm setup:local                # terminal 2, once: migrate + seed + build everything
-pnpm start:api                  # terminal 2: http://localhost:4000/api  (docs: /api/docs)
-pnpm start:web                  # terminal 3: http://localhost:3000
+pnpm start:api                  # terminal 2: http://localhost:4010/api  (docs: /api/docs)
+pnpm start:web                  # terminal 3: http://localhost:3010
 ```
-Admin: http://localhost:3000/login with `admin@xadboom.local` / `change-me-now` (from `.env`).
+Admin: http://localhost:3010/login with `admin@xadboom.local` / `change-me-now` (from `.env`).
 For hot reload use `pnpm dev:api` and `pnpm dev:web` instead of the `start:*` commands.
 
 ## Docker
