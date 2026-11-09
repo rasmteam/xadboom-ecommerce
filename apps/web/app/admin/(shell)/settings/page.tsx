@@ -7,7 +7,7 @@ export default async function SettingsPage() {
   if (!user) redirect("/login");
 
   return (
-    <main className="relative pt-16 w-full px-gutter min-h-screen pb-12 bg-[#F7E9E3]">
+    <main className="theme-adminPieces relative w-full px-gutter min-h-screen pb-12 bg-[#F7E9E3]">
       <div className="flex flex-col gap-1 py-space-lg">
         <div className="flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[10px]">
           <span>Curatorial Atelier</span>

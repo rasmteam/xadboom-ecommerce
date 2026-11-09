@@ -69,9 +69,23 @@ export type AdminDesigner = {
   published: boolean;
   sortOrder: number;
   pieceCount: number;
+  pieces: { title: string; edition: string }[];
 };
 
-export type AdminCategory = { id: string; slug: string; name: string; description: string | null; sortOrder: number; pieceCount: number };
+export type AdminCategory = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  sortOrder: number;
+  pieceCount: number;
+  titles: string[];
+  unitsTotal: number;
+  available: number;
+  allocated: number;
+  lowStock: number;
+  withDimensions: number;
+};
 
 export type AdminUsers = {
   rows: {
@@ -86,11 +100,15 @@ export type AdminUsers = {
     lastActiveAt: string | null;
     createdAt: string;
     orders: number;
+    pieces: number;
+    volumeUsd: string;
+    volumeToman: string | null;
   }[];
   total: number;
   page: number;
   pages: number;
-  stats: { total: number; staff: number; collectors: number; verified: number };
+  stats: { total: number; staff: number; collectors: number; verified: number; pending: number };
+  hubs: string[];
 };
 
 export type AdminOverview = {

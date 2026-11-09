@@ -31,7 +31,7 @@ export function AdminPage({
   children: React.ReactNode;
 }) {
   return (
-    <main className="relative pt-16 w-full px-gutter min-h-screen pb-12 bg-[#F7E9E3]">
+    <main className="theme-adminPieces relative w-full px-gutter min-h-screen pb-12 bg-[#F7E9E3]">
       <div className="flex flex-col w-full">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md py-space-lg">
           <div className="flex flex-col gap-1">

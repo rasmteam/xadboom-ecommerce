@@ -357,8 +357,23 @@ export class CatalogAdminController {
   @Get("designers")
   @Auth("ADMIN", "EDITOR")
   async designers() {
-    const rows = await this.prisma.db.designer.findMany({ orderBy: [{ sortOrder: "asc" }, { name: "asc" }], include: { _count: { select: { pieces: { where: { deletedAt: null } } } } } });
-    return rows.map(({ _count, ...d }) => ({ ...d, pieceCount: _count.pieces }));
+    const rows = await this.prisma.db.designer.findMany({
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      include: {
+        _count: { select: { pieces: { where: { deletedAt: null } } } },
+        pieces: {
+          where: { deletedAt: null },
+          orderBy: { createdAt: "asc" },
+          take: 5,
+          select: { title: true, totalEditions: true, editions: { where: { status: "AVAILABLE" }, orderBy: { number: "asc" }, take: 1, select: { number: true } } },
+        },
+      },
+    });
+    return rows.map(({ _count, pieces, ...d }) => ({
+      ...d,
+      pieceCount: _count.pieces,
+      pieces: pieces.map((p) => ({ title: p.title, edition: `${String(p.editions[0]?.number ?? p.totalEditions).padStart(2, "0")}/${String(p.totalEditions).padStart(2, "0")}` })),
+    }));
   }
 
   @Post("designers")
@@ -393,8 +408,26 @@ export class CatalogAdminController {
   @Get("categories")
   @Auth("ADMIN", "EDITOR")
   async categories() {
-    const rows = await this.prisma.db.category.findMany({ orderBy: [{ sortOrder: "asc" }, { name: "asc" }], include: { _count: { select: { pieces: { where: { deletedAt: null } } } } } });
-    return rows.map(({ _count, ...c }) => ({ ...c, pieceCount: _count.pieces }));
+    const rows = await this.prisma.db.category.findMany({
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      include: {
+        pieces: {
+          where: { deletedAt: null },
+          orderBy: { createdAt: "asc" },
+          select: { title: true, totalEditions: true, lengthMm: true, widthMm: true, heightMm: true, editions: { select: { status: true } } },
+        },
+      },
+    });
+    return rows.map(({ pieces, ...c }) => ({
+      ...c,
+      pieceCount: pieces.length,
+      titles: pieces.slice(0, 3).map((p) => p.title),
+      unitsTotal: pieces.reduce((n, p) => n + p.totalEditions, 0),
+      available: pieces.reduce((n, p) => n + p.editions.filter((e) => e.status === "AVAILABLE").length, 0),
+      allocated: pieces.reduce((n, p) => n + p.editions.filter((e) => e.status === "SOLD" || e.status === "RESERVED").length, 0),
+      lowStock: pieces.filter((p) => p.editions.filter((e) => e.status === "AVAILABLE").length === 1).length,
+      withDimensions: pieces.filter((p) => p.lengthMm && p.widthMm && p.heightMm).length,
+    }));
   }
 
   @Post("categories")
@@ -429,13 +462,23 @@ export class CatalogAdminController {
 
 // ───────────────────────── users ─────────────────────────
 
-const usersQuery = z.object({ role: z.enum(["ADMIN", "EDITOR", "COLLECTOR"]).optional(), kyc: z.enum(["UNVERIFIED", "PENDING", "VERIFIED"]).optional(), search: z.string().trim().max(120).optional(), page });
+const usersQuery = z.object({
+  view: z.enum(["all", "verified", "collectors", "staff", "pending"]).optional(),
+  role: z.enum(["ADMIN", "EDITOR", "COLLECTOR"]).optional(),
+  kyc: z.enum(["UNVERIFIED", "PENDING", "VERIFIED"]).optional(),
+  hub: z.string().trim().max(120).optional(),
+  sort: z.enum(["recent", "name", "orders"]).optional(),
+  search: z.string().trim().max(120).optional(),
+  page,
+});
 const userPatch = z.object({
   name: z.string().trim().min(1).max(160).optional(),
   role: z.enum(["ADMIN", "EDITOR", "COLLECTOR"]).optional(),
   tier: z.string().trim().max(80).nullable().optional(),
   kycStatus: z.enum(["UNVERIFIED", "PENDING", "VERIFIED"]).optional(),
   regionHub: z.string().trim().max(120).nullable().optional(),
+  studio: z.string().trim().max(160).nullable().optional(),
+  phone: z.string().trim().max(40).nullable().optional(),
 });
 const userCreate = z.object({
   name: z.string().trim().min(1).max(160),
@@ -455,22 +498,58 @@ export class UsersAdminController {
   async list(@Query(new ZodPipe(usersQuery)) q: z.infer<typeof usersQuery>) {
     const db = this.prisma.db;
     const where: Record<string, unknown> = {};
+    if (q.view === "verified") where.kycStatus = "VERIFIED";
+    if (q.view === "collectors") where.role = "COLLECTOR";
+    if (q.view === "staff") where.role = { in: ["ADMIN", "EDITOR"] };
+    if (q.view === "pending") where.kycStatus = "PENDING";
     if (q.role) where.role = q.role;
     if (q.kyc) where.kycStatus = q.kyc;
+    if (q.hub) where.regionHub = q.hub;
     if (q.search) where.OR = [{ name: { contains: q.search, mode: "insensitive" } }, { email: { contains: q.search, mode: "insensitive" } }, { studio: { contains: q.search, mode: "insensitive" } }];
-    const [rows, total, roles, verified] = await Promise.all([
-      db.user.findMany({ where, orderBy: { createdAt: "desc" }, skip: (q.page - 1) * PAGE, take: PAGE, select: { id: true, name: true, email: true, studio: true, role: true, tier: true, kycStatus: true, regionHub: true, lastActiveAt: true, createdAt: true, _count: { select: { orders: true } } } }),
+    const orderBy = q.sort === "name" ? { name: "asc" as const } : q.sort === "orders" ? { orders: { _count: "desc" as const } } : { createdAt: "desc" as const };
+    const [rows, total, roles, kyc, hubs] = await Promise.all([
+      db.user.findMany({ where, orderBy, skip: (q.page - 1) * PAGE, take: PAGE, select: { id: true, name: true, email: true, studio: true, role: true, tier: true, kycStatus: true, regionHub: true, lastActiveAt: true, createdAt: true, _count: { select: { orders: true } } } }),
       db.user.count({ where }),
       db.user.groupBy({ by: ["role"], _count: true }),
-      db.user.count({ where: { kycStatus: "VERIFIED" } }),
+      db.user.groupBy({ by: ["kycStatus"], _count: true }),
+      db.user.findMany({ where: { regionHub: { not: null } }, distinct: ["regionHub"], select: { regionHub: true } }),
     ]);
+    // acquisitions per listed user: paid orders, pieces, volume
+    const ids = rows.map((r) => r.id);
+    const paid = ids.length
+      ? await db.order.findMany({ where: { userId: { in: ids }, status: { in: ["PAID", "IN_CRATING", "DISPATCHED", "DELIVERED"] } }, select: { userId: true, currency: true, totalAmount: true, _count: { select: { items: true } } } })
+      : [];
+    const acq = (id: string) => {
+      const mine = paid.filter((o) => o.userId === id);
+      return {
+        pieces: mine.reduce((n, o) => n + o._count.items, 0),
+        volumeUsd: fmtMoney("USD", mine.filter((o) => o.currency === "USD").reduce((n, o) => n + o.totalAmount, 0)),
+        volumeToman: mine.some((o) => o.currency === "TOMAN") ? fmtMoney("TOMAN", mine.filter((o) => o.currency === "TOMAN").reduce((n, o) => n + o.totalAmount, 0)) : null,
+      };
+    };
+    const count = (k: string) => kyc.find((g) => g.kycStatus === k)?._count ?? 0;
     return {
-      rows: rows.map(({ _count, ...u }) => ({ ...u, orders: _count.orders, lastActiveAt: u.lastActiveAt?.toISOString() ?? null, createdAt: u.createdAt.toISOString() })),
+      rows: rows.map(({ _count, ...u }) => ({ ...u, orders: _count.orders, ...acq(u.id), lastActiveAt: u.lastActiveAt?.toISOString() ?? null, createdAt: u.createdAt.toISOString() })),
       total,
       page: q.page,
       pages: pages(total),
-      stats: { total: roles.reduce((s, r) => s + r._count, 0), staff: roles.filter((r) => r.role !== "COLLECTOR").reduce((s, r) => s + r._count, 0), collectors: roles.find((r) => r.role === "COLLECTOR")?._count ?? 0, verified },
+      stats: {
+        total: roles.reduce((n, r) => n + r._count, 0),
+        staff: roles.filter((r) => r.role !== "COLLECTOR").reduce((n, r) => n + r._count, 0),
+        collectors: roles.find((r) => r.role === "COLLECTOR")?._count ?? 0,
+        verified: count("VERIFIED"),
+        pending: count("PENDING"),
+      },
+      hubs: hubs.map((h) => h.regionHub as string),
     };
+  }
+
+  @Get(":id")
+  @Auth("ADMIN")
+  async one(@Param("id") id: string) {
+    const u = await this.prisma.db.user.findUnique({ where: { id }, select: { id: true, name: true, email: true, studio: true, role: true, tier: true, kycStatus: true, regionHub: true, phone: true } });
+    if (!u) throw new NotFoundException();
+    return u;
   }
 
   @Patch(":id")
