@@ -264,7 +264,7 @@ model Edition {
 
   piece        Piece         @relation(fields: [pieceId], references: [id], onDelete: Cascade)
   reservations Reservation[]
-  orderItem    OrderItem?
+  orderItems   OrderItem[]
 
   @@unique([pieceId, number])
   @@index([pieceId, status])
@@ -332,13 +332,15 @@ model Order {
 model OrderItem {
   id        String @id @default(cuid())
   orderId   String
-  editionId String @unique
+  editionId String
   titleSnap String
   skuSnap   String
   priceSnap Int // in the order's currency unit
 
   order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   edition Edition @relation(fields: [editionId], references: [id])
+
+  @@index([editionId])
 }
 
 model Payment {
