@@ -176,4 +176,12 @@ export class CatalogService {
       filterKey: disciplineFilterKey(d.discipline),
     }));
   }
+
+  async designer(slug: string) {
+    const d = await this.prisma.db.designer.findFirst({ where: { slug, published: true } });
+    if (!d) throw new NotFoundException("Designer not found");
+    const settings = await this.settings.getPriceSettings();
+    const rows = await this.loadPieces({ designerId: d.id });
+    return { designer: d, cards: rows.map((r) => this.toCard(r, settings)) };
+  }
 }

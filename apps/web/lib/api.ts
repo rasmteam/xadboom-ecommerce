@@ -3,7 +3,7 @@ import { cache } from "react";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import type { ShellCounts } from "./admin-types";
-import type { AdminPieces, PieceFormData, PublicOrder, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
+import type { PieceCard, AdminPieces, PieceFormData, PublicOrder, PieceFormOptions, CatalogData, DesignerRow, FeaturedData, PieceDetail, PriceSettings, SessionUser } from "./types";
 
 // Server-side (SSR) calls go straight to the API service; the browser uses the same-origin /api rewrite.
 const API_URL = process.env.API_URL ?? "http://localhost:4000";
@@ -47,6 +47,11 @@ export const api = {
     return piece;
   },
   designers: async () => (await get<DesignerRow[]>("/designers"))!,
+  designer: async (slug: string) => {
+    const data = await get<{ designer: DesignerRow; cards: PieceCard[] }>(`/designers/${encodeURIComponent(slug)}`);
+    if (!data) notFound();
+    return data;
+  },
   adminPieces: async (q: Record<string, string | number | undefined>) => {
     const params = new URLSearchParams();
     for (const [k, v] of Object.entries(q)) if (v !== undefined && v !== "") params.set(k, String(v));

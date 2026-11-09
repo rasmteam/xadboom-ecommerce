@@ -34,6 +34,11 @@ export class CatalogController {
   designers() {
     return this.catalog.designers();
   }
+
+  @Get("designers/:slug")
+  designer(@Param("slug") slug: string) {
+    return this.catalog.designer(slug);
+  }
 }
 
 @Module({ imports: [SettingsModule], controllers: [CatalogController], providers: [CatalogService], exports: [CatalogService] })
