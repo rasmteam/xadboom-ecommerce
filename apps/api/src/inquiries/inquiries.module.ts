@@ -2,6 +2,7 @@ import { Body, Controller, HttpCode, Injectable, Module, Post } from "@nestjs/co
 import { Throttle } from "@nestjs/throttler";
 import { z } from "zod";
 import { ZodPipe } from "../common/zod.pipe";
+import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.module";
 
 const inquirySchema = z.object({
@@ -16,7 +17,10 @@ type InquiryBody = z.infer<typeof inquirySchema>;
 
 @Injectable()
 export class InquiriesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mail: MailService,
+  ) {}
 
   async create({ pieceSlug, ...input }: InquiryBody) {
     const db = this.prisma.db;
@@ -26,10 +30,12 @@ export class InquiriesService {
     // 3h response target, shown in the admin as the SLA countdown
     const slaDueAt = new Date(Date.now() + 3 * 60 * 60 * 1000);
     const suffix = Math.random().toString(36).slice(2, 5).toUpperCase();
-    return db.inquiry.create({
+    const created = await db.inquiry.create({
       data: { ...input, pieceId: piece?.id, number: `INQ-${year}-${String(count + 100).padStart(3, "0")}-${suffix}`, status: "NEW", slaDueAt },
       select: { number: true, slaDueAt: true },
     });
+    this.mail.inquiryAck(input.email, input.client, created.number);
+    return created;
   }
 }
 

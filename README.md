@@ -31,3 +31,10 @@ docker compose up -d --build   # db + migrations + api + web on :3000
 ```
 One `Dockerfile`, targets: `api`, `web`, `migrate`. Hamravesh: deploy `api` and `web` as two apps (set `API_URL`
 on web to the API's internal address) and run `migrate` as a pre-release job.
+
+## More
+* Deployment, environment variables, backups and releases (Hamravesh): [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+* Tests: `pnpm test` (API unit tests) and `pnpm e2e` (browser smoke test against a running stack)
+* Email: set `SMTP_*` in `.env`; without it emails are recorded in the database (Admin API `GET /api/admin/emails`)
+* Excel: dimension template and import/export are in the admin (Pieces list, and section 3 of a piece)
+* 3D: upload a `.glb` on a piece; it appears in the interactive viewer on the product page

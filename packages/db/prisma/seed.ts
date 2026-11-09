@@ -28,6 +28,10 @@ const designers = [
 // Prices (USD) come from the catalogue/product pages; the two pieces only in the old server keep its price.
 const pieces = [
   { sku: "LV-0312", featured: true, slug: "lumen-void-lounge-chair", title: "Lumen Void Lounge Chair", designer: "alireza-taghaboni", category: "seating-lounges",
+    storyTitle: "The Tectonic Concept: Dynamic Cantilever",
+    quote: "The void beneath the seat is not empty space; it is structural tension held in delicate equilibrium by hand-carved Iranian walnut.",
+    quoteBy: "Alireza Taghaboni • NextOffice Studio, Tehran",
+    story: "Commissioned by Xadboom for the 2024 Architectural Editions cycle, the Lumen Void Lounge Chair interrogates the boundary between building-scale tectonics and body-scale ergonomics. Taghaboni draws directly from the kinetic principles pioneered in his celebrated Sharifi-ha House, translating spatial reconfigurability into a static object that feels poised for motion.\n\nThe rear stiles curve downward through an aggressive rake, sweeping into a ground-tethered wishbone cantilever. Instead of four standard upright legs, the chair redistributes occupant mass through double-lap tenons concealed within the sculpted walnut armatures. The resulting posture suspends the sitter 415 mm above the floor plane with zero visual clutter beneath the main perimeter.",
     description: "Sculptural dynamic cantilever armchair engineered in kiln-cured Iranian walnut and tactile heavy-gauge olive bouclé wool.", materials: "Solid Carved Walnut & Boucle Wool", total: 12, ed: 3, avail: 3, priceUsdCents: 245000, leadTime: "6-8 Weeks",
     length: 840, width: 920, height: 760, weight: 28, martindale: "65,000 Cycles", provenance: "Tehran Atelier / Zurich Vault",
     image: "/images/remote/551f32debaa3.jpg" },
@@ -105,7 +109,7 @@ async function main() {
       create: {
         sku: p.sku, slug: p.slug, title: p.title, status: "PUBLISHED", featured: "featured" in p,
         designerId: desId[p.designer], categoryId: catId[p.category],
-        description: (p as { description?: string }).description, materials: p.materials, provenance: p.provenance, leadTime: p.leadTime, martindale: p.martindale,
+        description: (p as { description?: string }).description, storyTitle: (p as { storyTitle?: string }).storyTitle, story: (p as { story?: string }).story, quote: (p as { quote?: string }).quote, quoteBy: (p as { quoteBy?: string }).quoteBy, materials: p.materials, provenance: p.provenance, leadTime: p.leadTime, martindale: p.martindale,
         priceUsdCents: p.priceUsdCents, totalEditions: p.total,
         lengthMm: p.length, widthMm: p.width, heightMm: p.height, weightKg: p.weight,
         images: { create: [{ url: p.image, alt: p.title, sortOrder: 0 }] },

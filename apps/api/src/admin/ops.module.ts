@@ -24,6 +24,7 @@ import { AuthModule } from "../auth/auth.module";
 import type { AuthUser } from "../auth/auth.service";
 import { CommerceModule, CommerceService } from "../commerce/commerce.module";
 import { ZodPipe } from "../common/zod.pipe";
+import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.module";
 
 const PAGE = 8;
@@ -54,6 +55,7 @@ export class OrdersAdminService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly commerce: CommerceService,
+    private readonly mail: MailService,
   ) {}
 
   async list(q: z.infer<typeof ordersQuery>) {
@@ -164,6 +166,21 @@ export class OrdersAdminService {
         : db.shipment.create({ data: { orderId: id, crateStatus: body.crateStatus, carrier: body.carrier, trackingRef: body.trackingRef, events } }),
       db.auditLog.create({ data: { actorId: actor.id, action: `order.${body.status.toLowerCase()}`, entity: "Order", entityId: id } }),
     ]);
+    if (body.status === "DISPATCHED") {
+      const full = await db.order.findUnique({ where: { id }, include: { shipments: { take: 1, orderBy: { createdAt: "desc" } } } });
+      if (full) {
+        this.mail.orderDispatched({
+          number: full.number,
+          token: full.publicToken,
+          name: full.collectorName,
+          email: full.collectorEmail,
+          total: fmtMoney(full.currency, full.totalAmount),
+          items: [],
+          carrier: full.shipments[0]?.carrier,
+          trackingRef: full.shipments[0]?.trackingRef,
+        });
+      }
+    }
     return { status: body.status };
   }
 }

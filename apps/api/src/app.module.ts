@@ -5,6 +5,8 @@ import { AdminModule } from "./admin/admin.module";
 import { AdminOpsModule } from "./admin/ops.module";
 import { AdminPiecesModule } from "./admin/pieces.module";
 import { CommerceModule } from "./commerce/commerce.module";
+import { AssetsModule } from "./admin/assets.module";
+import { MailModule } from "./mail/mail.module";
 import { AuthModule } from "./auth/auth.module";
 import { CatalogModule } from "./catalog/catalog.module";
 import { HealthController } from "./health/health.controller";
@@ -25,6 +27,8 @@ import { SettingsModule } from "./settings/settings.module";
     AdminPiecesModule,
     AdminOpsModule,
     CommerceModule,
+    MailModule,
+    AssetsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

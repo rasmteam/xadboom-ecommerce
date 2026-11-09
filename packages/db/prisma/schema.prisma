@@ -179,6 +179,11 @@ model Piece {
   slug        String      @unique
   title       String
   description String?
+  // long-form editorial content shown on the product page (all optional)
+  storyTitle  String? // e.g. "The Tectonic Concept: Dynamic Cantilever"
+  story       String? // paragraphs separated by a blank line
+  quote       String? // pull quote
+  quoteBy     String? // attribution of the pull quote
   designerId  String
   categoryId  String
   materials   String?
@@ -409,6 +414,21 @@ model ImportJob {
   createdAt DateTime     @default(now())
 
   user User? @relation(fields: [userId], references: [id])
+}
+
+// Every transactional email: what was sent (or would be sent when no mail server is configured).
+model EmailLog {
+  id        String   @id @default(cuid())
+  to        String
+  subject   String
+  body      String
+  template  String // "order-received" | "order-paid" | ...
+  status    String // "SENT" | "LOGGED" | "FAILED"
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([to])
 }
 
 model AuditLog {

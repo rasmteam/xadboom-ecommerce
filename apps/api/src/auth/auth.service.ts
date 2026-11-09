@@ -1,6 +1,7 @@
 import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { hashPassword, verifyPassword, type Role } from "@xadboom/db";
+import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.module";
 
 export const SESSION_COOKIE = "xb_session";
@@ -13,6 +14,7 @@ export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
+    private readonly mail: MailService,
   ) {}
 
   async login(email: string, password: string) {
@@ -33,6 +35,7 @@ export class AuthService {
       data: { name, email, passwordHash: await hashPassword(password), role: "COLLECTOR", lastActiveAt: new Date() },
       select: { id: true, email: true, name: true, role: true },
     });
+    this.mail.welcome(user.email, user.name);
     return { token: await this.jwt.signAsync({ sub: user.id }), user };
   }
 

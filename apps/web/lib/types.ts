@@ -43,6 +43,8 @@ export type PieceDetail = {
   card: PieceCard;
   designer: { slug: string; name: string; title: string | null; studio: string | null; portrait: string | null };
   description: string | null;
+  editorial: { title: string | null; paragraphs: string[]; quote: string | null; quoteBy: string | null } | null;
+  viewer: { url: string; filename: string; sizeBytes: number } | null;
   leadTime: string | null;
   provenance: string | null;
   martindale: string | null;
@@ -123,6 +125,10 @@ export type PieceFormData = {
   provenance: string | null;
   description: string | null;
   leadTime: string | null;
+  storyTitle: string | null;
+  story: string | null;
+  quote: string | null;
+  quoteBy: string | null;
   materials: string[];
   images: { url: string; alt: string | null }[];
   totalEditions: number;

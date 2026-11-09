@@ -138,6 +138,18 @@ export class CatalogService {
         portrait: piece.designer.portrait,
       },
       description: piece.description,
+      editorial: piece.story
+        ? {
+            title: piece.storyTitle,
+            paragraphs: piece.story.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean),
+            quote: piece.quote,
+            quoteBy: piece.quoteBy,
+          }
+        : null,
+      viewer: (() => {
+        const m = piece.assets.find((a) => a.kind === "GLB" && a.isViewerModel) ?? piece.assets.find((a) => a.kind === "GLB");
+        return m ? { url: m.url, filename: m.filename, sizeBytes: m.sizeBytes } : null;
+      })(),
       leadTime: piece.leadTime,
       provenance: piece.provenance,
       martindale: piece.martindale,

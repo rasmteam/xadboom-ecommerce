@@ -27,6 +27,7 @@ import { ZodPipe } from "../common/zod.pipe";
 import { Auth, CurrentUser } from "../auth/auth.guard";
 import { AuthModule } from "../auth/auth.module";
 import { AuthService, SESSION_COOKIE, type AuthUser } from "../auth/auth.service";
+import { MailService } from "../mail/mail.service";
 import { PrismaService } from "../prisma/prisma.module";
 import { SettingsModule, SettingsService } from "../settings/settings.module";
 import { getPaymentProvider, type PayableOrder } from "./payment";
@@ -64,6 +65,7 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
   constructor(
     private readonly prisma: PrismaService,
     private readonly settings: SettingsService,
+    private readonly mail: MailService,
   ) {}
 
   onModuleInit() {
@@ -259,6 +261,16 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
       await this.cancelOrder(order.id, "Payment gateway unavailable");
       throw new ConflictException("The payment gateway is unavailable. Your hold was released; please try again shortly.");
     }
+    this.mail.orderReceived({
+      number,
+      token: order.publicToken,
+      name: body.name,
+      email: body.email,
+      total: currency === "USD" ? `$${(total / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}` : `${total.toLocaleString("en-US")} Toman`,
+      items: priced.map((x) => `${x.r.edition.piece.title} (Edition ${String(x.r.edition.number).padStart(2, "0")} of ${String(x.r.edition.piece.totalEditions).padStart(2, "0")})`),
+      provider: provider.name,
+      dueAt,
+    });
     return { number, token: order.publicToken, provider: provider.name, redirectUrl };
   }
 
@@ -280,7 +292,17 @@ export class CommerceService implements OnModuleInit, OnModuleDestroy {
       else await tx.payment.create({ data: { orderId, provider, amount: order.totalAmount, currency: order.currency, status: "SUCCEEDED", refId: refId ?? null, verifiedAt: new Date() } });
       await tx.shipment.create({ data: { orderId, carrier: "Swiss Post Priority Fine Art Logistics", crateStatus: "Awaiting crating", events: [{ at: new Date().toISOString(), label: "Payment confirmed" }] } });
     });
-    return db.order.findUniqueOrThrow({ where: { id: orderId } });
+    const paid = await db.order.findUniqueOrThrow({ where: { id: orderId } });
+    this.mail.orderPaid({
+      number: paid.number,
+      token: paid.publicToken,
+      name: paid.collectorName,
+      email: paid.collectorEmail,
+      total: paid.currency === "USD" ? `$${(paid.totalAmount / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}` : `${paid.totalAmount.toLocaleString("en-US")} Toman`,
+      items: [],
+      certId: paid.provenanceCertId,
+    });
+    return paid;
   }
 
   async gatewayCallback(providerName: string, orderNumber: string, authority: string | undefined, status: string | undefined) {

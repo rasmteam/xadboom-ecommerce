@@ -41,6 +41,10 @@ const pieceInput = z
     sku: z.string().trim().toUpperCase().regex(/^[A-Z0-9-]{3,24}$/, "Serial may use letters, numbers and dashes (3-24)").optional(),
     provenance: z.string().trim().max(200).nullish(),
     description: z.string().trim().max(8000).nullish(),
+    storyTitle: z.string().trim().max(200).nullish(),
+    story: z.string().trim().max(20000).nullish(),
+    quote: z.string().trim().max(600).nullish(),
+    quoteBy: z.string().trim().max(200).nullish(),
     leadTime: z.string().trim().max(120).nullish(),
     materials: z.array(z.string().trim().min(1).max(120)).max(12).default([]),
     images: z.array(z.object({ url: imageUrl, alt: z.string().trim().max(200).nullish() })).max(12).default([]),
@@ -97,6 +101,10 @@ export class PiecesAdminService {
       categoryId: p.categoryId,
       provenance: p.provenance,
       description: p.description,
+      storyTitle: p.storyTitle,
+      story: p.story,
+      quote: p.quote,
+      quoteBy: p.quoteBy,
       leadTime: p.leadTime,
       materials: p.materials ? p.materials.split(" & ") : [],
       images: p.images.map((i) => ({ url: i.url, alt: i.alt })),
@@ -154,6 +162,10 @@ export class PiecesAdminService {
         categoryId: input.categoryId,
         provenance: input.provenance ?? null,
         description: input.description ?? null,
+        storyTitle: input.storyTitle ?? null,
+        story: input.story ?? null,
+        quote: input.quote ?? null,
+        quoteBy: input.quoteBy ?? null,
         leadTime: input.leadTime ?? null,
         materials: input.materials.join(" & ") || null,
         priceUsdCents: Math.round(input.priceUsd * 100),
@@ -214,6 +226,10 @@ export class PiecesAdminService {
           categoryId: input.categoryId,
           provenance: input.provenance ?? null,
           description: input.description ?? null,
+          storyTitle: input.storyTitle ?? null,
+          story: input.story ?? null,
+          quote: input.quote ?? null,
+          quoteBy: input.quoteBy ?? null,
           leadTime: input.leadTime ?? null,
           materials: input.materials.join(" & ") || null,
           priceUsdCents: Math.round(input.priceUsd * 100),
@@ -305,5 +321,5 @@ export class AdminPiecesController {
   }
 }
 
-@Module({ imports: [AuthModule], controllers: [AdminPiecesController], providers: [PiecesAdminService] })
+@Module({ imports: [AuthModule], controllers: [AdminPiecesController], providers: [PiecesAdminService], exports: [PiecesAdminService] })
 export class AdminPiecesModule {}
