@@ -1,4 +1,5 @@
 import { getPrisma, hashPassword } from "../src/index";
+import { profiles } from "./profiles";
 
 const prisma = getPrisma();
 
@@ -98,7 +99,7 @@ async function main() {
   }
   const desId: Record<string, string> = {};
   for (const d of designers) {
-    desId[d.slug] = (await prisma.designer.upsert({ where: { slug: d.slug }, update: {}, create: d })).id;
+    desId[d.slug] = (await prisma.designer.upsert({ where: { slug: d.slug }, update: {}, create: { ...d, ...(profiles[d.slug] ?? {}) } })).id;
   }
 
   const pieceId: Record<string, string> = {};

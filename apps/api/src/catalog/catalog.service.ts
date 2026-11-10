@@ -182,6 +182,11 @@ export class CatalogService {
     if (!d) throw new NotFoundException("Designer not found");
     const settings = await this.settings.getPriceSettings();
     const rows = await this.loadPieces({ designerId: d.id });
-    return { designer: d, cards: rows.map((r) => this.toCard(r, settings)) };
+    const others = await this.designers();
+    return {
+      designer: d,
+      cards: rows.map((r) => ({ ...this.toCard(r, settings), description: r.description })),
+      others: others.filter((o) => o.slug !== d.slug).slice(0, 3),
+    };
   }
 }

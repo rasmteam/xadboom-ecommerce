@@ -150,6 +150,17 @@ model Designer {
   bio          String?
   portrait     String?
   profileImage String? // 3:4 portrait used on the home page profile cards
+  // designer profile page
+  tagline         String? // one line under the name, e.g. "Pioneering Kinetic Tectonics & Spatial Mutability"
+  practice        String? // e.g. "London · Tehran · Harvard GSD"
+  landmarkWorks   String? @db.Text // one per line: "Title | Place, Year"
+  statement       String? @db.Text // curatorial statement shown as a quote
+  monographTitle  String? // headline of the biography section
+  biography       String? @db.Text // long biography, paragraphs separated by a blank line
+  monographImage  String? // wide image for the biography section
+  monographCaption String?
+  milestones      String? @db.Text // one per line: "Institution | Role | Place"
+  runNote         String? // e.g. "Strictly limited to 6 units per fabrication casting worldwide"
   published    Boolean  @default(true)
   sortOrder    Int      @default(0)
   createdAt    DateTime @default(now())

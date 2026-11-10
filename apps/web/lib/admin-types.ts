@@ -66,6 +66,16 @@ export type AdminDesigner = {
   bio: string | null;
   portrait: string | null;
   profileImage: string | null;
+  tagline: string | null;
+  practice: string | null;
+  landmarkWorks: string | null;
+  statement: string | null;
+  monographTitle: string | null;
+  biography: string | null;
+  monographImage: string | null;
+  monographCaption: string | null;
+  milestones: string | null;
+  runNote: string | null;
   published: boolean;
   sortOrder: number;
   pieceCount: number;
